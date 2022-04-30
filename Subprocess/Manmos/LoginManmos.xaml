@@ -1,0 +1,179 @@
+<Activity mc:Ignorable="sap sap2010" x:Class="LoginManmos" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mca="clr-namespace:Microsoft.CSharp.Activities;assembly=System.Activities" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib" xmlns:uix="http://schemas.uipath.com/workflow/activities/uix" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="in_masterConfigDict" Type="InArgument(scg:Dictionary(x:String, x:String))" />
+    <x:Property Name="in_server" Type="InArgument(x:String)" />
+  </x:Members>
+  <sap2010:ExpressionActivityEditor.ExpressionActivityEditor>C#</sap2010:ExpressionActivityEditor.ExpressionActivityEditor>
+  <sap:VirtualizedContainerService.HintSize>1474,1464</sap:VirtualizedContainerService.HintSize>
+  <sap2010:WorkflowViewState.IdRef>ActivityBuilder_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <sco:Collection x:TypeArguments="x:String">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Text</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>UiPath.UIAutomationNext.Enums</x:String>
+      <x:String>UiPath.UIAutomationCore.Contracts</x:String>
+      <x:String>System.Collections.ObjectModel</x:String>
+      <x:String>UiPath.UIAutomationNext.Activities</x:String>
+      <x:String>System.Activities.DynamicUpdate</x:String>
+      <x:String>UiPath.Platform.ObjectLibrary</x:String>
+      <x:String>UiPath.Shared.Activities</x:String>
+      <x:String>System.Runtime.InteropServices</x:String>
+      <x:String>System.Reflection</x:String>
+      <x:String>System.Runtime.Serialization</x:String>
+      <x:String>System.Linq.Expressions</x:String>
+      <x:String>System.Security</x:String>
+      <x:String>System.ComponentModel</x:String>
+      <x:String>UiPath.UIAutomationNext.Contracts</x:String>
+    </sco:Collection>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <sco:Collection x:TypeArguments="AssemblyReference">
+      <AssemblyReference>Microsoft.CSharp</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>System.ServiceModel.Activities</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>PresentationCore</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationNext</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationCore</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationNext.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Platform</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Callout.Activity</AssemblyReference>
+      <AssemblyReference>UiPath.Form.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.FTP.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Mail.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.OCR.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Web.Activities</AssemblyReference>
+      <AssemblyReference>System.Memory</AssemblyReference>
+      <AssemblyReference>System.Reflection.Metadata</AssemblyReference>
+      <AssemblyReference>Microsoft.Bcl.AsyncInterfaces</AssemblyReference>
+      <AssemblyReference>System.ValueTuple</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
+      <AssemblyReference>UiPath.Excel</AssemblyReference>
+    </sco:Collection>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence DisplayName="LoginManmos" sap:VirtualizedContainerService.HintSize="476,1399" sap2010:WorkflowViewState.IdRef="Sequence_1">
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <uix:NApplicationCard AttachMode="ByInstance" CloseMode="Never" DisplayName="Use Application: Mr.Manmos" sap:VirtualizedContainerService.HintSize="434,1307" sap2010:WorkflowViewState.IdRef="NApplicationCard_1" OpenMode="IfNotOpen" ScopeGuid="fae0ebac-f762-4fb5-8921-159667431845" Version="V1" WindowResize="Maximize">
+      <uix:NApplicationCard.Body>
+        <ActivityAction x:TypeArguments="x:Object">
+          <ActivityAction.Argument>
+            <DelegateInArgument x:TypeArguments="x:Object" Name="WSSessionData" />
+          </ActivityAction.Argument>
+          <Sequence DisplayName="Body application manmos" sap:VirtualizedContainerService.HintSize="376,1018" sap2010:WorkflowViewState.IdRef="Sequence_2">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <uix:NTypeInto ActivateBefore="True" ClickBeforeMode="None" DisplayName="Type Into 'Database Name'" EmptyFieldMode="SingleLine" sap:VirtualizedContainerService.HintSize="334,216" sap2010:WorkflowViewState.IdRef="NTypeInto_1" InteractionMode="Simulate" ScopeIdentifier="fae0ebac-f762-4fb5-8921-159667431845" Version="V1">
+              <uix:NTypeInto.Target>
+                <uix:TargetAnchorable DesignTimeRectangle="172, 171, 216, 33" ElementType="InputBox" FriendlyName="'Manmos'" FullSelectorArgument="&lt;wnd ctrlid='902' /&gt;" FuzzySelectorArgument="&lt;wnd ctrlid='902' /&gt;" Guid="802e570c-4cc6-4369-aacc-b9100f956198" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAANwAAAAlCAYAAAApx4dQAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAFcSURBVHhe7dhBboMwEAVQrptb5W65ADdIZbWuLNeOweDZ9D3pqzAeWPGlqNu+728RiYnCiQTmt3DP51NEFiRpFu7xeIjIjXm9Xp8LB9xH4SCQwkEghYNACgeBThVu27afq7bROfx3CgeBTheuV6pPZ8C35YXL8zKlfN87T+qdUu+ZLJ/3dsrz3g7cZeonZf1hjua1cp6uR8/VO/m6NSvVs9F90prBXZYWrqfc6z0z2hnNZt8LK03/0yRfz3zAR54Z7Yxms++FlZYXLs1aycrr0mhnNDvy3iTdl4GVpguXnL3Pyvnszmh25L0to3O4QuEqo3O44lLhavX5kY9+dufI7Ox90prBXZYWLkmzOnle/q2V89bOmVlOS3ne24G7nCoccI3CQSCFg0AKB4EUDgIpHARSOAikcBBI4SCQwkEghYNACgeBPhYuHYrIvWkWDljnT+FEZH0UTiQs+/sLWaElidHWw2sAAAAASUVORK5CYII=" InformativeScreenshot="b12b5fa116746bef22075cb9d204acac.png" IsResponsive="True" ScopeSelectorArgument="&lt;wnd app='manwin32.exe' cls='#32770' title='Database connection/User login Dialog' /&gt;" SearchSteps="Selector, FuzzySelector, Image">
+                  <uix:TargetAnchorable.Anchors>
+                    <scg:List x:TypeArguments="uix:ITarget" Capacity="1">
+                      <uix:Target DesignTimeRectangle="35, 176, 117, 20" ElementType="Text" FriendlyName="'Database Name'" FullSelectorArgument="&lt;wnd ctrlid='65535' title='Database Name' /&gt;" FuzzySelectorArgument="&lt;wnd ctrlid='65535' title='Database Name' check:text='Database Name' /&gt;" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAHkAAAAYCAYAAADeUlK2AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAG2SURBVGhD7ZFhrsMgDIN7/9P2BttjkifLOARYn1QVfnxqsZ2ENsd5nq/Ns9lLXoC95AXYS16AveQF2EtegGrJx3FYNDfCTP2vM/+b6H53vLddsmrQZz9gpu6OP4uJ/scd79295MLsB8zU3fFnMeV+7o53vPfQkgvq42OZXz34mmMfsB/lMl8zzleQ07yrR19Gfc6ppxoDv5mphEa4wH6UVT07O728X9WHPaf19mWQme3FennXs8vgPdJc5qNXQhAEmV/oHa5wLqoZnZ/lZ+dEM7I6kNVkWjTH1lVCUAwyv6CZnpoC56Ka0flZfnZONCOrA1lNpkVzbF0lBMVA/XJ2aIbP0Bzscz7SuZZpZVoewzlFfZxdHfop7HO+R0MPB9d8spVgQgz7UVb17Oz0qzKOnh4ZWodzpCusu0ymRX0dQ0tWL8pmuZ66qzKOq3uwpnpP/6hXS+vp+9UqoVGsXu+gmbryflUf9pzW25eJ+vb2Yj3qlWnZ+atXwl/QoTkQZfHknJ4VzvGTfYV9zuHpMtCZzFdafZymcBZPZkQD6oFqyZvnsZe8AHvJC7CXvAB7yQuwl/x4ztcb6Tm4EiR9670AAAAASUVORK5CYII=" SearchSteps="Selector, FuzzySelector, Image" />
+                    </scg:List>
+                  </uix:TargetAnchorable.Anchors>
+                </uix:TargetAnchorable>
+              </uix:NTypeInto.Target>
+              <uix:NTypeInto.Text>
+                <InArgument x:TypeArguments="x:String">
+                  <mca:CSharpValue x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpValue`1_3">in_server</mca:CSharpValue>
+                </InArgument>
+              </uix:NTypeInto.Text>
+            </uix:NTypeInto>
+            <uix:NTypeInto ActivateBefore="True" ClickBeforeMode="None" DisplayName="Type Into 'User ID'" EmptyFieldMode="SingleLine" sap:VirtualizedContainerService.HintSize="334,216" sap2010:WorkflowViewState.IdRef="NTypeInto_2" InteractionMode="Simulate" ScopeIdentifier="fae0ebac-f762-4fb5-8921-159667431845" Version="V1">
+              <uix:NTypeInto.Target>
+                <uix:TargetAnchorable DesignTimeRectangle="172, 324, 216, 33" ElementType="InputBox" FriendlyName="'Edit'" FullSelectorArgument="&lt;wnd ctrlid='1458' /&gt;" FuzzySelectorArgument="&lt;wnd ctrlid='1458' /&gt;" Guid="86636ed6-8859-46d0-a923-fc96f181e9be" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAANwAAAAlCAYAAAApx4dQAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAACmSURBVHhe7dOxDcMwAAPBrOuttJsW0AYO3KSJ4cr66g5gxfo/a63TzJoJzizcL7gxhplt2OU2uOM4zOzFzTmfgwPeIzgICQ5CgoOQ4CAkOAgJDkKCg5DgICQ4CAkOQoKDkOAgJDgICQ5CgoOQ4CAkOAgJDkKCg5DgICQ4CAkOQoKDkOAgJDgICQ5CgoOQ4CD0GNx1mtm7uw0O2OcvODPbP8GZZVvnF1Wn+sFp/6KSAAAAAElFTkSuQmCC" InformativeScreenshot="bf1e108b7ac808e182480e98c6e2c694.png" IsResponsive="True" ScopeSelectorArgument="&lt;wnd app='manwin32.exe' cls='#32770' title='Database connection/User login Dialog' /&gt;" SearchSteps="Selector, FuzzySelector, Image">
+                  <uix:TargetAnchorable.Anchors>
+                    <scg:List x:TypeArguments="uix:ITarget" Capacity="1">
+                      <uix:Target DesignTimeRectangle="35, 324, 79, 33" ElementType="Text" FriendlyName="'User ID'" FullSelectorArgument="&lt;wnd ctrlid='65535' title='User ID' /&gt;" FuzzySelectorArgument="&lt;wnd ctrlid='65535' title='User ID' check:text='User ID' /&gt;" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAFMAAAAlCAYAAAA+ydXcAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAEKSURBVGhD7ZRBDsMgDAT5/2v5QSsqIbmOAaeZJEq1hzlgrw2ZQ0qt9SUYJBNEMkEkE0QyQSQTRDJBJBNEMkEkE0QyQSQTZCOzlPJ1tsx6ZxPd3WoRPncVj5fpa71+x1v/UmbjkTJbzeL7PhP1bMb3O7PZEas+zSGZmQ/MnKM9niizmsvsJcFlWkZ9W1/t6ES5X+8/C8kEOfWf6XsWm7EzI6Lcaja7m+KwTI/N7M3PiHKr2exuiltkZjKeKDebze4l2cj8FJMPz9T2nkdk7rL17F6SUGajP2j1sExu1h/NeEazET53FUOZYj+SCSKZIJIJIpkgkgkimSCSCSKZIJIJIpkgkgkimRj19Qb0MErGQKjRGQAAAABJRU5ErkJggg==" SearchSteps="Selector, FuzzySelector, Image" />
+                    </scg:List>
+                  </uix:TargetAnchorable.Anchors>
+                </uix:TargetAnchorable>
+              </uix:NTypeInto.Target>
+              <uix:NTypeInto.Text>
+                <InArgument x:TypeArguments="x:String">
+                  <mca:CSharpValue x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpValue`1_4">in_masterConfigDict["manmosID"]</mca:CSharpValue>
+                </InArgument>
+              </uix:NTypeInto.Text>
+            </uix:NTypeInto>
+            <uix:NTypeInto ActivateBefore="True" ClickBeforeMode="None" DisplayName="Type Into 'Password'" EmptyFieldMode="SingleLine" sap:VirtualizedContainerService.HintSize="334,216" sap2010:WorkflowViewState.IdRef="NTypeInto_3" InteractionMode="Simulate" ScopeIdentifier="fae0ebac-f762-4fb5-8921-159667431845" Version="V1">
+              <uix:NTypeInto.Target>
+                <uix:TargetAnchorable DesignTimeRectangle="172, 369, 216, 33" ElementType="InputBox" FriendlyName="'Edit'" FullSelectorArgument="&lt;wnd ctrlid='1466' /&gt;" FuzzySelectorArgument="&lt;wnd ctrlid='1466' /&gt;" Guid="6d8c114a-685b-4f3c-be93-68561dde1d8d" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAANwAAAAlCAYAAAApx4dQAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAACmSURBVHhe7dOxDcMwAAPBrOuttJsW0AYO3KSJ4cr66g5gxfo/a63TzJoJzizcL7gxhplt2OU2uOM4zOzFzTmfgwPeIzgICQ5CgoOQ4CAkOAgJDkKCg5DgICQ4CAkOQoKDkOAgJDgICQ5CgoOQ4CAkOAgJDkKCg5DgICQ4CAkOQoKDkOAgJDgICQ5CgoOQ4CD0GNx1mtm7uw0O2OcvODPbP8GZZVvnF1Wn+sFp/6KSAAAAAElFTkSuQmCC" InformativeScreenshot="fc19250bf1b1f5a0128ceb1c876395cb.png" IsResponsive="True" ScopeSelectorArgument="&lt;wnd app='manwin32.exe' cls='#32770' title='Database connection/User login Dialog' /&gt;" SearchSteps="Selector, FuzzySelector, Image">
+                  <uix:TargetAnchorable.Anchors>
+                    <scg:List x:TypeArguments="uix:ITarget" Capacity="1">
+                      <uix:Target DesignTimeRectangle="35, 369, 79, 33" ElementType="Text" FriendlyName="'Password'" FullSelectorArgument="&lt;wnd ctrlid='65535' title='Password' /&gt;" FuzzySelectorArgument="&lt;wnd ctrlid='65535' title='Password' check:text='Password' /&gt;" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAFMAAAAlCAYAAAA+ydXcAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAEoSURBVGhD7ZRRCsMwDENz/9PmBh39CBhXcexUHaPTx6OLLIftwdp674fgIJlEJJOIZBKRTCKSSUQyiUgmEckkIplEJJOIZBK5yGytQXzvzez+XijTZ1H+Rh6XefIvQr8u8/zssV3Uyc5RF+F76C47sx0/s7mfZ9mSOevYHHWy89UuyvwcnVd3jDPqZaC+M21n1a/Oo/PsrlUns1cBykT4HsL2VjvVeXSe3bXqZPYqlP7mlrOHiDp2lp1HzwHa9TnqZPYqbMnc/RLV+TjPngN/RjnqZPYq/LRMlGU6KN/dq/CYTNSpzGcZ6qD8zt6su4L6zhz5rDPy7Hx0orMluquyF3UjLjLFPpJJRDKJSCYRySQimUQkk4hkEpFMIpJJRDKJSCYRyaTRjw8tmL4XVTibJAAAAABJRU5ErkJggg==" SearchSteps="Selector, FuzzySelector, Image" />
+                    </scg:List>
+                  </uix:TargetAnchorable.Anchors>
+                </uix:TargetAnchorable>
+              </uix:NTypeInto.Target>
+              <uix:NTypeInto.Text>
+                <InArgument x:TypeArguments="x:String">
+                  <mca:CSharpValue x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpValue`1_5">in_masterConfigDict["manmosPass"]</mca:CSharpValue>
+                </InArgument>
+              </uix:NTypeInto.Text>
+            </uix:NTypeInto>
+            <uix:NClick ClickType="Single" DisplayName="Click connect button" sap:VirtualizedContainerService.HintSize="334,156" sap2010:WorkflowViewState.IdRef="NClick_1" InteractionMode="Simulate" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="fae0ebac-f762-4fb5-8921-159667431845" Version="V1">
+              <uix:NClick.Target>
+                <uix:TargetAnchorable DesignTimeRectangle="172, 436, 113, 35" ElementType="Button" FriendlyName="'unchecked'" FullSelectorArgument="&lt;wnd ctrlid='1' title='Connect' /&gt;" FuzzySelectorArgument="&lt;wnd ctrlid='1' title='Connect' check:text='unchecked' /&gt;" Guid="992b3575-b246-4fc4-bdab-511e3c22c50d" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAHUAAAAnCAYAAAAxQgdAAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAE0SURBVHhe7ZZBDsMgDATz2Fzyq/wtH+AHqThQudRQN4HK3i7SSGG9HGAuWVJKJ8GCUgF5Sl3XlQRHlcoVc23b1pd6HAcJxL7vNqklI/6hVEAoFRBKBYRSAaFUQCgVEEoFxKXUZVle0DrR+OU9XEltSUSQ+9dStTxDqXbcSLVcuu7kfUHmZTaiU7jakVk9m0UoqZK6r+1HdLTsSkc7M4uQUltdmUfpzIBSxUzL73Qkls4oKFXMtDx/t9D6LSydUYT8UWp1ZT67IxnVGYUbqZnexS0PHbEzA3dStctr+bd7Lbd0LHsts5yZhSuphfwAEq2T6XVa52Ru6cisUM8Knzq9syNxKZXcg1IBoVRAKBUQSgWEUgGhVEAoFRBKBcQkNZdILLpS85DEpCmVxOZNKsGBUuFI5wOhcAku2jGRqAAAAABJRU5ErkJggg==" InformativeScreenshot="0a8959f74a6378af23605957b09b9610.png" ScopeSelectorArgument="&lt;wnd app='manwin32.exe' cls='#32770' title='Database connection/User login Dialog' /&gt;" SearchSteps="Selector, FuzzySelector, Image" />
+              </uix:NClick.Target>
+            </uix:NClick>
+          </Sequence>
+        </ActivityAction>
+      </uix:NApplicationCard.Body>
+      <uix:NApplicationCard.TargetApp>
+        <uix:TargetApp Area="-8, -8, 1382, 744" IconBase64="iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAADkSURBVFhH7Y9bEoQgDAS9/6m8mTImbCUhPILi/thVXQo4Q9w+AhxBH+FXuO97SJlNTuEWz4guqozhls2ILqqMk8NucUuZTU7RKuzqZMOokjuiiyrj5LBb3FJmk1O0Crs62TCq5I7ooso+9uO8dotbymxymAPgCRuFXZ3sENcAAO+y5I7outo78NUE1hErl2aHsKHVFvC/a7A/YgTOFPCxBvu1MyDPI89kwXVowf6IEThToApfsIDnI7Cm7SJY8xH4ej1ABu+0tQ6+6hvgfwMAe5ldL8deaNevoAZgX0cO8LGIbTsBE8wvc8LkSAAAAAAASUVORK5CYII=" InformativeScreenshot="c44d84bec23f735f029fb33cfe9f7b71.png" Selector="&lt;wnd app='manwin32.exe' cls='Afx:*' title='Mr.Manmos for Windows Version:*' /&gt;">
+          <uix:TargetApp.FilePath>
+            <InArgument x:TypeArguments="x:String">
+              <mca:CSharpValue x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpValue`1_2">in_masterConfigDict["manmosPath"]</mca:CSharpValue>
+            </InArgument>
+          </uix:TargetApp.FilePath>
+        </uix:TargetApp>
+      </uix:NApplicationCard.TargetApp>
+    </uix:NApplicationCard>
+  </Sequence>
+</Activity>
