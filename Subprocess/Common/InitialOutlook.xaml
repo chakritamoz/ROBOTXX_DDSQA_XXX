@@ -3,7 +3,7 @@
     <x:Property Name="in_masterConfigDict" Type="InArgument(scg:Dictionary(x:String, x:String))" />
   </x:Members>
   <sap2010:ExpressionActivityEditor.ExpressionActivityEditor>C#</sap2010:ExpressionActivityEditor.ExpressionActivityEditor>
-  <sap:VirtualizedContainerService.HintSize>1240,831</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1240,871</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>ActivityBuilder_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <sco:Collection x:TypeArguments="x:String">
@@ -76,7 +76,6 @@
       <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
       <AssemblyReference>System.Memory</AssemblyReference>
       <AssemblyReference>UiPath.Excel</AssemblyReference>
-      <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
       <AssemblyReference>System.Reflection.Metadata</AssemblyReference>
       <AssemblyReference>UiPath.Mail.Activities</AssemblyReference>
       <AssemblyReference>UiPath.Mail</AssemblyReference>
@@ -92,7 +91,7 @@
       <AssemblyReference>UiPath.Platform</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="InitialOutlook" sap:VirtualizedContainerService.HintSize="526,766" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="InitialOutlook" sap:VirtualizedContainerService.HintSize="526,806" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="sco:Collection(sd:Process)" Name="process" />
     </Sequence.Variables>
@@ -115,14 +114,14 @@
         </OutArgument>
       </ui:GetProcesses.Processes>
     </ui:GetProcesses>
-    <If DisplayName="Check process OUTLOOK already open" sap:VirtualizedContainerService.HintSize="484,481" sap2010:WorkflowViewState.IdRef="If_1">
+    <If DisplayName="Check process OUTLOOK already open" sap:VirtualizedContainerService.HintSize="484,521" sap2010:WorkflowViewState.IdRef="If_1">
       <If.Condition>
         <InArgument x:TypeArguments="x:Boolean">
           <mca:CSharpValue x:TypeArguments="x:Boolean" sap2010:WorkflowViewState.IdRef="CSharpValue`1_2">process.Where(p =&gt; p.ProcessName.Contains("OUTLOOK")).Count() &lt; 1</mca:CSharpValue>
         </InArgument>
       </If.Condition>
       <If.Then>
-        <uix:NApplicationCard AttachMode="ByInstance" DisplayName="Open Outlook application" sap:VirtualizedContainerService.HintSize="434,304" sap2010:WorkflowViewState.IdRef="NApplicationCard_1" ScopeGuid="f855e1de-5a2d-4613-b049-c6d21abb004f" Version="V1">
+        <uix:NApplicationCard AttachMode="ByInstance" CloseMode="Never" DisplayName="Open Outlook application" sap:VirtualizedContainerService.HintSize="434,344" sap2010:WorkflowViewState.IdRef="NApplicationCard_1" OpenMode="IfNotOpen" ScopeGuid="f855e1de-5a2d-4613-b049-c6d21abb004f" Version="V1">
           <uix:NApplicationCard.Body>
             <ActivityAction x:TypeArguments="x:Object">
               <ActivityAction.Argument>

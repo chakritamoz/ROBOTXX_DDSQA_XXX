@@ -1,12 +1,15 @@
-<Activity mc:Ignorable="sap sap2010" x:Class="IQAType" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mca="clr-namespace:Microsoft.CSharp.Activities;assembly=System.Activities" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="IQAType" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mca="clr-namespace:Microsoft.CSharp.Activities;assembly=System.Activities" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:uix="http://schemas.uipath.com/workflow/activities/uix" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <x:Members>
     <x:Property Name="in_process" Type="InArgument(x:String)" />
     <x:Property Name="in_masterConfigDict" Type="InArgument(scg:Dictionary(x:String, x:String))" />
     <x:Property Name="in_tableDict" Type="InArgument(scg:Dictionary(x:String, sd:DataTable))" />
     <x:Property Name="in_key" Type="InArgument(x:String)" />
+    <x:Property Name="in_regName" Type="InArgument(x:String)" />
+    <x:Property Name="io_otherTerminalsDict" Type="InOutArgument(scg:Dictionary(x:String, x:String))" />
+    <x:Property Name="in_pathLocation" Type="InArgument(x:String)" />
   </x:Members>
   <sap2010:ExpressionActivityEditor.ExpressionActivityEditor>C#</sap2010:ExpressionActivityEditor.ExpressionActivityEditor>
-  <sap:VirtualizedContainerService.HintSize>1474,647</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1794,3273</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>ActivityBuilder_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <sco:Collection x:TypeArguments="x:String">
@@ -41,6 +44,13 @@
       <x:String>UiPath.DataTableUtilities</x:String>
       <x:String>System.Activities.DynamicUpdate</x:String>
       <x:String>System.Linq.Expressions</x:String>
+      <x:String>UiPath.UIAutomationNext.Enums</x:String>
+      <x:String>UiPath.UIAutomationNext.Contracts</x:String>
+      <x:String>UiPath.UIAutomationCore.Contracts</x:String>
+      <x:String>UiPath.UIAutomationNext.Activities</x:String>
+      <x:String>UiPath.Platform.ObjectLibrary</x:String>
+      <x:String>UiPath.Shared.Activities</x:String>
+      <x:String>UiPath.UIAutomationNext.Activities.Models</x:String>
     </sco:Collection>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
@@ -75,36 +85,218 @@
       <AssemblyReference>System.ValueTuple</AssemblyReference>
       <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
       <AssemblyReference>UiPath.Excel</AssemblyReference>
-      <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
       <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationNext</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationCore</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationNext.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Platform</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.FTP.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Callout.Activity</AssemblyReference>
+      <AssemblyReference>UiPath.Form.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Mail.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.OCR.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Web.Activities</AssemblyReference>
+      <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="IQAType" sap:VirtualizedContainerService.HintSize="451,299" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="IQAType" sap:VirtualizedContainerService.HintSize="1119,3208" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <ui:ForEachRow ColumnNames="{x:Null}" CurrentIndex="{x:Null}" DisplayName="For Each Row match filter" sap:VirtualizedContainerService.HintSize="409,207" sap2010:WorkflowViewState.IdRef="ForEachRow_1">
-      <ui:ForEachRow.Body>
-        <ActivityAction x:TypeArguments="sd:DataRow">
+    <uix:NApplicationCard AttachMode="ByInstance" DisplayName="Use Application: Mr.Manmos" sap:VirtualizedContainerService.HintSize="1077,3116" sap2010:WorkflowViewState.IdRef="NApplicationCard_1" ScopeGuid="6aef8b23-14d4-4810-a127-4c6e69280f5f" Version="V1">
+      <uix:NApplicationCard.Body>
+        <ActivityAction x:TypeArguments="x:Object">
           <ActivityAction.Argument>
-            <DelegateInArgument x:TypeArguments="sd:DataRow" Name="procRow" />
+            <DelegateInArgument x:TypeArguments="x:Object" Name="WSSessionData" />
           </ActivityAction.Argument>
-          <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="200,83" sap2010:WorkflowViewState.IdRef="Sequence_2">
+          <Sequence DisplayName="Body use manmos application" sap:VirtualizedContainerService.HintSize="1043,2827" sap2010:WorkflowViewState.IdRef="Sequence_11">
+            <Sequence.Variables>
+              <Variable x:TypeArguments="x:String" Name="selectionText" />
+            </Sequence.Variables>
             <sap:WorkflowViewStateService.ViewState>
               <scg:Dictionary x:TypeArguments="x:String, x:Object">
                 <x:Boolean x:Key="IsExpanded">True</x:Boolean>
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
+            <ui:ForEachRow ColumnNames="{x:Null}" CurrentIndex="{x:Null}" DisplayName="For Each Row match filter" sap:VirtualizedContainerService.HintSize="1001,1196" sap2010:WorkflowViewState.IdRef="ForEachRow_1">
+              <ui:ForEachRow.Body>
+                <ActivityAction x:TypeArguments="sd:DataRow">
+                  <ActivityAction.Argument>
+                    <DelegateInArgument x:TypeArguments="sd:DataRow" Name="procRow" />
+                  </ActivityAction.Argument>
+                  <Sequence DisplayName="Body for each match filter" sap:VirtualizedContainerService.HintSize="967,1075" sap2010:WorkflowViewState.IdRef="Sequence_10">
+                    <Sequence.Variables>
+                      <Variable x:TypeArguments="x:Boolean" Name="flagLot" />
+                    </Sequence.Variables>
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                        <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Invoke Navigate lot manmos" sap:VirtualizedContainerService.HintSize="925,112" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_4" UnSafe="False" WorkflowFileName="Subprocess\\Manmos\\NavigateLotManmos.xaml">
+                      <ui:InvokeWorkflowFile.Arguments>
+                        <InArgument x:TypeArguments="scg:Dictionary(x:String, x:String)" x:Key="in_masterConfigDict">
+                          <mca:CSharpValue x:TypeArguments="scg:Dictionary(x:String, x:String)" sap2010:WorkflowViewState.IdRef="CSharpValue`1_16">in_masterConfigDict</mca:CSharpValue>
+                        </InArgument>
+                        <InArgument x:TypeArguments="x:String" x:Key="in_lot">
+                          <mca:CSharpValue x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpValue`1_17">procRow[in_process].ToString()</mca:CSharpValue>
+                        </InArgument>
+                        <OutArgument x:TypeArguments="x:Boolean" x:Key="out_flagLot">
+                          <mca:CSharpReference x:TypeArguments="x:Boolean" sap2010:WorkflowViewState.IdRef="CSharpReference`1_5">flagLot</mca:CSharpReference>
+                        </OutArgument>
+                      </ui:InvokeWorkflowFile.Arguments>
+                    </ui:InvokeWorkflowFile>
+                    <If DisplayName="If flag lot found or not" sap:VirtualizedContainerService.HintSize="925,829" sap2010:WorkflowViewState.IdRef="If_2">
+                      <If.Condition>
+                        <InArgument x:TypeArguments="x:Boolean">
+                          <mca:CSharpValue x:TypeArguments="x:Boolean" sap2010:WorkflowViewState.IdRef="CSharpValue`1_20">flagLot</mca:CSharpValue>
+                        </InArgument>
+                      </If.Condition>
+                      <sap:WorkflowViewStateService.ViewState>
+                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                        </scg:Dictionary>
+                      </sap:WorkflowViewStateService.ViewState>
+                      <If.Then>
+                        <uix:NCheckState Exists="{x:Null}" DisplayName="Check App State in use in other terminals" sap:VirtualizedContainerService.HintSize="680,670" sap2010:WorkflowViewState.IdRef="NCheckState_2" Timeout="1" Version="V1">
+                          <uix:NCheckState.IfExists>
+                            <Sequence DisplayName="Target does appear" sap:VirtualizedContainerService.HintSize="376,454" sap2010:WorkflowViewState.IdRef="Sequence_12">
+                              <sap:WorkflowViewStateService.ViewState>
+                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                </scg:Dictionary>
+                              </sap:WorkflowViewStateService.ViewState>
+                              <ui:InvokeCode ContinueOnError="{x:Null}" Code="otherTerminalDict[lot] = regName;" DisplayName="Add key lot pair regName" sap:VirtualizedContainerService.HintSize="334,164" sap2010:WorkflowViewState.IdRef="InvokeCode_2" Language="CSharp">
+                                <ui:InvokeCode.Arguments>
+                                  <InOutArgument x:TypeArguments="scg:Dictionary(x:String, x:String)" x:Key="otherTerminalDict">
+                                    <mca:CSharpReference x:TypeArguments="scg:Dictionary(x:String, x:String)" sap2010:WorkflowViewState.IdRef="CSharpReference`1_6">io_otherTerminalsDict</mca:CSharpReference>
+                                  </InOutArgument>
+                                  <InArgument x:TypeArguments="x:String" x:Key="lot">
+                                    <mca:CSharpValue x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpValue`1_21">procRow[in_process].ToString()</mca:CSharpValue>
+                                  </InArgument>
+                                  <InArgument x:TypeArguments="x:String" x:Key="regName">
+                                    <mca:CSharpValue x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpValue`1_22">in_regName</mca:CSharpValue>
+                                  </InArgument>
+                                </ui:InvokeCode.Arguments>
+                              </ui:InvokeCode>
+                              <uix:NClick ClickType="Single" DisplayName="Click OK button" sap:VirtualizedContainerService.HintSize="334,156" sap2010:WorkflowViewState.IdRef="NClick_3" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="6aef8b23-14d4-4810-a127-4c6e69280f5f" Version="V1">
+                                <uix:NClick.Target>
+                                  <uix:TargetAnchorable DesignTimeRectangle="164, 114, 75, 23" ElementType="Button" FriendlyName="'unchecked'" FullSelectorArgument="&lt;wnd ctrlid='2' title='OK' /&gt;" FuzzySelectorArgument="&lt;wnd ctrlid='2' title='OK' check:text='unchecked' /&gt;" Guid="f2aaaf19-d72d-4314-be69-f8b1294789df" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAE8AAAAbCAYAAAA9K9JnAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAD8SURBVGhD7dbNDYQgEIZhqqIeDl6shDa80wtN2AAdzO6EiLNZJCpZdkw+kzcqcHqCPyalROhewOuo4E3ThE5WxcPRPuZ5buOt64oqLctyDm8bQ3vA6wh4HQGvI914wZExpmR9FPOBnLHkY74P7r3GBTH/+9TiRW/fYI5CGYvkrQQSeIw8GI5TisdQ+64qRU+2gG54fJbI49KJ94Eky7vPBb7OeLaGPKgH4m1YjFd7F45L6WMr3mdy/PCx/c/ue9wHY99lAo0/GNZTLGvHpBaPy4AXflUGA6rG0x7wOgJeR8DrCHgdncLjRaheE48nUbtDPHSuLzx0PeDdLtELB2ExVm/MRywAAAAASUVORK5CYII=" InformativeScreenshot="1f289105fc502f782de163b3070be760.png" ScopeSelectorArgument="&lt;wnd app='manwin32.exe' cls='#32770' title='manwin32' /&gt;" SearchSteps="Selector, FuzzySelector, Image" />
+                                </uix:NClick.Target>
+                              </uix:NClick>
+                            </Sequence>
+                          </uix:NCheckState.IfExists>
+                          <uix:NCheckState.Target>
+                            <uix:TargetAnchorable DesignTimeRectangle="65, 59, 159, 15" ElementType="Text" FriendlyName="'It is'" FullSelectorArgument="&lt;wnd ctrlid='65535' title='It is opened at other terminals.' /&gt;&lt;ctrl name='It is opened at other terminals.' role='text' /&gt;" FuzzySelectorArgument="&lt;wnd ctrlid='65535' title='It is opened at other terminals.' /&gt;&lt;ctrl name='It is opened at other terminals.' role='text' automationid='' check:text='It is opened at other terminals.' /&gt;" Guid="d9403c01-bea0-4735-b29e-a4a27085be93" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAKMAAAATCAYAAAD8pr31AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAI1SURBVGhD7ZcLcoQgDIa9lhfiOt5mL+NhKBHQn5CgsE5LZ/LNbBfIgyQE3S7eMCbBmtGYBmtGYxqsGY1psGY0pgGa8ePd4sLfPF79th8TBur9R1q5SfTqZ7jdqB+Nt/0h5PubMx6LbaAZ/zu9uY3Wgtu9XdOZz2gsNqEZ6XvxS/qslcdyo31bk652k9CfcDibS7LFu8IB2J2C2qaMT7IhcN1FH1Whdr+tSSd8ol+wO9c4qJP9Sna01ht7tHEu1HjdQoQZyT9bV33APNl+nGxz5aLFLdWMQPsnPRIZfE1joO0NKNEzyE9I6Cwq2UIBSAa+yC6KKGHcr9cmrhcxqLllMC/Mt6adH9qN53sdMlLH9cwHzPfNr2F82BxjKeeor8V9QXqavaRf82UzppuRA63gfnB+Jwt+4RO3eNuGcRQ626NfRb/p+25frvskdkTy98QHznvHBJvf1uyuRy6+bMZIfAxrtwV1cd4jy7xtA6hPNc0v0fLdkhEt3Yy2Ttz5z7T0escEzDtqpvfIxSvNGLtf1m+/xi7ZEewpi7epfj3xvXGu2bD14yYLsdJ6vr2FTqsWpNrKT4uVeBJ7a28uG6lZ75iAeVfNKD6U142pNCP5jo/ednI0To9o9TEMOkJS+Yd01SDp90yUaZeEzUWbAK6r/8BgLqWOXgtCy4/bjcTObUqquLpr1jsmuCztV9RM08knQmtwPgloxt8GAzYMa0ZjIv6wGQ2jxJrRmAZrRmMarBmNSfD+B5CNNz7DvSszAAAAAElFTkSuQmCC" InformativeScreenshot="05fcd4f3f336a562853e553120c748c2.png" ScopeSelectorArgument="&lt;wnd app='manwin32.exe' cls='#32770' title='manwin32' /&gt;" SearchSteps="Selector, FuzzySelector" />
+                          </uix:NCheckState.Target>
+                          <sap:WorkflowViewStateService.ViewState>
+                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                            </scg:Dictionary>
+                          </sap:WorkflowViewStateService.ViewState>
+                        </uix:NCheckState>
+                      </If.Then>
+                      <If.Else>
+                        <ui:Continue sap:VirtualizedContainerService.HintSize="200,22" sap2010:WorkflowViewState.IdRef="Continue_4" />
+                      </If.Else>
+                    </If>
+                  </Sequence>
+                </ActivityAction>
+              </ui:ForEachRow.Body>
+              <ui:ForEachRow.DataTable>
+                <InArgument x:TypeArguments="sd:DataTable">
+                  <mca:CSharpValue x:TypeArguments="sd:DataTable" sap2010:WorkflowViewState.IdRef="CSharpValue`1_3">in_tableDict[in_key].DefaultView.ToTable(true,in_process)</mca:CSharpValue>
+                </InArgument>
+              </ui:ForEachRow.DataTable>
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+            </ui:ForEachRow>
+            <uix:NGetText DisplayName="Get Text selection list" sap:VirtualizedContainerService.HintSize="1001,156" sap2010:WorkflowViewState.IdRef="NGetText_2" ScopeIdentifier="6aef8b23-14d4-4810-a127-4c6e69280f5f" ScrapingMethod="Native" Version="V1">
+              <uix:NGetText.Target>
+                <uix:TargetAnchorable DesignTimeRectangle="4, 356, 867, 272" FriendlyName="'client'" FullSelectorArgument="&lt;wnd cls='SS32X25_Spread' idx='2' /&gt;&lt;ctrl role='client' /&gt;" FuzzySelectorArgument="&lt;wnd cls='SS32X25_Spread' /&gt;&lt;ctrl role='client' automationid='' /&gt;" Guid="890043cf-aac2-4ec5-a559-3962566c4d9a" InformativeScreenshot="14db76a57e6bc5ae2a5c08f433d23029.png" ScopeSelectorArgument="&lt;wnd app='manwin32.exe' cls='#32770' title='Select lot/sample' /&gt;" SearchSteps="Selector, FuzzySelector" />
+              </uix:NGetText.Target>
+              <uix:NGetText.Text>
+                <OutArgument x:TypeArguments="x:String">
+                  <mca:CSharpReference x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpReference`1_7">selectionText</mca:CSharpReference>
+                </OutArgument>
+              </uix:NGetText.Text>
+            </uix:NGetText>
+            <If DisplayName="Check selection text" sap:VirtualizedContainerService.HintSize="1001,1301" sap2010:WorkflowViewState.IdRef="If_3">
+              <If.Condition>
+                <InArgument x:TypeArguments="x:Boolean">
+                  <mca:CSharpValue x:TypeArguments="x:Boolean" sap2010:WorkflowViewState.IdRef="CSharpValue`1_23">selectionText.Split(new string[] {"\n"}, StringSplitOptions.None).Count() &gt; 1</mca:CSharpValue>
+                </InArgument>
+              </If.Condition>
+              <If.Then>
+                <Sequence DisplayName="Have lot in selection list" sap:VirtualizedContainerService.HintSize="396,1142" sap2010:WorkflowViewState.IdRef="Sequence_13">
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                  <uix:NClick ClickType="Single" DisplayName="Click OK(F9) button" sap:VirtualizedContainerService.HintSize="354,156" sap2010:WorkflowViewState.IdRef="NClick_1" InteractionMode="Simulate" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="6aef8b23-14d4-4810-a127-4c6e69280f5f" Version="V1">
+                    <uix:NClick.Target>
+                      <uix:TargetAnchorable DesignTimeRectangle="875, 453, 72, 42" ElementType="Button" FriendlyName="'O K(F9)'" FullSelectorArgument="&lt;wnd ctrlid='1' title='O K(F9)' /&gt;" FuzzySelectorArgument="&lt;wnd ctrlid='1' title='O K(F9)' check:text='O K(F9)' /&gt;" Guid="71cc8e9e-999b-41ca-8b4d-2540e233f821" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAEwAAAAuCAYAAACCq/96AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAEUSURBVGhD7dSLCYMwFEZh13Urd3OBbGAJJSW93sT8UazaI3xgXqIH2iGEsKAdwUSfYFzlaxxHP9g8zzCmaaoHS2O8EUxEMBHBRAQTEUxEMBHBRAQTEUxEMBHBRAQTEUx0WrBhGL54eyK7Vhqn5+TyPd5cut/jlGDey5Y+oPaRtbXSfMsZxWWDbZ3ZOu+NS2cUlwxWW/Puc3a+5Yzi1sFydp+3Zvf1eNxP0uo5U/O4P32r50zNpYPZcek+13q+1ynBoviyOW9P5K2luXxt6xmJnc/HPU4LdoS9H/x3waLejz4iVnS7YL9GMBHBRAQTEUxEMBHBRAQTEUxEMBHBRAQTEUxUDRYXseYGi5MoWwVDG4JJwvIC6uvcWdRQKHQAAAAASUVORK5CYII=" InformativeScreenshot="80b8db7c0cb89b55f098a58d2634cb36.png" ScopeSelectorArgument="&lt;wnd app='manwin32.exe' cls='#32770' title='Select lot/sample' /&gt;" SearchSteps="Selector, FuzzySelector, Image" />
+                    </uix:NClick.Target>
+                  </uix:NClick>
+                  <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Invoke Copy Data to Excel" sap:VirtualizedContainerService.HintSize="354,112" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_3" UnSafe="False" WorkflowFileName="Subprocess\\Manmos\\CopyDataToExcel.xaml">
+                    <ui:InvokeWorkflowFile.Arguments>
+                      <InArgument x:TypeArguments="scg:Dictionary(x:String, x:String)" x:Key="in_masterConfigDict">
+                        <mca:CSharpValue x:TypeArguments="scg:Dictionary(x:String, x:String)" sap2010:WorkflowViewState.IdRef="CSharpValue`1_24">in_masterConfigDict</mca:CSharpValue>
+                      </InArgument>
+                    </ui:InvokeWorkflowFile.Arguments>
+                  </ui:InvokeWorkflowFile>
+                  <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Invoke Paste Data to Excel" sap:VirtualizedContainerService.HintSize="354,112" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_2" UnSafe="False" WorkflowFileName="Subprocess\\Manmos\\PasteDataToExcel.xaml">
+                    <ui:InvokeWorkflowFile.Arguments>
+                      <InArgument x:TypeArguments="x:String" x:Key="in_pathLocation">
+                        <mca:CSharpValue x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpValue`1_12">in_pathLocation</mca:CSharpValue>
+                      </InArgument>
+                      <InArgument x:TypeArguments="x:String" x:Key="in_sheetName">
+                        <mca:CSharpValue x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpValue`1_11">in_process</mca:CSharpValue>
+                      </InArgument>
+                    </ui:InvokeWorkflowFile.Arguments>
+                  </ui:InvokeWorkflowFile>
+                  <uix:NClick ClickType="Single" DisplayName="Click close button collection data" sap:VirtualizedContainerService.HintSize="354,156" sap2010:WorkflowViewState.IdRef="NClick_5" InteractionMode="Simulate" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="6aef8b23-14d4-4810-a127-4c6e69280f5f" Version="V1">
+                    <uix:NClick.Target>
+                      <uix:TargetAnchorable DesignTimeRectangle="104, 123, 32, 18" ElementType="Button" FriendlyName="'Close'" FullSelectorArgument="&lt;wnd cls='Afx:*' title='*' /&gt;&lt;ctrl name='Close' role='push button' /&gt;" FuzzySelectorArgument="&lt;wnd cls='Afx:*' title='*' /&gt;&lt;ctrl name='Close' role='push button' automationid='' check:text='Close' /&gt;" Guid="3948fbd0-823b-4acf-86e9-8c5269c099e7" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAACQAAAAWCAYAAACosj4+AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAALRSURBVEhLzZbNS1RRGMbPH9Ff0CII2mnQxjauGrEPpE/INhXYIjeJZJJQhIskCjQdv9PSxIg+lMzRVLzV+NFUTjQpIzrXUedCUVQrQd7Oc+55b3fmXiEXDXPhx/u+zznnfZ7lFe0vP1EuITqGP1Mu4QTq7Bmh0wXFVLhjZ1aBJ7ydQPdCMQKHdu2l4eYW+h2dzSrwhDfnEF0jXwgg7a+P02T1tWYVeMKbc6QF+hkJ03pPkFK9GvQa1lFVz2jNfTfV06xwdmHmfajcS+CZFuj+q3kCEH/MGLTW1eCl+2/fWFVNJcfOOzRWXVHnXr067Z0fqxJ4wptziAdjCwQgfg9PULL9NiXbbFZkD3gGMHN/mO9WXvbVsWsFe1zv1X5GzvCEN+cQveNxAhC/GaNkNt2kRFDTVGejeltrqKhUZpubmw5+M+7hvql3cU0Esa/OmeEJb84hHk4sEuBASw21tFQvkXVZw72q8qz+UoUy3djY8AAd52oPv5Nv+L0b7OJAnEP0TS4SgDjffIuGCvf8E9eKi5S5ZVkOmKH73d8KeMKbc4h+Y4nAdgJxGNM0PWw3FAfiHOLR62UCHCh0II+GA3kUkqByHwrky7N8un7koDKNx+MOfjPu4b7ap7F3yOqCA3EO8fhtggDEhbY7NFayfwsKVIVZLBZzwHzjaImv7t3hBZ7w5hziSdgkAHGxu4mM0gBNlhYpjDMBG6kxtadOKjMGsyHvbqUreIeqWtP74AlvziGeTiUJQFzu76SpC8clJzJgza7TZX5nEqVnvne/lZRp9Dk84c05xLOZVQIQkwP9FKk4+585p7FneMKbc4jns2sEIKZGB2muppzmrpZTVNYoqgSzouaifa7uyF4SdTR7dnqe+Z7ekbkTnvDmHGLg3RqBw7v30Yj8Ffj6ZjyrwBPenEMMRtYJtHQMqv8SpM0m8IQ35xAv3qcolxBDHyzKHSz6A9keuoPwWfEHAAAAAElFTkSuQmCC" InformativeScreenshot="7f7142fb2ef410178c0432ca9e5d678c.png" ScopeSelectorArgument="&lt;wnd app='manwin32.exe' cls='Afx:*' title='Mr.Manmos for Windows Version:*' /&gt;" SearchSteps="Selector, FuzzySelector, Image" />
+                    </uix:NClick.Target>
+                  </uix:NClick>
+                  <uix:NClick ClickType="Single" DisplayName="Click No save change alert" sap:VirtualizedContainerService.HintSize="354,156" sap2010:WorkflowViewState.IdRef="NClick_6" InteractionMode="Simulate" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="6aef8b23-14d4-4810-a127-4c6e69280f5f" Version="V1">
+                    <uix:NClick.Target>
+                      <uix:TargetAnchorable DesignTimeRectangle="179, 114, 75, 23" ElementType="Button" FriendlyName="'&amp;No'" FullSelectorArgument="&lt;wnd ctrlid='7' title='&amp;amp;No' /&gt;" FuzzySelectorArgument="&lt;wnd ctrlid='7' title='&amp;amp;No' check:text='&amp;amp;No' /&gt;" Guid="da69f9f1-e67f-4c13-8a6c-7b60f53ca0fc" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAE8AAAAbCAYAAAA9K9JnAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAADbSURBVGhD7dXBDYQgEIVhqqIerlYybXinF5qgATqYBd01CCxhnUTZ5Jn8iYycvqCqEAKjawFP0IGHa+xalqWN571HndZ17eN91qgOeIKAJwh4goAnaEI8y0YpVsYWM83k8n3PNymeZq1zLOAN9oayFAGJXT47YcbTufUc6rx4EcQaxcaeZ2lPmmty+35rWB3I9zY13na/wRSz02kr1/c1OV5gR/H7RwS8sdo4+Q8Er+3XGicpAVWg+GH8dcATBDxBwBMEPEHAE9TFSw9RvyZeGqKxKjz0e8C7XOAXWaNk5C/5JyoAAAAASUVORK5CYII=" InformativeScreenshot="3c3b4a1d1c8bf2ad336e51e994be68ba.png" ScopeSelectorArgument="&lt;wnd app='manwin32.exe' cls='#32770' title='manwin32' /&gt;" SearchSteps="Selector, FuzzySelector, Image" />
+                    </uix:NClick.Target>
+                  </uix:NClick>
+                  <uix:NClick ClickType="Single" DisplayName="Click 'unchecked'" sap:VirtualizedContainerService.HintSize="354,156" sap2010:WorkflowViewState.IdRef="NClick_7" InteractionMode="Simulate" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="6aef8b23-14d4-4810-a127-4c6e69280f5f" Version="V1">
+                    <uix:NClick.Target>
+                      <uix:TargetAnchorable DesignTimeRectangle="23, 78, 75, 23" ElementType="Button" FriendlyName="'unchecked'" FullSelectorArgument="&lt;wnd ctrlid='1359' title='Parts' /&gt;" FuzzySelectorArgument="&lt;wnd ctrlid='1359' title='Parts' check:text='unchecked' /&gt;" Guid="7caf35ee-96f1-423d-99a1-12292ac9479d" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAE8AAAAbCAYAAAA9K9JnAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAADvSURBVGhD7ZTRDcMgDEQZNj/ZKrtlATZo649rLeogQ0hklIv0hLHBRKeDlHN+kT4o3gm+4i3LQpyY4vGrf+u61sXb950YbNvmEw858qNZvJQSx88oNImnNz4Z6BDi2srPlFjrohHCeVbflrPuFhvnhXGeJ3fE3eKBKZwnMShzZWzNR4Pe0715qOk1nvgKwjpPI3UNcrqO2JqPBv3DvnngSBidt/bXeo4ivPPKGuY674lHgr7hnSdIXYNcuUbHZf0KQjhvNqBDCOfNCp3XQbfzsPHpo8BrewKXeLKI2FTFkyKpcyge8fEnHmmH4nWTX2+aUQ8tQLfvXwAAAABJRU5ErkJggg==" InformativeScreenshot="d2c8fde517a3123b17058652d24da849.png" ScopeSelectorArgument="&lt;wnd app='manwin32.exe' cls='#32770' title='select a return screen' /&gt;" SearchSteps="Selector, FuzzySelector, Image" />
+                    </uix:NClick.Target>
+                  </uix:NClick>
+                </Sequence>
+              </If.Then>
+              <If.Else>
+                <uix:NClick ClickType="Single" DisplayName="Click close button" sap:VirtualizedContainerService.HintSize="334,156" sap2010:WorkflowViewState.IdRef="NClick_4" InteractionMode="Simulate" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="6aef8b23-14d4-4810-a127-4c6e69280f5f" Version="V1">
+                  <uix:NClick.Target>
+                    <uix:TargetAnchorable DesignTimeRectangle="924, 1, 34, 25" ElementType="Button" FriendlyName="'Close'" FullSelectorArgument="&lt;ctrl name='Close' role='push button' /&gt;" FuzzySelectorArgument="&lt;ctrl name='Close' role='push button' automationid='' check:text='Close' /&gt;" Guid="a7a8df4b-76d6-4e5c-86d4-9966016d41ee" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAACYAAAAcCAYAAAAN3M1lAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAADmSURBVFhH7dRNCsIwEIbhbESP4In7l/4npYWexIU38DDduxj5AgUXsZB0hCl08a5G8IHMVL2fd5LUNE00zzMpeiiSEmDWWocTB+v7nsZxlAdr25aGYZAHq+uajDHyYFVVuecUByvLkrqukwfTWrs92wVTStHL+mcIM/zGN/MFWFEU1DTNPhj++HK9eXFbs18Blue5O4DdT+kDxKAQYFmWuQNg2bFvSCwKAZamqTsAtuVfQbEoBFiSJHJhuExxT8kG80FicWywLUAMjg32jw8s645xdcJCO2GhnbDQjgFbloWkdACYpg9bfGsAT38g3AAAAABJRU5ErkJggg==" InformativeScreenshot="193fea9086dac0275a6ca9f834ab9e24.png" ScopeSelectorArgument="&lt;wnd app='manwin32.exe' cls='#32770' title='Select lot/sample' /&gt;" SearchSteps="Selector, FuzzySelector, Image" />
+                  </uix:NClick.Target>
+                </uix:NClick>
+              </If.Else>
+            </If>
           </Sequence>
         </ActivityAction>
-      </ui:ForEachRow.Body>
-      <ui:ForEachRow.DataTable>
-        <InArgument x:TypeArguments="sd:DataTable">
-          <mca:CSharpValue x:TypeArguments="sd:DataTable" sap2010:WorkflowViewState.IdRef="CSharpValue`1_3">in_tableDict[in_key].DefaultView.ToTable(true,in_process)</mca:CSharpValue>
-        </InArgument>
-      </ui:ForEachRow.DataTable>
-    </ui:ForEachRow>
+      </uix:NApplicationCard.Body>
+      <uix:NApplicationCard.TargetApp>
+        <uix:TargetApp Area="1912, 100, 1616, 876" IconBase64="iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAADkSURBVFhH7Y9bEoQgDAS9/6m8mTImbCUhPILi/thVXQo4Q9w+AhxBH+FXuO97SJlNTuEWz4guqozhls2ILqqMk8NucUuZTU7RKuzqZMOokjuiiyrj5LBb3FJmk1O0Crs62TCq5I7ooso+9uO8dotbymxymAPgCRuFXZ3sENcAAO+y5I7outo78NUE1hErl2aHsKHVFvC/a7A/YgTOFPCxBvu1MyDPI89kwXVowf6IEThToApfsIDnI7Cm7SJY8xH4ej1ABu+0tQ6+6hvgfwMAe5ldL8deaNevoAZgX0cO8LGIbTsBE8wvc8LkSAAAAAAASUVORK5CYII=" InformativeScreenshot="57cb4aae0fdf47f9d32e4e66a318ad2f.png" Selector="&lt;wnd app='manwin32.exe' cls='Afx:*' title='Mr.Manmos for Windows Version*' /&gt;" />
+      </uix:NApplicationCard.TargetApp>
+    </uix:NApplicationCard>
   </Sequence>
 </Activity>

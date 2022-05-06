@@ -1,0 +1,126 @@
+<Activity mc:Ignorable="sap sap2010" x:Class="ChangeServerManmos" sap2010:ExpressionActivityEditor.ExpressionActivityEditor="C#" sap:VirtualizedContainerService.HintSize="1794,1283" sap2010:WorkflowViewState.IdRef="ActivityBuilder_1" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib" xmlns:uix="http://schemas.uipath.com/workflow/activities/uix" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <TextExpression.NamespacesForImplementation>
+    <sco:Collection x:TypeArguments="x:String">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Text</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>UiPath.UIAutomationNext.Enums</x:String>
+      <x:String>UiPath.UIAutomationCore.Contracts</x:String>
+      <x:String>System.Collections.ObjectModel</x:String>
+      <x:String>UiPath.UIAutomationNext.Activities</x:String>
+      <x:String>System.Activities.DynamicUpdate</x:String>
+      <x:String>UiPath.Platform.ObjectLibrary</x:String>
+      <x:String>UiPath.Shared.Activities</x:String>
+    </sco:Collection>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <sco:Collection x:TypeArguments="AssemblyReference">
+      <AssemblyReference>Microsoft.CSharp</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>System.ServiceModel.Activities</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>PresentationCore</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationNext</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationCore</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationNext.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Platform</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Form.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.FTP.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Callout.Activity</AssemblyReference>
+      <AssemblyReference>UiPath.Mail.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.OCR.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Web.Activities</AssemblyReference>
+      <AssemblyReference>Microsoft.Bcl.AsyncInterfaces</AssemblyReference>
+      <AssemblyReference>System.ValueTuple</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
+      <AssemblyReference>System.Memory</AssemblyReference>
+      <AssemblyReference>UiPath.Excel</AssemblyReference>
+      <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
+    </sco:Collection>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence DisplayName="ChangeServerManmos" sap:VirtualizedContainerService.HintSize="476,1218" sap2010:WorkflowViewState.IdRef="Sequence_1">
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <uix:NApplicationCard AttachMode="ByInstance" DisplayName="Use Application: Mr.Manmos for Windows" sap:VirtualizedContainerService.HintSize="434,1126" sap2010:WorkflowViewState.IdRef="NApplicationCard_1" ScopeGuid="e6293be9-4138-4cbf-9cc6-aafc6c756852" Version="V1">
+      <uix:NApplicationCard.Body>
+        <ActivityAction x:TypeArguments="x:Object">
+          <ActivityAction.Argument>
+            <DelegateInArgument x:TypeArguments="x:Object" Name="WSSessionData" />
+          </ActivityAction.Argument>
+          <Sequence DisplayName="Body use application" sap:VirtualizedContainerService.HintSize="376,837" sap2010:WorkflowViewState.IdRef="Sequence_2">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <uix:NClick ClickType="Single" DisplayName="Click Close button" sap:VirtualizedContainerService.HintSize="334,156" sap2010:WorkflowViewState.IdRef="NClick_1" InteractionMode="Simulate" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="e6293be9-4138-4cbf-9cc6-aafc6c756852" Version="V1">
+              <uix:NClick.Target>
+                <uix:TargetAnchorable DesignTimeRectangle="896, 1, 34, 25" ElementType="Button" FriendlyName="'Close'" FullSelectorArgument="&lt;ctrl name='Close' role='push button' /&gt;" FuzzySelectorArgument="&lt;ctrl name='Close' role='push button' automationid='' check:text='Close' /&gt;" Guid="1c2ddeac-5e13-4f60-8891-d32ba7a52d3a" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAACYAAAAcCAYAAAAN3M1lAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAADmSURBVFhH7dRNCsIwEIbhbESP4In7l/4npYWexIU38DDduxj5AgUXsZB0hCl08a5G8IHMVL2fd5LUNE00zzMpeiiSEmDWWocTB+v7nsZxlAdr25aGYZAHq+uajDHyYFVVuecUByvLkrqukwfTWrs92wVTStHL+mcIM/zGN/MFWFEU1DTNPhj++HK9eXFbs18Blue5O4DdT+kDxKAQYFmWuQNg2bFvSCwKAZamqTsAtuVfQbEoBFiSJHJhuExxT8kG80FicWywLUAMjg32jw8s645xdcJCO2GhnbDQjgFbloWkdACYpg9bfGsAT38g3AAAAABJRU5ErkJggg==" InformativeScreenshot="d886cbead213a87368618e72bd11b010.png" ScopeSelectorArgument="&lt;wnd app='manwin32.exe' cls='#32770' title='Select/Edit/Delete parts*' /&gt;" SearchSteps="Selector, FuzzySelector, Image" />
+              </uix:NClick.Target>
+            </uix:NClick>
+            <uix:NClick ClickType="Single" DisplayName="Click disconnect server button" sap:VirtualizedContainerService.HintSize="334,156" sap2010:WorkflowViewState.IdRef="NClick_2" InteractionMode="Simulate" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="e6293be9-4138-4cbf-9cc6-aafc6c756852" Version="V1">
+              <uix:NClick.Target>
+                <uix:TargetAnchorable DesignTimeRectangle="37, 56, 23, 21" ElementType="Button" FriendlyName="'DB disconnection'" FullSelectorArgument="&lt;wnd cls='ToolbarWindow32' title='Standard' /&gt;&lt;ctrl name='Standard' role='tool bar' /&gt;&lt;ctrl name='DB disconnection' role='push button' /&gt;" FuzzySelectorArgument="&lt;wnd cls='ToolbarWindow32' title='Standard' /&gt;&lt;ctrl name='Standard' role='tool bar' /&gt;&lt;ctrl name='DB disconnection' role='push button' automationid='' check:text='DB disconnection' /&gt;" Guid="e9e70427-743d-4ac1-8302-3fcb1306e3b3" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAABsAAAAZCAYAAADAHFVeAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAB2SURBVEhL7ZbbCcAgDEWzrlu5WxbIBqn5sEgNrS23oZQEDj4i9+CHIImIRhEr01alFBteqTGbaq37BjNDOWZPMu/6T0kZhJQpEbmMYV7f6P1bsvYMJ3rYVf/bMo/eXzmzLEOQMggpg3AqszmaMZtsEcVfv3KiG6QkAlAodhrFAAAAAElFTkSuQmCC" InformativeScreenshot="3ade522f94e1e7d1354d59b65bb8d8ce.png" ScopeSelectorArgument="&lt;wnd app='manwin32.exe' cls='Afx:*' title='Mr.Manmos for Windows Version*' /&gt;" SearchSteps="Selector, FuzzySelector, Image" />
+              </uix:NClick.Target>
+            </uix:NClick>
+            <uix:NClick ClickType="Single" DisplayName="Click ok aleart box" sap:VirtualizedContainerService.HintSize="334,156" sap2010:WorkflowViewState.IdRef="NClick_3" InteractionMode="Simulate" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="e6293be9-4138-4cbf-9cc6-aafc6c756852" Version="V1">
+              <uix:NClick.Target>
+                <uix:TargetAnchorable DesignTimeRectangle="159, 114, 75, 23" ElementType="Button" FriendlyName="'unchecked'" FullSelectorArgument="&lt;wnd ctrlid='2' title='OK' /&gt;" FuzzySelectorArgument="&lt;wnd ctrlid='2' title='OK' check:text='unchecked' /&gt;" Guid="c868bf74-bb60-463c-8079-2df3d3893c42" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAE8AAAAbCAYAAAA9K9JnAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAEXSURBVGhD7ZbNDYQgEEZpin44eLER6vBOLzRhA3Qw6ywBZ7NIAKM7G8fkBeUnmpePQRVCAGEMkXeCLG+aJqGRojy56tc8z3V567oKBZZlaZOX+oSdbnlKKWm3FumSRxc+meRBtu0JeCfPmfc7E9p6Mu7AKA3Wx2dntjnGkfHrYJ88b/X2kQZc7vNgNRVE5KHkm8RRmCYPRe2pyngLOgtN8rClkq+Hd/I+JFFi+ozD+yhPlyTfBM/kVeUlWSivVAuvh3nNI/WM9h9u29+kj2nNOz4w9pQRaXhgaAs+z70W5smLRIEdvyo3CkTYJo8zf5E87kjyBhhOXlr49BaRbXuCJnk4SShTlYeDQp1DeUIbX/KEfkTeMAFebjlQCp66Uj8AAAAASUVORK5CYII=" InformativeScreenshot="7ed0d7e21f7028cd9a9cb0d3d4ed2e41.png" ScopeSelectorArgument="&lt;wnd app='manwin32.exe' cls='#32770' title='manwin32' /&gt;" SearchSteps="Selector, FuzzySelector, Image" />
+              </uix:NClick.Target>
+            </uix:NClick>
+            <uix:NClick ClickType="Single" DisplayName="Click connect server button" sap:VirtualizedContainerService.HintSize="334,156" sap2010:WorkflowViewState.IdRef="NClick_4" InteractionMode="Simulate" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="e6293be9-4138-4cbf-9cc6-aafc6c756852" Version="V1">
+              <uix:NClick.Target>
+                <uix:TargetAnchorable DesignTimeRectangle="14, 56, 23, 21" ElementType="Button" FriendlyName="'DB connection'" FullSelectorArgument="&lt;wnd cls='ToolbarWindow32' title='Standard' /&gt;&lt;ctrl name='Standard' role='tool bar' /&gt;&lt;ctrl name='DB connection' role='push button' /&gt;" FuzzySelectorArgument="&lt;wnd cls='ToolbarWindow32' title='Standard' /&gt;&lt;ctrl name='Standard' role='tool bar' /&gt;&lt;ctrl name='DB connection' role='push button' automationid='' check:text='DB connection' /&gt;" Guid="875e26ed-d0ff-490d-b0b1-cd57281e2d02" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAABsAAAAZCAYAAADAHFVeAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAACMSURBVEhL7ZLRDcAgCAVd163czQXYwJakzyjyUSNam2hyEZBwfOiIKK3iG9ms471/olTLYoymhBCyjPNGhtyCIzNhSOaca9D6wLDs/sDVrfWB1zJsLpEyDczokvHAEtTkXfIPmUYpkW8AM/b8IBrYvETrA0OyXo7MhH1k/GgNZBxnGRdnk2UrWCijdAG3NffiBDfcjAAAAABJRU5ErkJggg==" InformativeScreenshot="a0052b5df66c9f62b7c4c37d9e477e40.png" ScopeSelectorArgument="&lt;wnd app='manwin32.exe' cls='Afx:*' title='Mr.Manmos for Windows Version: 3.6.2.15 (TNHK)' /&gt;" SearchSteps="Selector, FuzzySelector, Image" />
+              </uix:NClick.Target>
+            </uix:NClick>
+          </Sequence>
+        </ActivityAction>
+      </uix:NApplicationCard.Body>
+      <uix:NApplicationCard.TargetApp>
+        <uix:TargetApp Area="-8, -8, 1936, 1056" IconBase64="iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAADkSURBVFhH7Y9bEoQgDAS9/6m8mTImbCUhPILi/thVXQo4Q9w+AhxBH+FXuO97SJlNTuEWz4guqozhls2ILqqMk8NucUuZTU7RKuzqZMOokjuiiyrj5LBb3FJmk1O0Crs62TCq5I7ooso+9uO8dotbymxymAPgCRuFXZ3sENcAAO+y5I7outo78NUE1hErl2aHsKHVFvC/a7A/YgTOFPCxBvu1MyDPI89kwXVowf6IEThToApfsIDnI7Cm7SJY8xH4ej1ABu+0tQ6+6hvgfwMAe5ldL8deaNevoAZgX0cO8LGIbTsBE8wvc8LkSAAAAAAASUVORK5CYII=" InformativeScreenshot="4b3f809a08b0ccc3a6d4b76a6652aeb4.png" Selector="&lt;wnd app='manwin32.exe' cls='Afx:*' title='Mr.Manmos for Windows Version*' /&gt;" />
+      </uix:NApplicationCard.TargetApp>
+    </uix:NApplicationCard>
+  </Sequence>
+</Activity>
