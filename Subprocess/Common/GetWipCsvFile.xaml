@@ -2,9 +2,10 @@
   <x:Members>
     <x:Property Name="in_masterConfigDict" Type="InArgument(scg:Dictionary(x:String, x:String))" />
     <x:Property Name="out_pathDict" Type="OutArgument(scg:Dictionary(x:String, x:String))" />
+    <x:Property Name="out_controlTable" Type="OutArgument(sd:DataTable)" />
   </x:Members>
   <sap2010:ExpressionActivityEditor.ExpressionActivityEditor>C#</sap2010:ExpressionActivityEditor.ExpressionActivityEditor>
-  <sap:VirtualizedContainerService.HintSize>1474,2471</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1794,2623</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>ActivityBuilder_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <sco:Collection x:TypeArguments="x:String">
@@ -82,14 +83,13 @@
       <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="GetWipCsvFile" sap:VirtualizedContainerService.HintSize="680,2406" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="GetWipCsvFile" sap:VirtualizedContainerService.HintSize="680,2558" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:String" Name="controlPart">
         <Variable.Default>
-          <mca:CSharpValue x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpValue`1_42">Path.Combine(in_masterConfigDict["masterPath"],in_masterConfigDict["contName"])</mca:CSharpValue>
+          <mca:CSharpValue x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpValue`1_51">Path.Combine(in_masterConfigDict["controlPath"],in_masterConfigDict["controlName"])</mca:CSharpValue>
         </Variable.Default>
       </Variable>
-      <Variable x:TypeArguments="sd:DataTable" Name="controlTable" />
       <Variable x:TypeArguments="scg:List(x:String)" Name="digitErrorList">
         <Variable.Default>
           <mca:CSharpValue x:TypeArguments="scg:List(x:String)" sap2010:WorkflowViewState.IdRef="CSharpValue`1_20">new List&lt;string&gt;{}</mca:CSharpValue>
@@ -100,26 +100,37 @@
           <mca:CSharpValue x:TypeArguments="scg:List(x:String)" sap2010:WorkflowViewState.IdRef="CSharpValue`1_21">new List&lt;string&gt;{}</mca:CSharpValue>
         </Variable.Default>
       </Variable>
+      <Variable x:TypeArguments="x:String" Name="partNumber" />
     </Sequence.Variables>
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
+    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Initial Folder download folder" sap:VirtualizedContainerService.HintSize="638,112" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_6" UnSafe="False" WorkflowFileName="Subprocess\\Common\\DeleteFileInFolder.xaml">
+      <ui:InvokeWorkflowFile.Arguments>
+        <InArgument x:TypeArguments="scg:Dictionary(x:String, x:String)" x:Key="in_masterConfigDict">
+          <mca:CSharpValue x:TypeArguments="scg:Dictionary(x:String, x:String)" sap2010:WorkflowViewState.IdRef="CSharpValue`1_63">in_masterConfigDict</mca:CSharpValue>
+        </InArgument>
+        <InArgument x:TypeArguments="scg:List(x:String)" x:Key="deleteList">
+          <mca:CSharpValue x:TypeArguments="scg:List(x:String)" sap2010:WorkflowViewState.IdRef="CSharpValue`1_62">Directory.GetFiles(in_masterConfigDict["mainPath"],"*.csv").ToList()</mca:CSharpValue>
+        </InArgument>
+      </ui:InvokeWorkflowFile.Arguments>
+    </ui:InvokeWorkflowFile>
     <ui:ReadRange AddHeaders="True" DisplayName="Read excel control part" sap:VirtualizedContainerService.HintSize="638,87" sap2010:WorkflowViewState.IdRef="ReadRange_1">
       <ui:ReadRange.DataTable>
         <OutArgument x:TypeArguments="sd:DataTable">
-          <mca:CSharpReference x:TypeArguments="sd:DataTable" sap2010:WorkflowViewState.IdRef="CSharpReference`1_3">controlTable</mca:CSharpReference>
+          <mca:CSharpReference x:TypeArguments="sd:DataTable" sap2010:WorkflowViewState.IdRef="CSharpReference`1_3">out_controlTable</mca:CSharpReference>
         </OutArgument>
       </ui:ReadRange.DataTable>
       <ui:ReadRange.Range>
         <InArgument x:TypeArguments="x:String">
-          <mca:CSharpValue x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpValue`1_43">in_masterConfigDict["contPosition"]</mca:CSharpValue>
+          <mca:CSharpValue x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpValue`1_55">in_masterConfigDict["controlPosition"]</mca:CSharpValue>
         </InArgument>
       </ui:ReadRange.Range>
       <ui:ReadRange.SheetName>
         <InArgument x:TypeArguments="x:String">
-          <mca:CSharpValue x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpValue`1_44">in_masterConfigDict["contSheet"]</mca:CSharpValue>
+          <mca:CSharpValue x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpValue`1_56">in_masterConfigDict["controlSheet"]</mca:CSharpValue>
         </InArgument>
       </ui:ReadRange.SheetName>
       <ui:ReadRange.WorkbookPath>
@@ -148,8 +159,10 @@
           </ActivityAction.Argument>
           <Sequence DisplayName="Body foreach input file" sap:VirtualizedContainerService.HintSize="602,1811" sap2010:WorkflowViewState.IdRef="Sequence_2">
             <Sequence.Variables>
-              <Variable x:TypeArguments="sd:DataTable" Name="customerTable" />
-              <Variable x:TypeArguments="x:Int32" Name="custIndex" />
+              <Variable x:TypeArguments="sd:DataTable" Name="inputTable" />
+              <Variable x:TypeArguments="x:Int32" Name="inputIndex" />
+              <Variable x:TypeArguments="sn:NetworkCredential" Name="teraCredential" />
+              <Variable x:TypeArguments="sn:NetworkCredential" Name="qadCredential" />
             </Sequence.Variables>
             <sap:WorkflowViewStateService.ViewState>
               <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -159,17 +172,17 @@
             <ui:ReadRange AddHeaders="True" DisplayName="Read excel upload customer data" sap:VirtualizedContainerService.HintSize="560,87" sap2010:WorkflowViewState.IdRef="ReadRange_2">
               <ui:ReadRange.DataTable>
                 <OutArgument x:TypeArguments="sd:DataTable">
-                  <mca:CSharpReference x:TypeArguments="sd:DataTable" sap2010:WorkflowViewState.IdRef="CSharpReference`1_4">customerTable</mca:CSharpReference>
+                  <mca:CSharpReference x:TypeArguments="sd:DataTable" sap2010:WorkflowViewState.IdRef="CSharpReference`1_4">inputTable</mca:CSharpReference>
                 </OutArgument>
               </ui:ReadRange.DataTable>
               <ui:ReadRange.Range>
                 <InArgument x:TypeArguments="x:String">
-                  <mca:CSharpValue x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpValue`1_45">in_masterConfigDict["custPosition"]</mca:CSharpValue>
+                  <mca:CSharpValue x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpValue`1_52">in_masterConfigDict["inputPosition"]</mca:CSharpValue>
                 </InArgument>
               </ui:ReadRange.Range>
               <ui:ReadRange.SheetName>
                 <InArgument x:TypeArguments="x:String">
-                  <mca:CSharpValue x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpValue`1_46">in_masterConfigDict["custSheet"]</mca:CSharpValue>
+                  <mca:CSharpValue x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpValue`1_53">in_masterConfigDict["inputSheet"]</mca:CSharpValue>
                 </InArgument>
               </ui:ReadRange.SheetName>
               <ui:ReadRange.WorkbookPath>
@@ -182,28 +195,26 @@
               <ui:ForEachRow.Body>
                 <ActivityAction x:TypeArguments="sd:DataRow">
                   <ActivityAction.Argument>
-                    <DelegateInArgument x:TypeArguments="sd:DataRow" Name="custRow" />
+                    <DelegateInArgument x:TypeArguments="sd:DataRow" Name="inputRow" />
                   </ActivityAction.Argument>
                   <Sequence DisplayName=" Body customer table" sap:VirtualizedContainerService.HintSize="526,1468" sap2010:WorkflowViewState.IdRef="Sequence_3">
                     <Sequence.Variables>
                       <Variable x:TypeArguments="x:String" Name="digitLot">
                         <Variable.Default>
-                          <mca:CSharpValue x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpValue`1_18">custRow["Lot"].ToString().Substring(5,1)</mca:CSharpValue>
+                          <mca:CSharpValue x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpValue`1_58">inputRow["Lot"].ToString().Substring(5,1)</mca:CSharpValue>
                         </Variable.Default>
                       </Variable>
                       <Variable x:TypeArguments="x:String" Name="model">
                         <Variable.Default>
-                          <mca:CSharpValue x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpValue`1_19">custRow["Model"].ToString()</mca:CSharpValue>
+                          <mca:CSharpValue x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpValue`1_60">inputRow["Model"].ToString()</mca:CSharpValue>
                         </Variable.Default>
                       </Variable>
-                      <Variable x:TypeArguments="x:String" Name="partNumber" />
                       <Variable x:TypeArguments="x:String" Name="fullLotX">
                         <Variable.Default>
-                          <mca:CSharpValue x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpValue`1_29">custRow["Lot"].ToString()</mca:CSharpValue>
+                          <mca:CSharpValue x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpValue`1_59">inputRow["Lot"].ToString()</mca:CSharpValue>
                         </Variable.Default>
                       </Variable>
                       <Variable x:TypeArguments="x:String" Name="outputName" />
-                      <Variable x:TypeArguments="sn:NetworkCredential" Name="teraCredential" />
                     </Sequence.Variables>
                     <sap:WorkflowViewStateService.ViewState>
                       <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -221,17 +232,17 @@
                         <Assign DisplayName="Assign Part Number" sap:VirtualizedContainerService.HintSize="262,64" sap2010:WorkflowViewState.IdRef="Assign_1">
                           <Assign.To>
                             <OutArgument x:TypeArguments="x:String">
-                              <mca:CSharpReference x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpReference`1_5">partNumber</mca:CSharpReference>
+                              <mca:CSharpReference x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpReference`1_15">partNumber</mca:CSharpReference>
                             </OutArgument>
                           </Assign.To>
                           <Assign.Value>
                             <InArgument x:TypeArguments="x:String">
-                              <mca:CSharpValue x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpValue`1_48" xml:space="preserve">controlTable.AsEnumerable().
+                              <mca:CSharpValue x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpValue`1_57" xml:space="preserve">out_controlTable.AsEnumerable().
 Where(row =&gt; 
-row[in_masterConfigDict["contColDigit"]].ToString().ToLower().Equals(digitLot.ToLower()) &amp;&amp; 
-row[in_masterConfigDict["contColModel"]].ToString().ToLower().Equals(model.ToLower())
+row[in_masterConfigDict["controlColDigit"]].ToString().ToLower().Equals(digitLot.ToLower()) &amp;&amp; 
+row[in_masterConfigDict["controlColModel"]].ToString().ToLower().Equals(model.ToLower())
 ).CopyToDataTable().
-Rows[0][in_masterConfigDict["contColPartNum"]].ToString()</mca:CSharpValue>
+Rows[0][in_masterConfigDict["controlColPartNum"]].ToString()</mca:CSharpValue>
                             </InArgument>
                           </Assign.Value>
                         </Assign>
@@ -279,7 +290,7 @@ Rows[0][in_masterConfigDict["contColPartNum"]].ToString()</mca:CSharpValue>
                     <If DisplayName="If fisrt index of customerTable" sap:VirtualizedContainerService.HintSize="484,533" sap2010:WorkflowViewState.IdRef="If_1">
                       <If.Condition>
                         <InArgument x:TypeArguments="x:Boolean">
-                          <mca:CSharpValue x:TypeArguments="x:Boolean" sap2010:WorkflowViewState.IdRef="CSharpValue`1_25">custIndex == 0</mca:CSharpValue>
+                          <mca:CSharpValue x:TypeArguments="x:Boolean" sap2010:WorkflowViewState.IdRef="CSharpValue`1_25">inputIndex == 0</mca:CSharpValue>
                         </InArgument>
                       </If.Condition>
                       <sap:WorkflowViewStateService.ViewState>
@@ -290,9 +301,6 @@ Rows[0][in_masterConfigDict["contColPartNum"]].ToString()</mca:CSharpValue>
                       </sap:WorkflowViewStateService.ViewState>
                       <If.Then>
                         <Sequence DisplayName="Body fisrt index" sap:VirtualizedContainerService.HintSize="408,356" sap2010:WorkflowViewState.IdRef="Sequence_5">
-                          <Sequence.Variables>
-                            <Variable x:TypeArguments="sn:NetworkCredential" Name="qadCredential" />
-                          </Sequence.Variables>
                           <sap:WorkflowViewStateService.ViewState>
                             <scg:Dictionary x:TypeArguments="x:String, x:Object">
                               <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -383,12 +391,12 @@ Rows[0][in_masterConfigDict["contColPartNum"]].ToString()</mca:CSharpValue>
                       </Assign.To>
                       <Assign.Value>
                         <InArgument x:TypeArguments="x:String">
-                          <mca:CSharpValue x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpValue`1_49" xml:space="preserve">controlTable.AsEnumerable().
+                          <mca:CSharpValue x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpValue`1_61" xml:space="preserve">out_controlTable.AsEnumerable().
 Where(row =&gt; 
-row[in_masterConfigDict["contColDigit"]].ToString().ToLower().Equals(digitLot.ToLower()) &amp;&amp; 
-row[in_masterConfigDict["contColModel"]].ToString().ToLower().Equals(model.ToLower())
+row[in_masterConfigDict["controlColDigit"]].ToString().ToLower().Equals(digitLot.ToLower()) &amp;&amp; 
+row[in_masterConfigDict["controlColModel"]].ToString().ToLower().Equals(model.ToLower())
 ).CopyToDataTable().
-Rows[0][in_masterConfigDict["contColFileName"]].ToString()</mca:CSharpValue>
+Rows[0][in_masterConfigDict["controlColFileName"]].ToString()</mca:CSharpValue>
                         </InArgument>
                       </Assign.Value>
                     </Assign>
@@ -397,14 +405,14 @@ Rows[0][in_masterConfigDict["contColFileName"]].ToString()</mca:CSharpValue>
               </ui:ForEachRow.Body>
               <ui:ForEachRow.CurrentIndex>
                 <OutArgument x:TypeArguments="x:Int32">
-                  <mca:CSharpReference x:TypeArguments="x:Int32" sap2010:WorkflowViewState.IdRef="CSharpReference`1_8">custIndex</mca:CSharpReference>
+                  <mca:CSharpReference x:TypeArguments="x:Int32" sap2010:WorkflowViewState.IdRef="CSharpReference`1_8">inputIndex</mca:CSharpReference>
                 </OutArgument>
               </ui:ForEachRow.CurrentIndex>
               <ui:ForEachRow.DataTable>
                 <InArgument x:TypeArguments="sd:DataTable">
-                  <mca:CSharpValue x:TypeArguments="sd:DataTable" sap2010:WorkflowViewState.IdRef="CSharpValue`1_47" xml:space="preserve">customerTable.AsEnumerable().
-Where(row =&gt; row[in_masterConfigDict["custColRemark"]].
-Equals(in_masterConfigDict["custValRemark"])).
+                  <mca:CSharpValue x:TypeArguments="sd:DataTable" sap2010:WorkflowViewState.IdRef="CSharpValue`1_54" xml:space="preserve">inputTable.AsEnumerable().
+Where(row =&gt; row[in_masterConfigDict["inputColRemark"]].
+Equals(in_masterConfigDict["inputValRemark"])).
 CopyToDataTable()</mca:CSharpValue>
                 </InArgument>
               </ui:ForEachRow.DataTable>

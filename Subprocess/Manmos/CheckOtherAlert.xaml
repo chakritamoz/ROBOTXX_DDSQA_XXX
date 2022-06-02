@@ -1,0 +1,182 @@
+<Activity mc:Ignorable="sap sap2010" x:Class="CheckOtherAlert" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mca="clr-namespace:Microsoft.CSharp.Activities;assembly=System.Activities" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:uix="http://schemas.uipath.com/workflow/activities/uix" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="in_masterConfigDict" Type="InArgument(scg:Dictionary(x:String, x:String))" />
+    <x:Property Name="io_otherTerminalsDict" Type="InOutArgument(scg:Dictionary(x:String, x:String))" />
+    <x:Property Name="in_lot" Type="InArgument(x:String)" />
+    <x:Property Name="in_regName" Type="InArgument(x:String)" />
+  </x:Members>
+  <sap2010:ExpressionActivityEditor.ExpressionActivityEditor>C#</sap2010:ExpressionActivityEditor.ExpressionActivityEditor>
+  <sap:VirtualizedContainerService.HintSize>1240,2107</sap:VirtualizedContainerService.HintSize>
+  <sap2010:WorkflowViewState.IdRef>ActivityBuilder_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <sco:Collection x:TypeArguments="x:String">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Text</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>UiPath.UIAutomationNext.Enums</x:String>
+      <x:String>UiPath.UIAutomationNext.Contracts</x:String>
+      <x:String>System.Runtime.Serialization</x:String>
+      <x:String>UiPath.UIAutomationCore.Contracts</x:String>
+      <x:String>System.Collections.ObjectModel</x:String>
+      <x:String>UiPath.UIAutomationNext.Activities</x:String>
+      <x:String>System.Activities.DynamicUpdate</x:String>
+      <x:String>UiPath.Platform.ObjectLibrary</x:String>
+      <x:String>UiPath.Shared.Activities</x:String>
+      <x:String>System.Runtime.InteropServices</x:String>
+      <x:String>System.Reflection</x:String>
+      <x:String>System.Linq.Expressions</x:String>
+    </sco:Collection>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <sco:Collection x:TypeArguments="AssemblyReference">
+      <AssemblyReference>Microsoft.CSharp</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>System.ServiceModel.Activities</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>PresentationCore</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationNext</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationCore</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationNext.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Platform</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.FTP.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Form.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Mail.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Callout.Activity</AssemblyReference>
+      <AssemblyReference>UiPath.OCR.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Web.Activities</AssemblyReference>
+      <AssemblyReference>System.Memory</AssemblyReference>
+      <AssemblyReference>System.Reflection.Metadata</AssemblyReference>
+      <AssemblyReference>Microsoft.Bcl.AsyncInterfaces</AssemblyReference>
+      <AssemblyReference>System.ValueTuple</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
+      <AssemblyReference>UiPath.Excel</AssemblyReference>
+      <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
+    </sco:Collection>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence DisplayName="CheckOtherAlert" sap:VirtualizedContainerService.HintSize="756,2042" sap2010:WorkflowViewState.IdRef="Sequence_1">
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <uix:NApplicationCard AttachMode="ByInstance" DisplayName="Use Application: Mr.Manmos" sap:VirtualizedContainerService.HintSize="714,1950" sap2010:WorkflowViewState.IdRef="NApplicationCard_1" ScopeGuid="041bc127-f39e-4ded-ad8e-f50e6956c906" Version="V1">
+      <uix:NApplicationCard.Body>
+        <ActivityAction x:TypeArguments="x:Object">
+          <ActivityAction.Argument>
+            <DelegateInArgument x:TypeArguments="x:Object" Name="WSSessionData" />
+          </ActivityAction.Argument>
+          <uix:NCheckState Exists="{x:Null}" DisplayName="Check App State in use in other terminals" sap:VirtualizedContainerService.HintSize="680,1658" sap2010:WorkflowViewState.IdRef="NCheckState_1" Version="V1">
+            <uix:NCheckState.IfExists>
+              <Sequence DisplayName="Target does appear" sap:VirtualizedContainerService.HintSize="376,1440" sap2010:WorkflowViewState.IdRef="Sequence_2">
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+                <ui:InvokeCode ContinueOnError="{x:Null}" Code="otherTerminalDict[lot] = regName;" DisplayName="Add key lot pair regName" sap:VirtualizedContainerService.HintSize="334,164" sap2010:WorkflowViewState.IdRef="InvokeCode_1" Language="CSharp">
+                  <ui:InvokeCode.Arguments>
+                    <InOutArgument x:TypeArguments="scg:Dictionary(x:String, x:String)" x:Key="otherTerminalDict">
+                      <mca:CSharpReference x:TypeArguments="scg:Dictionary(x:String, x:String)" sap2010:WorkflowViewState.IdRef="CSharpReference`1_1">io_otherTerminalsDict</mca:CSharpReference>
+                    </InOutArgument>
+                    <InArgument x:TypeArguments="x:String" x:Key="lot">
+                      <mca:CSharpValue x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpValue`1_1">in_lot</mca:CSharpValue>
+                    </InArgument>
+                    <InArgument x:TypeArguments="x:String" x:Key="regName">
+                      <mca:CSharpValue x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpValue`1_2">in_regName</mca:CSharpValue>
+                    </InArgument>
+                  </ui:InvokeCode.Arguments>
+                </ui:InvokeCode>
+                <uix:NClick ClickType="Single" DisplayName="Click &quot;OK&quot; button" sap:VirtualizedContainerService.HintSize="334,157" sap2010:WorkflowViewState.IdRef="NClick_2" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="041bc127-f39e-4ded-ad8e-f50e6956c906" Version="V1">
+                  <uix:NClick.Target>
+                    <uix:TargetAnchorable DesignTimeRectangle="164, 114, 75, 23" ElementType="Button" FriendlyName="'unchecked'" FullSelectorArgument="&lt;wnd ctrlid='2' title='OK' /&gt;" FuzzySelectorArgument="&lt;wnd ctrlid='2' title='OK' check:text='unchecked' /&gt;" Guid="1de3a86a-86b6-4c7e-8ee0-07da5ee69df7" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAE8AAAAbCAYAAAA9K9JnAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAEXSURBVGhD7ZbNDYQgEEZpin44eLER6vBOLzRhA3Qw6ywBZ7NIAKM7G8fkBeUnmpePQRVCAGEMkXeCLG+aJqGRojy56tc8z3V567oKBZZlaZOX+oSdbnlKKWm3FumSRxc+meRBtu0JeCfPmfc7E9p6Mu7AKA3Wx2dntjnGkfHrYJ88b/X2kQZc7vNgNRVE5KHkm8RRmCYPRe2pyngLOgtN8rClkq+Hd/I+JFFi+ozD+yhPlyTfBM/kVeUlWSivVAuvh3nNI/WM9h9u29+kj2nNOz4w9pQRaXhgaAs+z70W5smLRIEdvyo3CkTYJo8zf5E87kjyBhhOXlr49BaRbXuCJnk4SShTlYeDQp1DeUIbX/KEfkTeMAFebjlQCp66Uj8AAAAASUVORK5CYII=" InformativeScreenshot="9d663cf469dccc114c802d5ad53b936e.png" ScopeSelectorArgument="&lt;wnd app='manwin32.exe' cls='#32770' title='manwin32' /&gt;" SearchSteps="Selector, FuzzySelector, Image" />
+                  </uix:NClick.Target>
+                </uix:NClick>
+                <uix:NClick ClickType="Single" DisplayName="Click &quot;Release flag&quot; button" sap:VirtualizedContainerService.HintSize="334,157" sap2010:WorkflowViewState.IdRef="NClick_3" InteractionMode="Simulate" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="041bc127-f39e-4ded-ad8e-f50e6956c906" Version="V1">
+                  <uix:NClick.Target>
+                    <uix:TargetAnchorable DesignTimeRectangle="875, 554, 72, 23" ElementType="Button" FriendlyName="'Release flag'" FullSelectorArgument="&lt;wnd ctrlid='1199' title='Release flag' /&gt;" FuzzySelectorArgument="&lt;wnd ctrlid='1199' title='Release flag' check:text='Release flag' /&gt;" Guid="6bb947ca-efd3-43bc-b81b-8b07b973a649" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAEwAAAAbCAYAAADWHGlkAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAD9SURBVGhD7ZQBCoQwDAT73f7Kv/mB/sCjHDnCmrSJWLnjVhhsd2OFQSyttYPEobAkH2G8/KvWagvb950A27aNhcmevKGwJBSWhMKSXBJWSjlhzSHRuTuRd9717svCIhnytDD9PgoL8FPC+l6wZqw+klsZ5tjLGnOdYY6dsOQf5u3xjj1izWfOsJ5DMud1lnxhfY3oGewktzqdy9qaw15mvLUGe2svLBOmO8xnfWTvnaGx5r0zvRx5RJjs8e71o3w262Wz57wc+eqfvu5wj7M617231sxyzSVh/wCFTYh8XR0KS0JhSSgsCYUlGQrrJTljCush8TkJIzEoLEU7XiE12BDXN+yXAAAAAElFTkSuQmCC" InformativeScreenshot="56270b12733c9f85d9aedf0dbf08bc82.png" ScopeSelectorArgument="&lt;wnd app='manwin32.exe' cls='#32770' title='Select lot/sample' /&gt;" SearchSteps="Selector, FuzzySelector, Image" />
+                  </uix:NClick.Target>
+                </uix:NClick>
+                <uix:NClick ClickType="Single" DisplayName="Click &quot;OK&quot; button" sap:VirtualizedContainerService.HintSize="334,157" sap2010:WorkflowViewState.IdRef="NClick_4" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="041bc127-f39e-4ded-ad8e-f50e6956c906" Version="V1">
+                  <uix:NClick.Target>
+                    <uix:TargetAnchorable DesignTimeRectangle="206, 114, 75, 23" ElementType="Button" FriendlyName="'OK'" FullSelectorArgument="&lt;wnd ctrlid='1' title='OK' /&gt;" FuzzySelectorArgument="&lt;wnd ctrlid='1' title='OK' check:text='OK' /&gt;" Guid="337a80ba-26d8-426e-99ad-e66d3673193b" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAE8AAAAbCAYAAAA9K9JnAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAD1SURBVGhD7dbNDYUgEEZRqqIetlZCG+7phSZsgA7mOSHiGHlEnQQx+UxuVGB1gj8mpUToWcBTVPBwXDumaarjLcuCGs3z3Mbb7tE54CkCniLgKQKeonHxgiNjTMn6KOYDOWPJx3wf3LrGBTHfpyHxorcrmKNQxiJ5K4EEHiO/AMcNiMdQ+64qRU+2gG54fJbIfRsP74Aky7vPBb7OeLaG3LGP4W1YjFd7F/ZtwMdWvM/k+N/H9r3d96kPxr7LBBp/MKynWNb2a0g8LgPe+FV5AXBYvC8EPEXAUwQ8RcBTBDxFTTyeRO2qeDyIrnXCQ/cD3uMS/QCJ02Jpi1v+WAAAAABJRU5ErkJggg==" InformativeScreenshot="6be1f85108cdf76db1e4e927f170cc4d.png" ScopeSelectorArgument="&lt;wnd app='manwin32.exe' cls='#32770' title='manwin32' /&gt;" SearchSteps="Selector, FuzzySelector, Image" />
+                  </uix:NClick.Target>
+                </uix:NClick>
+                <uix:NClick ClickType="Single" DisplayName="Click &quot;Release flag&quot; button" sap:VirtualizedContainerService.HintSize="334,157" sap2010:WorkflowViewState.IdRef="NClick_5" InteractionMode="Simulate" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="041bc127-f39e-4ded-ad8e-f50e6956c906" Version="V1">
+                  <uix:NClick.Target>
+                    <uix:TargetAnchorable DesignTimeRectangle="875, 180, 72, 23" ElementType="Button" FriendlyName="'unchecked'" FullSelectorArgument="&lt;wnd ctrlid='168' title='Select(F6)' /&gt;" FuzzySelectorArgument="&lt;wnd ctrlid='168' title='Select(F6)' check:text='unchecked' /&gt;" Guid="13c25205-7597-4704-804e-f2671a39cde1" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAEwAAAAbCAYAAADWHGlkAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAFBSURBVGhD7ZRhroMwDIM5LH+4FXfjAtxgT5GeN8uQEBjtj5FJnxrspoBXOqzr+jKmaSoCkNM7sCLHO7BxHIuA3cDqt/3Z5xgGtixL8c88z7nAoD2d04ENw/Do8VRgaHoyTT5JCxbs+cpdfwTW4fsDnrOnofbAnNt3mM650pOF+7yaUT3To9y+w7I3Zq70GN4Le+tF9zl6BvjNd5hiPmAt8j2dr1VHzXi6EXlM1zPMu9bR8yNda+ZIh8fXCvzbd5jCPVYrPEc91rEGw7pXM6pnepQmO4w58yJHfqR7NaN6pgfAb36GRQ+Fax09P9K9mvHW2fM8up5hnqe1+kc6j1orWEPnRD0G/OZnWC++fbZsf/MzrCdXQ8v0Yc7P7LBenN5hCO2p4099kj1IBWaTig9hYGYWW9zACp9NYEWOCuwU6+sPSpGvbq3owpkAAAAASUVORK5CYII=" InformativeScreenshot="67019dda221b18e2a9986221eefe61ff.png" ScopeSelectorArgument="&lt;wnd app='manwin32.exe' cls='#32770' title='Select lot/sample' /&gt;" SearchSteps="Selector, FuzzySelector, Image" />
+                  </uix:NClick.Target>
+                </uix:NClick>
+                <uix:NCheck Action="Check" DisplayName="Check All samples" sap:VirtualizedContainerService.HintSize="334,157" sap2010:WorkflowViewState.IdRef="NCheck_1" ScopeIdentifier="041bc127-f39e-4ded-ad8e-f50e6956c906" Version="V1">
+                  <uix:NCheck.Target>
+                    <uix:TargetAnchorable DesignTimeRectangle="138, 124, 92, 16" ElementType="CheckBox" FriendlyName="'All samples'" FullSelectorArgument="&lt;wnd ctrlid='1039' title='All samples' /&gt;" FuzzySelectorArgument="&lt;wnd ctrlid='1039' title='All samples' check:fulltext='All samples' /&gt;" Guid="cce6533b-0d46-4c35-86d6-8f0f80ad54a4" InformativeScreenshot="87bfa6eff8bcc9bcc9dea15ee22413a4.png" ScopeSelectorArgument="&lt;wnd app='manwin32.exe' cls='#32770' title='Editing/New sample' /&gt;" SearchSteps="Selector, FuzzySelector" />
+                  </uix:NCheck.Target>
+                </uix:NCheck>
+                <uix:NClick ClickType="Single" DisplayName="Click &quot;OK&quot; button" sap:VirtualizedContainerService.HintSize="334,157" sap2010:WorkflowViewState.IdRef="NClick_6" InteractionMode="Simulate" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="041bc127-f39e-4ded-ad8e-f50e6956c906" Version="V1">
+                  <uix:NClick.Target>
+                    <uix:TargetAnchorable DesignTimeRectangle="267, 172, 72, 26" ElementType="Button" FriendlyName="'unchecked'" FullSelectorArgument="&lt;wnd ctrlid='1' title='O K' /&gt;" FuzzySelectorArgument="&lt;wnd ctrlid='1' title='O K' check:text='unchecked' /&gt;" Guid="06bd6c44-68eb-4a3f-9cff-5b4f733bbc62" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAEwAAAAeCAYAAACG0fjXAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAC1SURBVGhD7dRbCsMgEEZhF+tLduXe3IA7SBnoJa2j+EMqpj3C9xCdFw+YUErZMY5gomewGCM63GCsem3b1g+Wc8ZdSmks2GPv3xFMRDARwUQEEy0XLITwxpsxn2e92TMtFcy7dCvEcX9WLHP5YDNjmUsHmx3LEEzEkxTx0xf9RDDv+1uWCmbs4kfejPHOevNnWS7Y6ggmIpiIYCKCiQgmGgpmQ3jpBrND1JrB0FYFwxiCScp+A7phXhc0U4VFAAAAAElFTkSuQmCC" InformativeScreenshot="104bf7f141857f8455880094c0cae1ce.png" ScopeSelectorArgument="&lt;wnd app='manwin32.exe' cls='#32770' title='Editing/New sample' /&gt;" SearchSteps="Selector, FuzzySelector, Image" />
+                  </uix:NClick.Target>
+                </uix:NClick>
+              </Sequence>
+            </uix:NCheckState.IfExists>
+            <uix:NCheckState.Target>
+              <uix:TargetAnchorable DesignTimeRectangle="65, 59, 159, 15" ElementType="Text" FriendlyName="'It is'" FullSelectorArgument="&lt;wnd ctrlid='65535' title='It is opened at other terminals.' /&gt;&lt;ctrl name='It is opened at other terminals.' role='text' /&gt;" FuzzySelectorArgument="&lt;wnd ctrlid='65535' title='It is opened at other terminals.' /&gt;&lt;ctrl name='It is opened at other terminals.' role='text' automationid='' check:text='It is opened at other terminals.' /&gt;" Guid="d9403c01-bea0-4735-b29e-a4a27085be93" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAKMAAAATCAYAAAD8pr31AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAI1SURBVGhD7ZcLcoQgDIa9lhfiOt5mL+NhKBHQn5CgsE5LZ/LNbBfIgyQE3S7eMCbBmtGYBmtGYxqsGY1psGY0pgGa8ePd4sLfPF79th8TBur9R1q5SfTqZ7jdqB+Nt/0h5PubMx6LbaAZ/zu9uY3Wgtu9XdOZz2gsNqEZ6XvxS/qslcdyo31bk652k9CfcDibS7LFu8IB2J2C2qaMT7IhcN1FH1Whdr+tSSd8ol+wO9c4qJP9Sna01ht7tHEu1HjdQoQZyT9bV33APNl+nGxz5aLFLdWMQPsnPRIZfE1joO0NKNEzyE9I6Cwq2UIBSAa+yC6KKGHcr9cmrhcxqLllMC/Mt6adH9qN53sdMlLH9cwHzPfNr2F82BxjKeeor8V9QXqavaRf82UzppuRA63gfnB+Jwt+4RO3eNuGcRQ626NfRb/p+25frvskdkTy98QHznvHBJvf1uyuRy6+bMZIfAxrtwV1cd4jy7xtA6hPNc0v0fLdkhEt3Yy2Ttz5z7T0escEzDtqpvfIxSvNGLtf1m+/xi7ZEewpi7epfj3xvXGu2bD14yYLsdJ6vr2FTqsWpNrKT4uVeBJ7a28uG6lZ75iAeVfNKD6U142pNCP5jo/ednI0To9o9TEMOkJS+Yd01SDp90yUaZeEzUWbAK6r/8BgLqWOXgtCy4/bjcTObUqquLpr1jsmuCztV9RM08knQmtwPgloxt8GAzYMa0ZjIv6wGQ2jxJrRmAZrRmMarBmNSfD+B5CNNz7DvSszAAAAAElFTkSuQmCC" InformativeScreenshot="05fcd4f3f336a562853e553120c748c2.png" ScopeSelectorArgument="&lt;wnd app='manwin32.exe' cls='#32770' title='manwin32' /&gt;" SearchSteps="Selector, FuzzySelector" />
+            </uix:NCheckState.Target>
+            <uix:NCheckState.Timeout>
+              <InArgument x:TypeArguments="x:Double">
+                <mca:CSharpValue x:TypeArguments="x:Double" sap2010:WorkflowViewState.IdRef="CSharpValue`1_4">Convert.ToInt32(in_masterConfigDict["delay"])</mca:CSharpValue>
+              </InArgument>
+            </uix:NCheckState.Timeout>
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+          </uix:NCheckState>
+        </ActivityAction>
+      </uix:NApplicationCard.Body>
+      <uix:NApplicationCard.TargetApp>
+        <uix:TargetApp Area="-8, -8, 1936, 1056" IconBase64="iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAADkSURBVFhH7Y9bEoQgDAS9/6m8mTImbCUhPILi/thVXQo4Q9w+AhxBH+FXuO97SJlNTuEWz4guqozhls2ILqqMk8NucUuZTU7RKuzqZMOokjuiiyrj5LBb3FJmk1O0Crs62TCq5I7ooso+9uO8dotbymxymAPgCRuFXZ3sENcAAO+y5I7outo78NUE1hErl2aHsKHVFvC/a7A/YgTOFPCxBvu1MyDPI89kwXVowf6IEThToApfsIDnI7Cm7SJY8xH4ej1ABu+0tQ6+6hvgfwMAe5ldL8deaNevoAZgX0cO8LGIbTsBE8wvc8LkSAAAAAAASUVORK5CYII=" InformativeScreenshot="09019b35def8368eac6888648dc8105c.png" Selector="&lt;wnd app='manwin32.exe' cls='Afx:*' title='Mr.Manmos for Windows Version: 3.6.2.15 (TNHK)'/&gt;" />
+      </uix:NApplicationCard.TargetApp>
+    </uix:NApplicationCard>
+  </Sequence>
+</Activity>

@@ -5,7 +5,7 @@
     <x:Property Name="in_outputName" Type="InArgument(x:String)" />
   </x:Members>
   <sap2010:ExpressionActivityEditor.ExpressionActivityEditor>C#</sap2010:ExpressionActivityEditor.ExpressionActivityEditor>
-  <sap:VirtualizedContainerService.HintSize>1474,998</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1794,998</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>ActivityBuilder_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <sco:Collection x:TypeArguments="x:String">
@@ -89,19 +89,19 @@
       <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="DownloadReportFtp" sap:VirtualizedContainerService.HintSize="639,933" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="DownloadReportFtp" sap:VirtualizedContainerService.HintSize="602,933" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <p:WithFtpSession ClientCertificatePassword="{x:Null}" ClientCertificatePath="{x:Null}" ClientCertificateSecurePassword="{x:Null}" Port="{x:Null}" SecurePassword="{x:Null}" CertificatePasswordInputModeSwitch="Password" ContinueOnError="False" DisplayName="FTP Scope" sap:VirtualizedContainerService.HintSize="597,841" sap2010:WorkflowViewState.IdRef="WithFtpSession_1" PasswordInputModeSwitch="Password">
+    <p:WithFtpSession ClientCertificatePassword="{x:Null}" ClientCertificatePath="{x:Null}" ClientCertificateSecurePassword="{x:Null}" Port="{x:Null}" SecurePassword="{x:Null}" CertificatePasswordInputModeSwitch="Password" ContinueOnError="False" DisplayName="FTP Scope" sap:VirtualizedContainerService.HintSize="560,841" sap2010:WorkflowViewState.IdRef="WithFtpSession_1" PasswordInputModeSwitch="Password">
       <p:WithFtpSession.Body>
         <ActivityAction x:TypeArguments="p:IFtpSession">
           <ActivityAction.Argument>
             <DelegateInArgument x:TypeArguments="p:IFtpSession" Name="FtpSession" />
           </ActivityAction.Argument>
-          <Sequence DisplayName="Body FTP Scope" sap:VirtualizedContainerService.HintSize="563,755" sap2010:WorkflowViewState.IdRef="Sequence_2">
+          <Sequence DisplayName="Body FTP Scope" sap:VirtualizedContainerService.HintSize="526,755" sap2010:WorkflowViewState.IdRef="Sequence_2">
             <Sequence.Variables>
               <Variable x:TypeArguments="x:Boolean" Name="fileExist" />
               <Variable x:TypeArguments="x:String" Name="pathDownloadFile">
@@ -115,7 +115,7 @@
                 <x:Boolean x:Key="IsExpanded">True</x:Boolean>
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
-            <p:FileExists ContinueOnError="False" DisplayName="File receiver prn exist" sap:VirtualizedContainerService.HintSize="521,89" sap2010:WorkflowViewState.IdRef="FileExists_1">
+            <p:FileExists ContinueOnError="False" DisplayName="File receiver prn exist" sap:VirtualizedContainerService.HintSize="484,89" sap2010:WorkflowViewState.IdRef="FileExists_1">
               <p:FileExists.Exists>
                 <OutArgument x:TypeArguments="x:Boolean">
                   <mca:CSharpReference x:TypeArguments="x:Boolean" sap2010:WorkflowViewState.IdRef="CSharpReference`1_1">fileExist</mca:CSharpReference>
@@ -127,7 +127,7 @@
                 </InArgument>
               </p:FileExists.RemotePath>
             </p:FileExists>
-            <If DisplayName="Check File in FTP exist or not" sap:VirtualizedContainerService.HintSize="521,534" sap2010:WorkflowViewState.IdRef="If_1">
+            <If DisplayName="Check File in FTP exist or not" sap:VirtualizedContainerService.HintSize="484,534" sap2010:WorkflowViewState.IdRef="If_1">
               <If.Condition>
                 <InArgument x:TypeArguments="x:Boolean">
                   <mca:CSharpValue x:TypeArguments="x:Boolean" sap2010:WorkflowViewState.IdRef="CSharpValue`1_2">fileExist</mca:CSharpValue>
@@ -143,7 +143,7 @@
                   <p:DownloadFiles ContinueOnError="False" Create="False" DisplayName="Download files" sap:VirtualizedContainerService.HintSize="334,137" sap2010:WorkflowViewState.IdRef="DownloadFiles_1" Overwrite="True" Recursive="False">
                     <p:DownloadFiles.LocalPath>
                       <InArgument x:TypeArguments="x:String">
-                        <mca:CSharpValue x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpValue`1_6">in_masterConfigDict["outputPath"]</mca:CSharpValue>
+                        <mca:CSharpValue x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpValue`1_18">in_masterConfigDict["mainPath"]</mca:CSharpValue>
                       </InArgument>
                     </p:DownloadFiles.LocalPath>
                     <p:DownloadFiles.RemotePath>

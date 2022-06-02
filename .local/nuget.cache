@@ -1,10 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "xFIPYSITvkk+A3GxunSXYHgO4H74iH/jMBxYormPlOhPcLHPZPf3HxV1V5id97yf6JabVkBZ8T8mIIkj8ceEtg==",
+  "dgSpecHash": "gBKGixg0iqcNjFe42lMvSNAdmRn6D5jEBhldK9zozrbezpCCPvz0E+A92Ze3bKbkRa4MsopUGViByiRUwpo4AQ==",
   "success": true,
   "projectFilePath": "D:\\RobotDevelopment\\NEWPROJECT\\.local\\",
   "expectedPackageFiles": [
+    "C:\\Users\\chakrit.pok\\.nuget\\packages\\arutu.colnumbertocolletter.activity\\1.0.2\\arutu.colnumbertocolletter.activity.1.0.2.nupkg.sha512",
     "C:\\Users\\chakrit.pok\\.nuget\\packages\\arutu.readallexcelsheet.activity\\1.0.5\\arutu.readallexcelsheet.activity.1.0.5.nupkg.sha512",
+    "C:\\Users\\chakrit.pok\\.nuget\\packages\\arutu.transposetable.activity\\1.0.1\\arutu.transposetable.activity.1.0.1.nupkg.sha512",
     "C:\\Users\\chakrit.pok\\.nuget\\packages\\avalonedit\\6.0.1\\avalonedit.6.0.1.nupkg.sha512",
     "C:\\Users\\chakrit.pok\\.nuget\\packages\\castle.core\\4.4.0\\castle.core.4.4.0.nupkg.sha512",
     "C:\\Users\\chakrit.pok\\.nuget\\packages\\closedxml\\0.87.1\\closedxml.0.87.1.nupkg.sha512",

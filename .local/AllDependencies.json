@@ -2,6 +2,15 @@
   "version": 3,
   "targets": {
     ".NETFramework,Version=v4.6.1": {
+      "Arutu.ColNumberToColLetter.Activity/1.0.2": {
+        "type": "package",
+        "compile": {
+          "lib/_._": {}
+        },
+        "runtime": {
+          "lib/ColumnNumberToColumnLetter.dll": {}
+        }
+      },
       "Arutu.ReadAllExcelSheet.Activity/1.0.5": {
         "type": "package",
         "compile": {
@@ -9,6 +18,15 @@
         },
         "runtime": {
           "lib/ReadAllWorkSheetExcel.dll": {}
+        }
+      },
+      "Arutu.TransposeTable.Activity/1.0.1": {
+        "type": "package",
+        "compile": {
+          "lib/_._": {}
+        },
+        "runtime": {
+          "lib/ShinTransposeTable.dll": {}
         }
       },
       "AvalonEdit/6.0.1": {
@@ -2615,6 +2633,15 @@
       }
     },
     ".NETFramework,Version=v4.6.1/win10-x64": {
+      "Arutu.ColNumberToColLetter.Activity/1.0.2": {
+        "type": "package",
+        "compile": {
+          "lib/_._": {}
+        },
+        "runtime": {
+          "lib/ColumnNumberToColumnLetter.dll": {}
+        }
+      },
       "Arutu.ReadAllExcelSheet.Activity/1.0.5": {
         "type": "package",
         "compile": {
@@ -2622,6 +2649,15 @@
         },
         "runtime": {
           "lib/ReadAllWorkSheetExcel.dll": {}
+        }
+      },
+      "Arutu.TransposeTable.Activity/1.0.1": {
+        "type": "package",
+        "compile": {
+          "lib/_._": {}
+        },
+        "runtime": {
+          "lib/ShinTransposeTable.dll": {}
         }
       },
       "AvalonEdit/6.0.1": {
@@ -5214,6 +5250,17 @@
     }
   },
   "libraries": {
+    "Arutu.ColNumberToColLetter.Activity/1.0.2": {
+      "sha512": "xhg2cYb2klHn87HeY/BvChMutwUoHL5JptJIYq2V00a/ixMmxr2uaC2hRZWtSK/0bpCBAet0yu9yHOgnwUtmfg==",
+      "type": "package",
+      "path": "arutu.colnumbertocolletter.activity/1.0.2",
+      "files": [
+        ".nupkg.metadata",
+        "arutu.colnumbertocolletter.activity.1.0.2.nupkg.sha512",
+        "arutu.colnumbertocolletter.activity.nuspec",
+        "lib/ColumnNumberToColumnLetter.dll"
+      ]
+    },
     "Arutu.ReadAllExcelSheet.Activity/1.0.5": {
       "sha512": "h8wuovu1o58O57o+s7ijtgVUKQZWsbKNAFDHu/SgKQDgza9LCpMEwUiz5HXiK47VFtl7ANkKijwLv0xgv7FPVw==",
       "type": "package",
@@ -5223,6 +5270,17 @@
         "arutu.readallexcelsheet.activity.1.0.5.nupkg.sha512",
         "arutu.readallexcelsheet.activity.nuspec",
         "lib/ReadAllWorkSheetExcel.dll"
+      ]
+    },
+    "Arutu.TransposeTable.Activity/1.0.1": {
+      "sha512": "HrAotvpvCrnB0PXJHi/Mv8dZEvLKSRHKI+L40tO2nWRJ0RYuRz8xnMhvLtLWrpkm64r0DERbJWdjDa2ficGIcg==",
+      "type": "package",
+      "path": "arutu.transposetable.activity/1.0.1",
+      "files": [
+        ".nupkg.metadata",
+        "arutu.transposetable.activity.1.0.1.nupkg.sha512",
+        "arutu.transposetable.activity.nuspec",
+        "lib/ShinTransposeTable.dll"
       ]
     },
     "AvalonEdit/6.0.1": {
@@ -10562,7 +10620,9 @@
   "projectFileDependencyGroups": {
     "": [],
     ".NETFramework,Version=v4.6.1": [
+      "Arutu.ColNumberToColLetter.Activity >= 1.0.2 <= 1.0.2",
       "Arutu.ReadAllExcelSheet.Activity >= 1.0.5 <= 1.0.5",
+      "Arutu.TransposeTable.Activity >= 1.0.1 <= 1.0.1",
       "UiPath.Credentials.Activities >= 2.0.0 <= 2.0.0",
       "UiPath.Excel.Activities >= 2.11.4 <= 2.11.4",
       "UiPath.FTP.Activities >= 2.3.0 <= 2.3.0",
@@ -10587,10 +10647,20 @@
     "frameworks": {
       "net461": {
         "dependencies": {
+          "Arutu.ColNumberToColLetter.Activity": {
+            "include": "Runtime",
+            "target": "Package",
+            "version": "[1.0.2, 1.0.2]"
+          },
           "Arutu.ReadAllExcelSheet.Activity": {
             "include": "Runtime",
             "target": "Package",
             "version": "[1.0.5, 1.0.5]"
+          },
+          "Arutu.TransposeTable.Activity": {
+            "include": "Runtime",
+            "target": "Package",
+            "version": "[1.0.1, 1.0.1]"
           },
           "UiPath.Credentials.Activities": {
             "include": "Runtime",

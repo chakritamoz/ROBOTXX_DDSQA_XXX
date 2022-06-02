@@ -1,10 +1,12 @@
 <Activity mc:Ignorable="sap sap2010" x:Class="ConvertWipToInfo" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mca="clr-namespace:Microsoft.CSharp.Activities;assembly=System.Activities" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:sc="clr-namespace:System.Collections;assembly=mscorlib" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <x:Members>
     <x:Property Name="in_masterConfigDict" Type="InArgument(scg:Dictionary(x:String, x:String))" />
-    <x:Property Name="out_tableDict" Type="OutArgument(scg:Dictionary(x:String, sd:DataTable))" />
+    <x:Property Name="in_controlTable" Type="InArgument(sd:DataTable)" />
+    <x:Property Name="in_pathDict" Type="InArgument(scg:Dictionary(x:String, x:String))" />
+    <x:Property Name="out_infoTableDict" Type="OutArgument(scg:Dictionary(x:String, sd:DataTable))" />
   </x:Members>
   <sap2010:ExpressionActivityEditor.ExpressionActivityEditor>C#</sap2010:ExpressionActivityEditor.ExpressionActivityEditor>
-  <sap:VirtualizedContainerService.HintSize>1474,2193</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1794,3766</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>ActivityBuilder_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <sco:Collection x:TypeArguments="x:String">
@@ -80,44 +82,43 @@
       <AssemblyReference>System.ValueTuple</AssemblyReference>
       <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
       <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
-      <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="ConvertWipToInfo" sap:VirtualizedContainerService.HintSize="756,2128" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="ConvertWipToInfo" sap:VirtualizedContainerService.HintSize="968,3701" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
-      <Variable x:TypeArguments="sd:DataTable" Name="templateTable" />
+      <Variable x:TypeArguments="sd:DataTable" Name="lotInfoTable" />
     </Sequence.Variables>
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <ui:ReadRange AddHeaders="True" DisplayName="Read template lot info" sap:VirtualizedContainerService.HintSize="714,87" sap2010:WorkflowViewState.IdRef="ReadRange_1">
+    <ui:ReadRange AddHeaders="False" DisplayName="Read template lot info" sap:VirtualizedContainerService.HintSize="926,87" sap2010:WorkflowViewState.IdRef="ReadRange_1">
       <ui:ReadRange.DataTable>
         <OutArgument x:TypeArguments="sd:DataTable">
-          <mca:CSharpReference x:TypeArguments="sd:DataTable" sap2010:WorkflowViewState.IdRef="CSharpReference`1_1">templateTable</mca:CSharpReference>
+          <mca:CSharpReference x:TypeArguments="sd:DataTable" sap2010:WorkflowViewState.IdRef="CSharpReference`1_1">lotInfoTable</mca:CSharpReference>
         </OutArgument>
       </ui:ReadRange.DataTable>
       <ui:ReadRange.Range>
         <InArgument x:TypeArguments="x:String">
-          <mca:CSharpValue x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpValue`1_47">in_masterConfigDict["tempPosition"]</mca:CSharpValue>
+          <mca:CSharpValue x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpValue`1_116">in_masterConfigDict["lotInfoPositionW"]</mca:CSharpValue>
         </InArgument>
       </ui:ReadRange.Range>
       <ui:ReadRange.SheetName>
         <InArgument x:TypeArguments="x:String">
-          <mca:CSharpValue x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpValue`1_49">in_masterConfigDict["tempSheet"]</mca:CSharpValue>
+          <mca:CSharpValue x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpValue`1_108">in_masterConfigDict["lotInfoSheet"]</mca:CSharpValue>
         </InArgument>
       </ui:ReadRange.SheetName>
       <ui:ReadRange.WorkbookPath>
         <InArgument x:TypeArguments="x:String">
-          <mca:CSharpValue x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpValue`1_48">Path.Combine(in_masterConfigDict["tempPath"],in_masterConfigDict["tempName"])</mca:CSharpValue>
+          <mca:CSharpValue x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpValue`1_107">Path.Combine(in_masterConfigDict["lotInfoMasterPath"],in_masterConfigDict["lotInfoName"])</mca:CSharpValue>
         </InArgument>
       </ui:ReadRange.WorkbookPath>
     </ui:ReadRange>
-    <Assign DisplayName="Initial table dictionary" sap:VirtualizedContainerService.HintSize="714,60" sap2010:WorkflowViewState.IdRef="Assign_2">
+    <Assign DisplayName="Initial table dictionary" sap:VirtualizedContainerService.HintSize="926,60" sap2010:WorkflowViewState.IdRef="Assign_2">
       <Assign.To>
         <OutArgument x:TypeArguments="scg:Dictionary(x:String, sd:DataTable)">
-          <mca:CSharpReference x:TypeArguments="scg:Dictionary(x:String, sd:DataTable)" sap2010:WorkflowViewState.IdRef="CSharpReference`1_18">out_tableDict</mca:CSharpReference>
+          <mca:CSharpReference x:TypeArguments="scg:Dictionary(x:String, sd:DataTable)" sap2010:WorkflowViewState.IdRef="CSharpReference`1_18">out_infoTableDict</mca:CSharpReference>
         </OutArgument>
       </Assign.To>
       <Assign.Value>
@@ -126,36 +127,57 @@
         </InArgument>
       </Assign.Value>
     </Assign>
-    <ui:ForEach x:TypeArguments="x:Object" CurrentIndex="{x:Null}" DisplayName="For Each file wip in folder output" sap:VirtualizedContainerService.HintSize="714,1809" sap2010:WorkflowViewState.IdRef="ForEach`1_1">
+    <ui:ForEach x:TypeArguments="x:Object" CurrentIndex="{x:Null}" DisplayName="For Each file wip in folder output" sap:VirtualizedContainerService.HintSize="926,3382" sap2010:WorkflowViewState.IdRef="ForEach`1_1">
       <ui:ForEach.Body>
         <ActivityAction x:TypeArguments="x:Object">
           <ActivityAction.Argument>
             <DelegateInArgument x:TypeArguments="x:Object" Name="file" />
           </ActivityAction.Argument>
-          <Sequence DisplayName="Body for each wip file" sap:VirtualizedContainerService.HintSize="678,1685" sap2010:WorkflowViewState.IdRef="Sequence_2">
+          <Sequence DisplayName="Body for each wip file" sap:VirtualizedContainerService.HintSize="890,3258" sap2010:WorkflowViewState.IdRef="Sequence_2">
             <Sequence.Variables>
               <Variable x:TypeArguments="sd:DataTable" Name="wipTable" />
               <Variable x:TypeArguments="x:Int32" Name="indexCurrent" />
               <Variable x:TypeArguments="sd:DataTable" Name="tempTable" />
+              <Variable x:TypeArguments="x:Int32" Name="indexLot" />
+              <Variable x:TypeArguments="x:String" Name="partNumber" />
+              <Variable x:TypeArguments="x:String" Name="lotX" />
             </Sequence.Variables>
             <sap:WorkflowViewStateService.ViewState>
               <scg:Dictionary x:TypeArguments="x:String, x:Object">
                 <x:Boolean x:Key="IsExpanded">True</x:Boolean>
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
-            <Assign DisplayName="Clone templateTable" sap:VirtualizedContainerService.HintSize="636,60" sap2010:WorkflowViewState.IdRef="Assign_1">
+            <Assign sap:VirtualizedContainerService.HintSize="848,60" sap2010:WorkflowViewState.IdRef="Assign_8">
               <Assign.To>
                 <OutArgument x:TypeArguments="sd:DataTable">
-                  <mca:CSharpReference x:TypeArguments="sd:DataTable" sap2010:WorkflowViewState.IdRef="CSharpReference`1_14">tempTable</mca:CSharpReference>
+                  <mca:CSharpReference x:TypeArguments="sd:DataTable" sap2010:WorkflowViewState.IdRef="CSharpReference`1_30">tempTable</mca:CSharpReference>
                 </OutArgument>
               </Assign.To>
               <Assign.Value>
                 <InArgument x:TypeArguments="sd:DataTable">
-                  <mca:CSharpValue x:TypeArguments="sd:DataTable" sap2010:WorkflowViewState.IdRef="CSharpValue`1_40">templateTable.Clone()</mca:CSharpValue>
+                  <mca:CSharpValue x:TypeArguments="sd:DataTable" sap2010:WorkflowViewState.IdRef="CSharpValue`1_105">lotInfoTable.Copy()</mca:CSharpValue>
                 </InArgument>
               </Assign.Value>
             </Assign>
-            <ui:ReadCsvFile Encoding="{x:Null}" Delimitator="Comma" DisplayName="Read CSV" sap:VirtualizedContainerService.HintSize="636,152" sap2010:WorkflowViewState.IdRef="ReadCsvFile_1">
+            <Assign DisplayName="Assign partNumber" sap:VirtualizedContainerService.HintSize="848,64" sap2010:WorkflowViewState.IdRef="Assign_6">
+              <Assign.To>
+                <OutArgument x:TypeArguments="x:String">
+                  <mca:CSharpReference x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpReference`1_26">partNumber</mca:CSharpReference>
+                </OutArgument>
+              </Assign.To>
+              <Assign.Value>
+                <InArgument x:TypeArguments="x:String">
+                  <mca:CSharpValue x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpValue`1_121" xml:space="preserve">in_controlTable.AsEnumerable().
+Where(inRow =&gt; 
+inRow[in_masterConfigDict["controlColFileName"]].
+Equals(
+in_pathDict[Path.GetFileNameWithoutExtension(file.ToString())]
+)
+).CopyToDataTable().Rows[0][in_masterConfigDict["controlColPartNum"]].ToString()</mca:CSharpValue>
+                </InArgument>
+              </Assign.Value>
+            </Assign>
+            <ui:ReadCsvFile Encoding="{x:Null}" Delimitator="Comma" DisplayName="Read CSV" sap:VirtualizedContainerService.HintSize="848,152" sap2010:WorkflowViewState.IdRef="ReadCsvFile_1">
               <ui:ReadCsvFile.DataTable>
                 <OutArgument x:TypeArguments="sd:DataTable">
                   <mca:CSharpReference x:TypeArguments="sd:DataTable" sap2010:WorkflowViewState.IdRef="CSharpReference`1_3">wipTable</mca:CSharpReference>
@@ -167,17 +189,17 @@
                 </InArgument>
               </ui:ReadCsvFile.FilePath>
             </ui:ReadCsvFile>
-            <ui:ForEachRow ColumnNames="{x:Null}" CurrentIndex="{x:Null}" DisplayName="For Each Row distinct lot number" sap:VirtualizedContainerService.HintSize="636,1201" sap2010:WorkflowViewState.IdRef="ForEachRow_4">
+            <ui:ForEachRow ColumnNames="{x:Null}" DisplayName="For Each Row distinct lot number" sap:VirtualizedContainerService.HintSize="848,2191" sap2010:WorkflowViewState.IdRef="ForEachRow_4">
               <ui:ForEachRow.Body>
                 <ActivityAction x:TypeArguments="sd:DataRow">
                   <ActivityAction.Argument>
                     <DelegateInArgument x:TypeArguments="sd:DataRow" Name="distLot" />
                   </ActivityAction.Argument>
-                  <Sequence DisplayName="Body distinct lot number" sap:VirtualizedContainerService.HintSize="602,1081" sap2010:WorkflowViewState.IdRef="Sequence_16">
+                  <Sequence DisplayName="Body distinct lot" sap:VirtualizedContainerService.HintSize="814,2071" sap2010:WorkflowViewState.IdRef="Sequence_19">
                     <Sequence.Variables>
                       <Variable x:TypeArguments="sd:DataRow" Name="tempRow">
                         <Variable.Default>
-                          <mca:CSharpValue x:TypeArguments="sd:DataRow" sap2010:WorkflowViewState.IdRef="CSharpValue`1_41">tempTable.NewRow()</mca:CSharpValue>
+                          <mca:CSharpValue x:TypeArguments="sd:DataRow" sap2010:WorkflowViewState.IdRef="CSharpValue`1_137">tempTable.NewRow()</mca:CSharpValue>
                         </Variable.Default>
                       </Variable>
                     </Sequence.Variables>
@@ -186,84 +208,204 @@
                         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                       </scg:Dictionary>
                     </sap:WorkflowViewStateService.ViewState>
-                    <ui:ForEachRow ColumnNames="{x:Null}" DisplayName="For Each Row filter only current lot number" sap:VirtualizedContainerService.HintSize="560,761" sap2010:WorkflowViewState.IdRef="ForEachRow_6">
+                    <ui:ForEachRow ColumnNames="{x:Null}" CurrentIndex="{x:Null}" DisplayName="For Each Row distinct mfgpro" sap:VirtualizedContainerService.HintSize="772,1754" sap2010:WorkflowViewState.IdRef="ForEachRow_7">
                       <ui:ForEachRow.Body>
                         <ActivityAction x:TypeArguments="sd:DataRow">
                           <ActivityAction.Argument>
-                            <DelegateInArgument x:TypeArguments="sd:DataRow" Name="currRow" />
+                            <DelegateInArgument x:TypeArguments="sd:DataRow" Name="mfgLot" />
                           </ActivityAction.Argument>
-                          <Sequence DisplayName="Body filter only current lot number" sap:VirtualizedContainerService.HintSize="526,637" sap2010:WorkflowViewState.IdRef="Sequence_15">
+                          <Sequence DisplayName="Body each mfgpro" sap:VirtualizedContainerService.HintSize="738,1630" sap2010:WorkflowViewState.IdRef="Sequence_18">
+                            <Sequence.Variables>
+                              <Variable x:TypeArguments="x:Double" Name="qty" />
+                            </Sequence.Variables>
                             <sap:WorkflowViewStateService.ViewState>
                               <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                 <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                                <x:Boolean x:Key="IsPinned">False</x:Boolean>
                               </scg:Dictionary>
                             </sap:WorkflowViewStateService.ViewState>
-                            <If DisplayName="First index of current filter" sap:VirtualizedContainerService.HintSize="484,341" sap2010:WorkflowViewState.IdRef="If_3">
-                              <If.Condition>
-                                <InArgument x:TypeArguments="x:Boolean">
-                                  <mca:CSharpValue x:TypeArguments="x:Boolean" sap2010:WorkflowViewState.IdRef="CSharpValue`1_34">indexCurrent == 0</mca:CSharpValue>
+                            <Assign DisplayName="Get max qty per mfgpro" sap:VirtualizedContainerService.HintSize="696,64" sap2010:WorkflowViewState.IdRef="Assign_11">
+                              <Assign.To>
+                                <OutArgument x:TypeArguments="x:Double">
+                                  <mca:CSharpReference x:TypeArguments="x:Double" sap2010:WorkflowViewState.IdRef="CSharpReference`1_37">qty</mca:CSharpReference>
+                                </OutArgument>
+                              </Assign.To>
+                              <Assign.Value>
+                                <InArgument x:TypeArguments="x:Double">
+                                  <mca:CSharpValue x:TypeArguments="x:Double" sap2010:WorkflowViewState.IdRef="CSharpValue`1_149" xml:space="preserve">wipTable.AsEnumerable().
+Where(row =&gt; 
+row[in_masterConfigDict["wipColLotNumber"]].Equals(distLot[in_masterConfigDict["wipColLotNumber"]]) &amp;&amp;
+row[in_masterConfigDict["wipColMfgPro"]].Equals(mfgLot[in_masterConfigDict["wipColMfgPro"]])
+).Max(row =&gt; Convert.ToDouble(row[in_masterConfigDict["wipColQty"]]))</mca:CSharpValue>
                                 </InArgument>
-                              </If.Condition>
-                              <If.Then>
-                                <ui:InvokeCode ContinueOnError="{x:Null}" Code="string lotNumber = currRow[configDict[&quot;wipColLotNumber&quot;]].ToString();&#xA;tempRow[configDict[&quot;tempColOqaLot&quot;]] = lotNumber.Remove(lotNumber.Length-1) + &quot;X&quot;;&#xA;tempRow[configDict[&quot;tempColProdLot&quot;]] = lotNumber;&#xA;tempRow[configDict[&quot;tempColTray&quot;]] = currRow[configDict[&quot;wipColTray&quot;]].ToString();&#xA;tempRow[configDict[&quot;tempColPackDate&quot;]] = currRow[configDict[&quot;wipColEff&quot;]].ToString();" DisplayName="Add fix value to list" sap:VirtualizedContainerService.HintSize="334,164" sap2010:WorkflowViewState.IdRef="InvokeCode_4" Language="CSharp">
-                                  <ui:InvokeCode.Arguments>
-                                    <InArgument x:TypeArguments="sd:DataRow" x:Key="currRow">
-                                      <mca:CSharpValue x:TypeArguments="sd:DataRow" sap2010:WorkflowViewState.IdRef="CSharpValue`1_35">currRow</mca:CSharpValue>
-                                    </InArgument>
-                                    <InArgument x:TypeArguments="scg:Dictionary(x:String, x:String)" x:Key="configDict">
-                                      <mca:CSharpValue x:TypeArguments="scg:Dictionary(x:String, x:String)" sap2010:WorkflowViewState.IdRef="CSharpValue`1_36">in_masterConfigDict</mca:CSharpValue>
-                                    </InArgument>
-                                    <InOutArgument x:TypeArguments="sd:DataRow" x:Key="tempRow">
-                                      <mca:CSharpReference x:TypeArguments="sd:DataRow" sap2010:WorkflowViewState.IdRef="CSharpReference`1_11">tempRow</mca:CSharpReference>
-                                    </InOutArgument>
-                                  </ui:InvokeCode.Arguments>
-                                </ui:InvokeCode>
-                              </If.Then>
-                              <If.Else>
-                                <Sequence sap2010:WorkflowViewState.IdRef="Sequence_14">
-                                  <sap:WorkflowViewStateService.ViewState>
-                                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                                    </scg:Dictionary>
-                                  </sap:WorkflowViewStateService.ViewState>
-                                </Sequence>
-                              </If.Else>
-                            </If>
-                            <ui:InvokeCode ContinueOnError="{x:Null}" Code="string mfg = currRow[configDict[&quot;wipColMfgPro&quot;]].ToString();&#xA;tempRow[configDict[mfg]] = currRow[configDict[&quot;wipColLotSerial&quot;]].ToString();" DisplayName="Add column match mfgpro" sap:VirtualizedContainerService.HintSize="484,164" sap2010:WorkflowViewState.IdRef="InvokeCode_5" Language="CSharp">
-                              <ui:InvokeCode.Arguments>
-                                <InArgument x:TypeArguments="sd:DataRow" x:Key="currRow">
-                                  <mca:CSharpValue x:TypeArguments="sd:DataRow" sap2010:WorkflowViewState.IdRef="CSharpValue`1_37">currRow</mca:CSharpValue>
-                                </InArgument>
-                                <InArgument x:TypeArguments="scg:Dictionary(x:String, x:String)" x:Key="configDict">
-                                  <mca:CSharpValue x:TypeArguments="scg:Dictionary(x:String, x:String)" sap2010:WorkflowViewState.IdRef="CSharpValue`1_38">in_masterConfigDict</mca:CSharpValue>
-                                </InArgument>
-                                <InOutArgument x:TypeArguments="sd:DataRow" x:Key="tempRow">
-                                  <mca:CSharpReference x:TypeArguments="sd:DataRow" sap2010:WorkflowViewState.IdRef="CSharpReference`1_12">tempRow</mca:CSharpReference>
-                                </InOutArgument>
-                              </ui:InvokeCode.Arguments>
-                            </ui:InvokeCode>
-                          </Sequence>
-                        </ActivityAction>
-                      </ui:ForEachRow.Body>
-                      <ui:ForEachRow.CurrentIndex>
-                        <OutArgument x:TypeArguments="x:Int32">
-                          <mca:CSharpReference x:TypeArguments="x:Int32" sap2010:WorkflowViewState.IdRef="CSharpReference`1_5">indexCurrent</mca:CSharpReference>
-                        </OutArgument>
-                      </ui:ForEachRow.CurrentIndex>
-                      <ui:ForEachRow.DataTable>
-                        <InArgument x:TypeArguments="sd:DataTable">
-                          <mca:CSharpValue x:TypeArguments="sd:DataTable" sap2010:WorkflowViewState.IdRef="CSharpValue`1_21" xml:space="preserve">wipTable.AsEnumerable().
-Where(row =&gt; row[in_masterConfigDict["wipColLotNumber"]].
-Equals(distLot[in_masterConfigDict["wipColLotNumber"]])
+                              </Assign.Value>
+                            </Assign>
+                            <ui:ForEachRow ColumnNames="{x:Null}" DisplayName="For Each Row filter only current lot number" sap:VirtualizedContainerService.HintSize="696,1434" sap2010:WorkflowViewState.IdRef="ForEachRow_6">
+                              <ui:ForEachRow.Body>
+                                <ActivityAction x:TypeArguments="sd:DataRow">
+                                  <ActivityAction.Argument>
+                                    <DelegateInArgument x:TypeArguments="sd:DataRow" Name="currRow" />
+                                  </ActivityAction.Argument>
+                                  <Sequence DisplayName="Body filter only current lot number" sap:VirtualizedContainerService.HintSize="526,1310" sap2010:WorkflowViewState.IdRef="Sequence_15">
+                                    <Sequence.Variables>
+                                      <Variable x:TypeArguments="x:String" Name="valueHeader" />
+                                    </Sequence.Variables>
+                                    <sap:WorkflowViewStateService.ViewState>
+                                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                        <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                      </scg:Dictionary>
+                                    </sap:WorkflowViewStateService.ViewState>
+                                    <Assign DisplayName="Assign valueHeader" sap:VirtualizedContainerService.HintSize="484,60" sap2010:WorkflowViewState.IdRef="Assign_7">
+                                      <Assign.To>
+                                        <OutArgument x:TypeArguments="x:String">
+                                          <mca:CSharpReference x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpReference`1_28">valueHeader</mca:CSharpReference>
+                                        </OutArgument>
+                                      </Assign.To>
+                                      <Assign.Value>
+                                        <InArgument x:TypeArguments="x:String">
+                                          <mca:CSharpValue x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpValue`1_142">tempTable.Rows[0][in_masterConfigDict[mfgLot[in_masterConfigDict["wipColMfgPro"]].ToString()]].ToString()</mca:CSharpValue>
+                                        </InArgument>
+                                      </Assign.Value>
+                                    </Assign>
+                                    <If DisplayName="Check header is empty" sap:VirtualizedContainerService.HintSize="484,341" sap2010:WorkflowViewState.IdRef="If_5">
+                                      <If.Condition>
+                                        <InArgument x:TypeArguments="x:Boolean">
+                                          <mca:CSharpValue x:TypeArguments="x:Boolean" sap2010:WorkflowViewState.IdRef="CSharpValue`1_143">valueHeader == mfgLot[in_masterConfigDict["wipColMfgPro"]].ToString()</mca:CSharpValue>
+                                        </InArgument>
+                                      </If.Condition>
+                                      <sap:WorkflowViewStateService.ViewState>
+                                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                        </scg:Dictionary>
+                                      </sap:WorkflowViewStateService.ViewState>
+                                      <If.Then>
+                                        <ui:InvokeCode ContinueOnError="{x:Null}" Code="tempTable.Rows[0][configDict[&quot;lotInfoColProdLot&quot;]] =  partNumber;&#xA;tempTable.Rows[0][configDict[mfgpro]] = currRow[configDict[&quot;wipColItemNumber&quot;]].ToString();" DisplayName="Add Item number to Header" sap:VirtualizedContainerService.HintSize="334,164" sap2010:WorkflowViewState.IdRef="InvokeCode_7" Language="CSharp">
+                                          <ui:InvokeCode.Arguments>
+                                            <InArgument x:TypeArguments="sd:DataRow" x:Key="currRow">
+                                              <mca:CSharpValue x:TypeArguments="sd:DataRow" sap2010:WorkflowViewState.IdRef="CSharpValue`1_81">currRow</mca:CSharpValue>
+                                            </InArgument>
+                                            <InArgument x:TypeArguments="scg:Dictionary(x:String, x:String)" x:Key="configDict">
+                                              <mca:CSharpValue x:TypeArguments="scg:Dictionary(x:String, x:String)" sap2010:WorkflowViewState.IdRef="CSharpValue`1_82">in_masterConfigDict</mca:CSharpValue>
+                                            </InArgument>
+                                            <InArgument x:TypeArguments="sd:DataTable" x:Key="tempTable">
+                                              <mca:CSharpValue x:TypeArguments="sd:DataTable" sap2010:WorkflowViewState.IdRef="CSharpValue`1_103">tempTable</mca:CSharpValue>
+                                            </InArgument>
+                                            <InArgument x:TypeArguments="x:String" x:Key="partNumber">
+                                              <mca:CSharpValue x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpValue`1_88">partNumber</mca:CSharpValue>
+                                            </InArgument>
+                                            <InArgument x:TypeArguments="x:String" x:Key="mfgpro">
+                                              <mca:CSharpValue x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpValue`1_144">mfgLot[in_masterConfigDict["wipColMfgPro"]].ToString()</mca:CSharpValue>
+                                            </InArgument>
+                                          </ui:InvokeCode.Arguments>
+                                        </ui:InvokeCode>
+                                      </If.Then>
+                                    </If>
+                                    <If DisplayName="First index of current filter" sap:VirtualizedContainerService.HintSize="484,533" sap2010:WorkflowViewState.IdRef="If_3">
+                                      <If.Condition>
+                                        <InArgument x:TypeArguments="x:Boolean">
+                                          <mca:CSharpValue x:TypeArguments="x:Boolean" sap2010:WorkflowViewState.IdRef="CSharpValue`1_34">indexCurrent == 0</mca:CSharpValue>
+                                        </InArgument>
+                                      </If.Condition>
+                                      <sap:WorkflowViewStateService.ViewState>
+                                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                        </scg:Dictionary>
+                                      </sap:WorkflowViewStateService.ViewState>
+                                      <If.Then>
+                                        <Sequence DisplayName="Fix value in first row" sap:VirtualizedContainerService.HintSize="376,356" sap2010:WorkflowViewState.IdRef="Sequence_17">
+                                          <sap:WorkflowViewStateService.ViewState>
+                                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                            </scg:Dictionary>
+                                          </sap:WorkflowViewStateService.ViewState>
+                                          <ui:InvokeCode ContinueOnError="{x:Null}" Code="string lotNumber = currRow[configDict[&quot;wipColLotNumber&quot;]].ToString();&#xA;tempRow[configDict[&quot;lotInfoColOqaLot&quot;]] = lotNumber.Remove(lotNumber.Length-1) + &quot;X&quot;;&#xA;tempRow[configDict[&quot;lotInfoColProdLot&quot;]] = lotNumber;&#xA;tempRow[configDict[&quot;lotInfoColTray&quot;]] = currRow[configDict[&quot;wipColTray&quot;]].ToString();&#xA;tempRow[configDict[&quot;lotInfoColPackDate&quot;]] = currRow[configDict[&quot;wipColEff&quot;]].ToString();" DisplayName="Add fix value to list" sap:VirtualizedContainerService.HintSize="334,164" sap2010:WorkflowViewState.IdRef="InvokeCode_4" Language="CSharp">
+                                            <ui:InvokeCode.Arguments>
+                                              <InArgument x:TypeArguments="sd:DataRow" x:Key="currRow">
+                                                <mca:CSharpValue x:TypeArguments="sd:DataRow" sap2010:WorkflowViewState.IdRef="CSharpValue`1_35">currRow</mca:CSharpValue>
+                                              </InArgument>
+                                              <InArgument x:TypeArguments="scg:Dictionary(x:String, x:String)" x:Key="configDict">
+                                                <mca:CSharpValue x:TypeArguments="scg:Dictionary(x:String, x:String)" sap2010:WorkflowViewState.IdRef="CSharpValue`1_36">in_masterConfigDict</mca:CSharpValue>
+                                              </InArgument>
+                                              <InOutArgument x:TypeArguments="sd:DataRow" x:Key="tempRow">
+                                                <mca:CSharpReference x:TypeArguments="sd:DataRow" sap2010:WorkflowViewState.IdRef="CSharpReference`1_11">tempRow</mca:CSharpReference>
+                                              </InOutArgument>
+                                            </ui:InvokeCode.Arguments>
+                                          </ui:InvokeCode>
+                                          <Assign DisplayName="Assign lotX" sap:VirtualizedContainerService.HintSize="334,60" sap2010:WorkflowViewState.IdRef="Assign_4">
+                                            <Assign.To>
+                                              <OutArgument x:TypeArguments="x:String">
+                                                <mca:CSharpReference x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpReference`1_29">lotX</mca:CSharpReference>
+                                              </OutArgument>
+                                            </Assign.To>
+                                            <Assign.Value>
+                                              <InArgument x:TypeArguments="x:String">
+                                                <mca:CSharpValue x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpValue`1_110">tempRow[in_masterConfigDict["lotInfoColOqaLot"]].ToString()</mca:CSharpValue>
+                                              </InArgument>
+                                            </Assign.Value>
+                                          </Assign>
+                                        </Sequence>
+                                      </If.Then>
+                                    </If>
+                                    <ui:InvokeCode ContinueOnError="{x:Null}" Code="tempRow[configDict[mfgpro]] = currRow[configDict[&quot;wipColLotSerial&quot;]].ToString();" DisplayName="Add column match mfgpro" sap:VirtualizedContainerService.HintSize="484,164" sap2010:WorkflowViewState.IdRef="InvokeCode_5" Language="CSharp">
+                                      <ui:InvokeCode.Arguments>
+                                        <InArgument x:TypeArguments="sd:DataRow" x:Key="currRow">
+                                          <mca:CSharpValue x:TypeArguments="sd:DataRow" sap2010:WorkflowViewState.IdRef="CSharpValue`1_37">currRow</mca:CSharpValue>
+                                        </InArgument>
+                                        <InArgument x:TypeArguments="scg:Dictionary(x:String, x:String)" x:Key="configDict">
+                                          <mca:CSharpValue x:TypeArguments="scg:Dictionary(x:String, x:String)" sap2010:WorkflowViewState.IdRef="CSharpValue`1_38">in_masterConfigDict</mca:CSharpValue>
+                                        </InArgument>
+                                        <InOutArgument x:TypeArguments="sd:DataRow" x:Key="tempRow">
+                                          <mca:CSharpReference x:TypeArguments="sd:DataRow" sap2010:WorkflowViewState.IdRef="CSharpReference`1_12">tempRow</mca:CSharpReference>
+                                        </InOutArgument>
+                                        <InArgument x:TypeArguments="x:String" x:Key="mfgpro">
+                                          <mca:CSharpValue x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpValue`1_145">mfgLot[in_masterConfigDict["wipColMfgPro"]].ToString()</mca:CSharpValue>
+                                        </InArgument>
+                                      </ui:InvokeCode.Arguments>
+                                    </ui:InvokeCode>
+                                  </Sequence>
+                                </ActivityAction>
+                              </ui:ForEachRow.Body>
+                              <ui:ForEachRow.CurrentIndex>
+                                <OutArgument x:TypeArguments="x:Int32">
+                                  <mca:CSharpReference x:TypeArguments="x:Int32" sap2010:WorkflowViewState.IdRef="CSharpReference`1_5">indexCurrent</mca:CSharpReference>
+                                </OutArgument>
+                              </ui:ForEachRow.CurrentIndex>
+                              <ui:ForEachRow.DataTable>
+                                <InArgument x:TypeArguments="sd:DataTable">
+                                  <mca:CSharpValue x:TypeArguments="sd:DataTable" sap2010:WorkflowViewState.IdRef="CSharpValue`1_152" xml:space="preserve">wipTable.AsEnumerable().
+Where(row =&gt; 
+row[in_masterConfigDict["wipColLotNumber"]].Equals(distLot[in_masterConfigDict["wipColLotNumber"]]) &amp;&amp;
+row[in_masterConfigDict["wipColMfgPro"]].Equals(mfgLot[in_masterConfigDict["wipColMfgPro"]]) &amp;&amp;
+row[in_masterConfigDict["wipColQty"]].Equals(qty.ToString())
 ).CopyToDataTable().DefaultView
 .ToTable(true, 
+in_masterConfigDict["wipColItemNumber"],
 in_masterConfigDict["wipColLotNumber"],
 in_masterConfigDict["wipColLotSerial"],
-in_masterConfigDict["wipColMfgPro"],
+in_masterConfigDict["wipColQty"],
 in_masterConfigDict["wipColEff"],
 in_masterConfigDict["wipColTray"]
 )</mca:CSharpValue>
+                                </InArgument>
+                              </ui:ForEachRow.DataTable>
+                              <sap:WorkflowViewStateService.ViewState>
+                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                </scg:Dictionary>
+                              </sap:WorkflowViewStateService.ViewState>
+                            </ui:ForEachRow>
+                          </Sequence>
+                        </ActivityAction>
+                      </ui:ForEachRow.Body>
+                      <ui:ForEachRow.DataTable>
+                        <InArgument x:TypeArguments="sd:DataTable">
+                          <mca:CSharpValue x:TypeArguments="sd:DataTable" sap2010:WorkflowViewState.IdRef="CSharpValue`1_148" xml:space="preserve">wipTable.AsEnumerable().
+Where(row =&gt; 
+	row[in_masterConfigDict["wipColLotNumber"]].Equals(distLot[in_masterConfigDict["wipColLotNumber"]])
+).CopyToDataTable().DefaultView.ToTable(true,in_masterConfigDict["wipColMfgPro"])</mca:CSharpValue>
                         </InArgument>
                       </ui:ForEachRow.DataTable>
                       <sap:WorkflowViewStateService.ViewState>
@@ -273,7 +415,7 @@ in_masterConfigDict["wipColTray"]
                         </scg:Dictionary>
                       </sap:WorkflowViewStateService.ViewState>
                     </ui:ForEachRow>
-                    <ui:AddDataRow ArrayRow="{x:Null}" DisplayName="Add Data Row" sap:VirtualizedContainerService.HintSize="560,188" sap2010:WorkflowViewState.IdRef="AddDataRow_1">
+                    <ui:AddDataRow ArrayRow="{x:Null}" DisplayName="Add Data Row" sap:VirtualizedContainerService.HintSize="772,185" sap2010:WorkflowViewState.IdRef="AddDataRow_1">
                       <ui:AddDataRow.DataRow>
                         <InArgument x:TypeArguments="sd:DataRow">
                           <mca:CSharpValue x:TypeArguments="sd:DataRow" sap2010:WorkflowViewState.IdRef="CSharpValue`1_39">tempRow</mca:CSharpValue>
@@ -281,16 +423,21 @@ in_masterConfigDict["wipColTray"]
                       </ui:AddDataRow.DataRow>
                       <ui:AddDataRow.DataTable>
                         <InOutArgument x:TypeArguments="sd:DataTable">
-                          <mca:CSharpReference x:TypeArguments="sd:DataTable" sap2010:WorkflowViewState.IdRef="CSharpReference`1_15">tempTable</mca:CSharpReference>
+                          <mca:CSharpReference x:TypeArguments="sd:DataTable" sap2010:WorkflowViewState.IdRef="CSharpReference`1_31">tempTable</mca:CSharpReference>
                         </InOutArgument>
                       </ui:AddDataRow.DataTable>
                     </ui:AddDataRow>
                   </Sequence>
                 </ActivityAction>
               </ui:ForEachRow.Body>
+              <ui:ForEachRow.CurrentIndex>
+                <OutArgument x:TypeArguments="x:Int32">
+                  <mca:CSharpReference x:TypeArguments="x:Int32" sap2010:WorkflowViewState.IdRef="CSharpReference`1_24">indexLot</mca:CSharpReference>
+                </OutArgument>
+              </ui:ForEachRow.CurrentIndex>
               <ui:ForEachRow.DataTable>
                 <InArgument x:TypeArguments="sd:DataTable">
-                  <mca:CSharpValue x:TypeArguments="sd:DataTable" sap2010:WorkflowViewState.IdRef="CSharpValue`1_15">wipTable.DefaultView.ToTable(true, in_masterConfigDict["wipColLotNumber"])</mca:CSharpValue>
+                  <mca:CSharpValue x:TypeArguments="sd:DataTable" sap2010:WorkflowViewState.IdRef="CSharpValue`1_147">wipTable.DefaultView.ToTable(true, in_masterConfigDict["wipColLotNumber"])</mca:CSharpValue>
                 </InArgument>
               </ui:ForEachRow.DataTable>
               <sap:WorkflowViewStateService.ViewState>
@@ -300,15 +447,71 @@ in_masterConfigDict["wipColTray"]
                 </scg:Dictionary>
               </sap:WorkflowViewStateService.ViewState>
             </ui:ForEachRow>
-            <Assign DisplayName="Assign outputName pair table" sap:VirtualizedContainerService.HintSize="636,60" sap2010:WorkflowViewState.IdRef="Assign_3">
+            <ui:CopyFile ContinueOnError="{x:Null}" DisplayName="Copy template lot info" sap:VirtualizedContainerService.HintSize="848,157" sap2010:WorkflowViewState.IdRef="CopyFile_2" Overwrite="True">
+              <ui:CopyFile.Destination>
+                <InArgument x:TypeArguments="x:String">
+                  <mca:CSharpValue x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpValue`1_112">Path.Combine(in_masterConfigDict["lotInfoPath"],in_masterConfigDict["lotInfoName"].Replace("template",lotX))</mca:CSharpValue>
+                </InArgument>
+              </ui:CopyFile.Destination>
+              <ui:CopyFile.Path>
+                <InArgument x:TypeArguments="x:String">
+                  <mca:CSharpValue x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpValue`1_111">Path.Combine(in_masterConfigDict["lotInfoMasterPath"],in_masterConfigDict["lotInfoName"])</mca:CSharpValue>
+                </InArgument>
+              </ui:CopyFile.Path>
+            </ui:CopyFile>
+            <ui:WriteRange AddHeaders="False" DisplayName="Write excel lot info" sap:VirtualizedContainerService.HintSize="848,115" sap2010:WorkflowViewState.IdRef="WriteRange_1">
+              <ui:WriteRange.DataTable>
+                <InArgument x:TypeArguments="sd:DataTable">
+                  <mca:CSharpValue x:TypeArguments="sd:DataTable" sap2010:WorkflowViewState.IdRef="CSharpValue`1_104">tempTable</mca:CSharpValue>
+                </InArgument>
+              </ui:WriteRange.DataTable>
+              <ui:WriteRange.SheetName>
+                <InArgument x:TypeArguments="x:String">
+                  <mca:CSharpValue x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpValue`1_113">in_masterConfigDict["lotInfoSheet"]</mca:CSharpValue>
+                </InArgument>
+              </ui:WriteRange.SheetName>
+              <ui:WriteRange.StartingCell>
+                <InArgument x:TypeArguments="x:String">
+                  <mca:CSharpValue x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpValue`1_117">in_masterConfigDict["lotInfoPositionW"]</mca:CSharpValue>
+                </InArgument>
+              </ui:WriteRange.StartingCell>
+              <ui:WriteRange.WorkbookPath>
+                <InArgument x:TypeArguments="x:String">
+                  <mca:CSharpValue x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpValue`1_114">Path.Combine(in_masterConfigDict["lotInfoPath"],in_masterConfigDict["lotInfoName"].Replace("template",lotX))</mca:CSharpValue>
+                </InArgument>
+              </ui:WriteRange.WorkbookPath>
+            </ui:WriteRange>
+            <ui:ReadRange AddHeaders="True" DisplayName="Read template table to tempTable" sap:VirtualizedContainerService.HintSize="848,87" sap2010:WorkflowViewState.IdRef="ReadRange_2">
+              <ui:ReadRange.DataTable>
+                <OutArgument x:TypeArguments="sd:DataTable">
+                  <mca:CSharpReference x:TypeArguments="sd:DataTable" sap2010:WorkflowViewState.IdRef="CSharpReference`1_23">tempTable</mca:CSharpReference>
+                </OutArgument>
+              </ui:ReadRange.DataTable>
+              <ui:ReadRange.Range>
+                <InArgument x:TypeArguments="x:String">
+                  <mca:CSharpValue x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpValue`1_118">in_masterConfigDict["lotInfoPositionR"]</mca:CSharpValue>
+                </InArgument>
+              </ui:ReadRange.Range>
+              <ui:ReadRange.SheetName>
+                <InArgument x:TypeArguments="x:String">
+                  <mca:CSharpValue x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpValue`1_120">in_masterConfigDict["lotInfoSheet"]</mca:CSharpValue>
+                </InArgument>
+              </ui:ReadRange.SheetName>
+              <ui:ReadRange.WorkbookPath>
+                <InArgument x:TypeArguments="x:String">
+                  <mca:CSharpValue x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpValue`1_119">Path.Combine(in_masterConfigDict["lotInfoPath"],in_masterConfigDict["lotInfoName"].Replace("template",lotX))</mca:CSharpValue>
+                </InArgument>
+              </ui:ReadRange.WorkbookPath>
+            </ui:ReadRange>
+            <Assign DisplayName="Assign outputName pair table" sap:VirtualizedContainerService.HintSize="848,60" sap2010:WorkflowViewState.IdRef="Assign_3">
               <Assign.To>
                 <OutArgument x:TypeArguments="sd:DataTable">
-                  <mca:CSharpReference x:TypeArguments="sd:DataTable" sap2010:WorkflowViewState.IdRef="CSharpReference`1_19">out_tableDict[Path.GetFileNameWithoutExtension(file.ToString())]</mca:CSharpReference>
+                  <mca:CSharpReference x:TypeArguments="sd:DataTable" sap2010:WorkflowViewState.IdRef="CSharpReference`1_19">out_infoTableDict[Path.GetFileNameWithoutExtension(file.ToString())]</mca:CSharpReference>
                 </OutArgument>
               </Assign.To>
               <Assign.Value>
                 <InArgument x:TypeArguments="sd:DataTable">
-                  <mca:CSharpValue x:TypeArguments="sd:DataTable" sap2010:WorkflowViewState.IdRef="CSharpValue`1_45">tempTable</mca:CSharpValue>
+                  <mca:CSharpValue x:TypeArguments="sd:DataTable" sap2010:WorkflowViewState.IdRef="CSharpValue`1_70">tempTable</mca:CSharpValue>
                 </InArgument>
               </Assign.Value>
             </Assign>
@@ -317,9 +520,15 @@ in_masterConfigDict["wipColTray"]
       </ui:ForEach.Body>
       <ui:ForEach.Values>
         <InArgument x:TypeArguments="sc:IEnumerable">
-          <mca:CSharpValue x:TypeArguments="sc:IEnumerable" sap2010:WorkflowViewState.IdRef="CSharpValue`1_4">Directory.GetFiles(in_masterConfigDict["outputPath"],"*.csv")</mca:CSharpValue>
+          <mca:CSharpValue x:TypeArguments="sc:IEnumerable" sap2010:WorkflowViewState.IdRef="CSharpValue`1_109">Directory.GetFiles(in_masterConfigDict["mainPath"],"*.csv")</mca:CSharpValue>
         </InArgument>
       </ui:ForEach.Values>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
     </ui:ForEach>
   </Sequence>
 </Activity>

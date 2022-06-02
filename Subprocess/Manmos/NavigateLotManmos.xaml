@@ -1,14 +1,17 @@
-<Activity mc:Ignorable="sap sap2010" x:Class="NavigateLotManmos" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mca="clr-namespace:Microsoft.CSharp.Activities;assembly=System.Activities" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:sc="clr-namespace:System.Collections;assembly=mscorlib" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:uix="http://schemas.uipath.com/workflow/activities/uix" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="NavigateLotManmos" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mca="clr-namespace:Microsoft.CSharp.Activities;assembly=System.Activities" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:sc="clr-namespace:System.ComponentModel;assembly=System" xmlns:sc1="clr-namespace:System.Collections;assembly=mscorlib" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:uix="http://schemas.uipath.com/workflow/activities/uix" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <x:Members>
     <x:Property Name="in_masterConfigDict" Type="InArgument(scg:Dictionary(x:String, x:String))" />
     <x:Property Name="in_lot" Type="InArgument(x:String)" />
     <x:Property Name="out_flagLot" Type="OutArgument(x:Boolean)" />
+    <x:Property Name="in_process" Type="InArgument(x:String)" />
+    <x:Property Name="io_lotStr" Type="InOutArgument(x:String)" />
+    <x:Property Name="io_dateMEATable" Type="InOutArgument(sd:DataTable)" />
   </x:Members>
   <sap2010:ExpressionActivityEditor.ExpressionActivityEditor>C#</sap2010:ExpressionActivityEditor.ExpressionActivityEditor>
-  <sap:VirtualizedContainerService.HintSize>1794,3547</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1474,3749</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>ActivityBuilder_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
-    <scg:List x:TypeArguments="x:String" Capacity="37">
+    <scg:List x:TypeArguments="x:String" Capacity="74">
       <x:String>System.Activities</x:String>
       <x:String>System.Activities.Statements</x:String>
       <x:String>System.Activities.Expressions</x:String>
@@ -46,10 +49,13 @@
       <x:String>System.ComponentModel</x:String>
       <x:String>System.Security</x:String>
       <x:String>UiPath.UIAutomationNext.Contracts</x:String>
+      <x:String>System.Text.RegularExpressions</x:String>
+      <x:String>System.Globalization</x:String>
+      <x:String>System.Xml.Serialization</x:String>
     </scg:List>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
-    <scg:List x:TypeArguments="AssemblyReference" Capacity="42">
+    <scg:List x:TypeArguments="AssemblyReference" Capacity="84">
       <AssemblyReference>Microsoft.CSharp</AssemblyReference>
       <AssemblyReference>System</AssemblyReference>
       <AssemblyReference>System.Core</AssemblyReference>
@@ -91,60 +97,93 @@
       <AssemblyReference>System.ValueTuple</AssemblyReference>
       <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
       <AssemblyReference>UiPath.Excel</AssemblyReference>
+      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="NavigateLotManmos" sap:VirtualizedContainerService.HintSize="1333,3482" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="NavigateLotManmos" sap:VirtualizedContainerService.HintSize="1255,3684" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <uix:NCheckState Exists="{x:Null}" DisplayName="Check App State 'Selection list'" sap:VirtualizedContainerService.HintSize="1291,3390" sap2010:WorkflowViewState.IdRef="NCheckState_1" Version="V1">
+    <uix:NCheckState Exists="{x:Null}" DisplayName="Check App State 'Selection list'" sap:VirtualizedContainerService.HintSize="1213,3592" sap2010:WorkflowViewState.IdRef="NCheckState_1" Version="V1">
       <uix:NCheckState.IfExists>
-        <uix:NApplicationCard AttachMode="ByInstance" DisplayName="Use Application: Select lot/sample" sap:VirtualizedContainerService.HintSize="987,3174" sap2010:WorkflowViewState.IdRef="NApplicationCard_1" ScopeGuid="95f7d729-18c0-4be7-b773-6bd58086d14c" Version="V1">
+        <uix:NApplicationCard AttachMode="ByInstance" DisplayName="Use Application: Select lot/sample" sap:VirtualizedContainerService.HintSize="909,3376" sap2010:WorkflowViewState.IdRef="NApplicationCard_1" ScopeGuid="95f7d729-18c0-4be7-b773-6bd58086d14c" Version="V1">
           <uix:NApplicationCard.Body>
             <ActivityAction x:TypeArguments="x:Object">
               <ActivityAction.Argument>
                 <DelegateInArgument x:TypeArguments="x:Object" Name="WSSessionData" />
               </ActivityAction.Argument>
-              <Sequence DisplayName="Body Select lot" sap:VirtualizedContainerService.HintSize="953,2885" sap2010:WorkflowViewState.IdRef="Sequence_2">
+              <Sequence DisplayName="Body Select lot" sap:VirtualizedContainerService.HintSize="875,3087" sap2010:WorkflowViewState.IdRef="Sequence_2">
                 <Sequence.Variables>
-                  <Variable x:TypeArguments="x:String" Name="lotName" />
                   <Variable x:TypeArguments="x:String" Name="lotText" />
                   <Variable x:TypeArguments="x:Int32" Name="indexItem" />
+                  <Variable x:TypeArguments="x:Boolean" Name="searchExist" />
                 </Sequence.Variables>
                 <sap:WorkflowViewStateService.ViewState>
                   <scg:Dictionary x:TypeArguments="x:String, x:Object">
                     <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                   </scg:Dictionary>
                 </sap:WorkflowViewStateService.ViewState>
-                <uix:NClick ClickType="Single" DisplayName="Click Search(F5) button" sap:VirtualizedContainerService.HintSize="911,156" sap2010:WorkflowViewState.IdRef="NClick_1" InteractionMode="Simulate" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="95f7d729-18c0-4be7-b773-6bd58086d14c" Version="V1">
-                  <uix:NClick.Target>
-                    <uix:TargetAnchorable DesignTimeRectangle="875, 132, 72, 23" ElementType="Button" FriendlyName="'unchecked'" FullSelectorArgument="&lt;wnd ctrlid='108' title='Search(F5)' /&gt;" FuzzySelectorArgument="&lt;wnd ctrlid='108' title='Search(F5)' check:text='unchecked' /&gt;" Guid="36352c36-9471-464f-8f22-df37af800d4c" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAEwAAAAbCAYAAADWHGlkAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAEfSURBVGhD7ZRhDoMgDEY5rH+8lXfzAtzApdnqmk8K7QYsmSV5mXxtFV8yU875COyEMCensGVZggpFYbGua13XurB934MX27bZhHF2d0KYkxDmpKuwlNJJqd6T2jO4Js/DtHK+h0Y3Yfgwy8O/Qbu/zC09SOvcw4SNxiLD0oO03mOaMKozrVzbY6b1lq4lPMNgTe6RKd8w66E4l3Vtln5LfZhJsLe0xxrSVZgED4FotdIsX0sw98winplpwmRNy3k/ehbxzAz7htUOwXtL3nNWyy0zzJRvWK0mc67VemSGPZhjj4RqDOZyjwz7S/6K1gu3uJ0w4lNplrm/FDaSEOYkhDkxCaOm4E1VGBWDK6qwQOciLLBxCoulL/pbPj3l4wG3Q/P734Td2QAAAABJRU5ErkJggg==" InformativeScreenshot="f80d5fee5747f20a65b721b00d5dc9fc.png" ScopeSelectorArgument="&lt;wnd app='manwin32.exe' cls='#32770' title='Select lot/sample' /&gt;" SearchSteps="Selector, FuzzySelector, Image" />
-                  </uix:NClick.Target>
-                </uix:NClick>
-                <uix:NTypeInto ActivateBefore="True" ClickBeforeMode="None" DisplayName="Type Into 'Lot name'" EmptyFieldMode="SingleLine" sap:VirtualizedContainerService.HintSize="911,216" sap2010:WorkflowViewState.IdRef="NTypeInto_1" InteractionMode="Simulate" ScopeIdentifier="95f7d729-18c0-4be7-b773-6bd58086d14c" Version="V1">
-                  <uix:NTypeInto.Target>
-                    <uix:TargetAnchorable DesignTimeRectangle="117, 33, 174, 20" ElementType="InputBox" FriendlyName="'Edit'" FullSelectorArgument="&lt;wnd ctrlid='168' /&gt;" FuzzySelectorArgument="&lt;wnd ctrlid='168' /&gt;" Guid="7dd2da4c-71a6-4d7e-b9f6-d32a92fcbae4" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAALIAAAAYCAYAAABeDafgAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAACFSURBVHhe7dKxDYAwEARBt+uu3JsbcAcgCEhAiJA/zUinDz7dttbazKpPyBaxK+QxhlmpHR5D7r2bldic8z1kqOBTyK2188JfCZkIQiaCkIkgZCIImQhCJoKQiSBkIgiZCEImgpCJIGQifAoZ/k7IRHgN+XiaVdljyFDRLWSzyhOyBWxtOztWc4Qj8WV2AAAAAElFTkSuQmCC" InformativeScreenshot="44a9ff33235027ad9acee410ea28889b.png" IsResponsive="True" ScopeSelectorArgument="&lt;wnd app='manwin32.exe' cls='#32770' title='Search lot information' /&gt;" SearchSteps="Selector, FuzzySelector, Image">
-                      <uix:TargetAnchorable.Anchors>
-                        <scg:List x:TypeArguments="uix:ITarget" Capacity="1">
-                          <uix:Target DesignTimeRectangle="15, 39, 90, 13" ElementType="Text" FriendlyName="'Lot name'" FullSelectorArgument="&lt;wnd ctrlid='189' title='Lot name' /&gt;" FuzzySelectorArgument="&lt;wnd ctrlid='189' title='Lot name' check:text='Lot name' /&gt;" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAF4AAAARCAYAAABU3BvXAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAACiSURBVFhH7ZFBDsQgDAP5/2v5ARUHS8ENFWoFUSofRpvYoYfZUmtt4jwSH4TEByHxQQziSylDKfbxSbz+qPdIfBDL4nsHOLN3yGc9Mptzxr13k50l8Z4ELwc9t93Tnf2dzfye94xsEz/b+2zxep5xa8FNVo6KX8m9md/9gZTiec/ITTzjdfzG7l5md3wDeP1sBsgyM4gX55D4ICQ+CIkPobYL1bKojQnvQecAAAAASUVORK5CYII=" SearchSteps="Selector, FuzzySelector, Image" />
-                        </scg:List>
-                      </uix:TargetAnchorable.Anchors>
-                    </uix:TargetAnchorable>
-                  </uix:NTypeInto.Target>
-                  <uix:NTypeInto.Text>
-                    <InArgument x:TypeArguments="x:String">
-                      <mca:CSharpValue x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpValue`1_3">in_lot</mca:CSharpValue>
-                    </InArgument>
-                  </uix:NTypeInto.Text>
-                </uix:NTypeInto>
-                <uix:NClick ClickType="Single" DisplayName="Click Start button" sap:VirtualizedContainerService.HintSize="911,156" sap2010:WorkflowViewState.IdRef="NClick_2" InteractionMode="Simulate" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="95f7d729-18c0-4be7-b773-6bd58086d14c" Version="V1">
+                <ui:InterruptibleDoWhile DisplayName="Loop opne select domain popup" sap:VirtualizedContainerService.HintSize="833,597" sap2010:WorkflowViewState.IdRef="InterruptibleDoWhile_1">
+                  <ui:InterruptibleDoWhile.Body>
+                    <uix:NCheckState DisplayName="Check select domain pop is appear" sap:VirtualizedContainerService.HintSize="722,432" sap2010:WorkflowViewState.IdRef="NCheckState_2" ScopeIdentifier="95f7d729-18c0-4be7-b773-6bd58086d14c" Version="V1">
+                      <uix:NCheckState.Exists>
+                        <OutArgument x:TypeArguments="x:Boolean">
+                          <mca:CSharpReference x:TypeArguments="x:Boolean" sap2010:WorkflowViewState.IdRef="CSharpReference`1_8">searchExist</mca:CSharpReference>
+                        </OutArgument>
+                      </uix:NCheckState.Exists>
+                      <uix:NCheckState.IfExists>
+                        <uix:NTypeInto ActivateBefore="True" ClickBeforeMode="None" DisplayName="Type Into 'Lot name'" EmptyFieldMode="SingleLine" sap:VirtualizedContainerService.HintSize="334,216" sap2010:WorkflowViewState.IdRef="NTypeInto_2" InteractionMode="Simulate" ScopeIdentifier="95f7d729-18c0-4be7-b773-6bd58086d14c" Version="V1">
+                          <uix:NTypeInto.DelayBefore>
+                            <InArgument x:TypeArguments="x:Double">
+                              <mca:CSharpValue x:TypeArguments="x:Double" sap2010:WorkflowViewState.IdRef="CSharpValue`1_15">Convert.ToInt32(in_masterConfigDict["delay"])</mca:CSharpValue>
+                            </InArgument>
+                          </uix:NTypeInto.DelayBefore>
+                          <uix:NTypeInto.Target>
+                            <uix:TargetAnchorable DesignTimeRectangle="117, 33, 174, 20" ElementType="InputBox" FriendlyName="'Edit'" FullSelectorArgument="&lt;wnd ctrlid='168' /&gt;" FuzzySelectorArgument="&lt;wnd ctrlid='168' /&gt;" Guid="7dd2da4c-71a6-4d7e-b9f6-d32a92fcbae4" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAALIAAAAYCAYAAABeDafgAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAACFSURBVHhe7dKxDYAwEARBt+uu3JsbcAcgCEhAiJA/zUinDz7dttbazKpPyBaxK+QxhlmpHR5D7r2bldic8z1kqOBTyK2188JfCZkIQiaCkIkgZCIImQhCJoKQiSBkIgiZCEImgpCJIGQifAoZ/k7IRHgN+XiaVdljyFDRLWSzyhOyBWxtOztWc4Qj8WV2AAAAAElFTkSuQmCC" InformativeScreenshot="44a9ff33235027ad9acee410ea28889b.png" IsResponsive="True" ScopeSelectorArgument="&lt;wnd app='manwin32.exe' cls='#32770' title='Search lot information' /&gt;" SearchSteps="Selector, FuzzySelector, Image">
+                              <uix:TargetAnchorable.Anchors>
+                                <scg:List x:TypeArguments="uix:ITarget" Capacity="1">
+                                  <uix:Target DesignTimeRectangle="15, 39, 90, 13" ElementType="Text" FriendlyName="'Lot name'" FullSelectorArgument="&lt;wnd ctrlid='189' title='Lot name' /&gt;" FuzzySelectorArgument="&lt;wnd ctrlid='189' title='Lot name' check:text='Lot name' /&gt;" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAF4AAAARCAYAAABU3BvXAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAACiSURBVFhH7ZFBDsQgDAP5/2v5ARUHS8ENFWoFUSofRpvYoYfZUmtt4jwSH4TEByHxQQziSylDKfbxSbz+qPdIfBDL4nsHOLN3yGc9Mptzxr13k50l8Z4ELwc9t93Tnf2dzfye94xsEz/b+2zxep5xa8FNVo6KX8m9md/9gZTiec/ITTzjdfzG7l5md3wDeP1sBsgyM4gX55D4ICQ+CIkPobYL1bKojQnvQecAAAAASUVORK5CYII=" SearchSteps="Selector, FuzzySelector, Image" />
+                                </scg:List>
+                              </uix:TargetAnchorable.Anchors>
+                            </uix:TargetAnchorable>
+                          </uix:NTypeInto.Target>
+                          <uix:NTypeInto.Text>
+                            <InArgument x:TypeArguments="x:String">
+                              <mca:CSharpValue x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpValue`1_14">in_lot</mca:CSharpValue>
+                            </InArgument>
+                          </uix:NTypeInto.Text>
+                        </uix:NTypeInto>
+                      </uix:NCheckState.IfExists>
+                      <uix:NCheckState.IfNotExists>
+                        <uix:NClick ClickType="Single" DisplayName="Click Search(F5) button" sap:VirtualizedContainerService.HintSize="334,156" sap2010:WorkflowViewState.IdRef="NClick_7" InteractionMode="Simulate" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="95f7d729-18c0-4be7-b773-6bd58086d14c" Version="V1">
+                          <uix:NClick.Target>
+                            <uix:TargetAnchorable DesignTimeRectangle="875, 132, 72, 23" ElementType="Button" FriendlyName="'unchecked'" FullSelectorArgument="&lt;wnd ctrlid='108' title='Search(F5)' /&gt;" FuzzySelectorArgument="&lt;wnd ctrlid='108' title='Search(F5)' check:text='unchecked' /&gt;" Guid="36352c36-9471-464f-8f22-df37af800d4c" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAEwAAAAbCAYAAADWHGlkAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAEfSURBVGhD7ZRhDoMgDEY5rH+8lXfzAtzApdnqmk8K7QYsmSV5mXxtFV8yU875COyEMCensGVZggpFYbGua13XurB934MX27bZhHF2d0KYkxDmpKuwlNJJqd6T2jO4Js/DtHK+h0Y3Yfgwy8O/Qbu/zC09SOvcw4SNxiLD0oO03mOaMKozrVzbY6b1lq4lPMNgTe6RKd8w66E4l3Vtln5LfZhJsLe0xxrSVZgED4FotdIsX0sw98winplpwmRNy3k/ehbxzAz7htUOwXtL3nNWyy0zzJRvWK0mc67VemSGPZhjj4RqDOZyjwz7S/6K1gu3uJ0w4lNplrm/FDaSEOYkhDkxCaOm4E1VGBWDK6qwQOciLLBxCoulL/pbPj3l4wG3Q/P734Td2QAAAABJRU5ErkJggg==" InformativeScreenshot="f80d5fee5747f20a65b721b00d5dc9fc.png" ScopeSelectorArgument="&lt;wnd app='manwin32.exe' cls='#32770' title='Select lot/sample' /&gt;" SearchSteps="Selector, FuzzySelector, Image" />
+                          </uix:NClick.Target>
+                        </uix:NClick>
+                      </uix:NCheckState.IfNotExists>
+                      <uix:NCheckState.Target>
+                        <uix:TargetAnchorable DesignTimeRectangle="3, 26, 318, 239" FriendlyName="'Search lot information'" FullSelectorArgument="&lt;ctrl name='Search lot information' role='dialog' /&gt;" FuzzySelectorArgument="&lt;ctrl name='Search lot information' role='dialog' automationid='' check:text='Search lot information' /&gt;" Guid="107fc0c8-d2fc-4063-8847-4dd75a74f21d" ImageBase64="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" InformativeScreenshot="ec509016b30973903977d2666aaaa867.png" ScopeSelectorArgument="&lt;wnd app='manwin32.exe' cls='#32770' title='Search lot information' /&gt;" SearchSteps="Selector, FuzzySelector" />
+                      </uix:NCheckState.Target>
+                      <uix:NCheckState.Timeout>
+                        <InArgument x:TypeArguments="x:Double">
+                          <mca:CSharpValue x:TypeArguments="x:Double" sap2010:WorkflowViewState.IdRef="CSharpValue`1_11">Convert.ToInt32(in_masterConfigDict["delay"])</mca:CSharpValue>
+                        </InArgument>
+                      </uix:NCheckState.Timeout>
+                    </uix:NCheckState>
+                  </ui:InterruptibleDoWhile.Body>
+                  <ui:InterruptibleDoWhile.Condition>
+                    <mca:CSharpValue x:TypeArguments="x:Boolean" sap2010:WorkflowViewState.IdRef="CSharpValue`1_13">!searchExist</mca:CSharpValue>
+                  </ui:InterruptibleDoWhile.Condition>
+                </ui:InterruptibleDoWhile>
+                <uix:NClick ClickType="Single" DisplayName="Click Start button" sap:VirtualizedContainerService.HintSize="833,156" sap2010:WorkflowViewState.IdRef="NClick_2" InteractionMode="Simulate" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="95f7d729-18c0-4be7-b773-6bd58086d14c" Version="V1">
                   <uix:NClick.Target>
                     <uix:TargetAnchorable DesignTimeRectangle="177, 228, 60, 26" ElementType="Button" FriendlyName="'unchecked'" FullSelectorArgument="&lt;wnd ctrlid='1' title='Start' /&gt;" FuzzySelectorArgument="&lt;wnd ctrlid='1' title='Start' check:text='unchecked' /&gt;" Guid="bc6e5ad8-a90b-4125-ae11-28e0e0656516" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAEAAAAAeCAYAAACc7RhZAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAADBSURBVFhH7ZTBDcQgDAQplg9d0RsN0EFyPBxZxDgX7gQIb6SRMLsfjxRczvmwDATQwXtvClGAhS+EoAtIKW1LjPE7AXS3GxAAARAAAUMFOOcupHw0QwXUS/P5rZB/CZwqgAMBn4znNEt3Ur+XZd4AbRnKeEfrv2G4AI62UJk5dYeff2FJAfVyNGudXqa+Aa2FWj2t08sybwBl/Fx3eS7NPUz9BVYAAiAAAiAAAp4ElNLOqAJKaIGmAEvcBFjFuIB8nEh9FWij3v9kAAAAAElFTkSuQmCC" InformativeScreenshot="df9353d338c43d2ba4a7ad573c626ba5.png" ScopeSelectorArgument="&lt;wnd app='manwin32.exe' cls='#32770' title='Search lot information' /&gt;" SearchSteps="Selector, FuzzySelector, Image" />
                   </uix:NClick.Target>
                 </uix:NClick>
-                <uix:NGetText DelayBefore="5" DisplayName="Get Text all Lot on screen" sap:VirtualizedContainerService.HintSize="911,156" sap2010:WorkflowViewState.IdRef="NGetText_2" ScopeIdentifier="95f7d729-18c0-4be7-b773-6bd58086d14c" ScrapingMethod="Native" Version="V1">
+                <uix:NGetText DelayBefore="5" DisplayName="Get Text all Lot on screen" sap:VirtualizedContainerService.HintSize="833,156" sap2010:WorkflowViewState.IdRef="NGetText_2" ScopeIdentifier="95f7d729-18c0-4be7-b773-6bd58086d14c" ScrapingMethod="Native" Version="V1">
                   <uix:NGetText.Target>
                     <uix:TargetAnchorable DesignTimeRectangle="12, 51, 853, 330" FriendlyName="'Selection list'" FullSelectorArgument="&lt;wnd cls='SS32X25_Spread' /&gt;&lt;ctrl name='Selection list' role='client' /&gt;" FuzzySelectorArgument="&lt;wnd cls='SS32X25_Spread' /&gt;&lt;ctrl role='client' automationid='' /&gt;" Guid="65fc4f00-0c12-4250-a0cb-1574e3bc24c0" ImageBase64="" InformativeScreenshot="c4a7234ad2b245a8ec5b136988e74517.png" ScopeSelectorArgument="&lt;wnd app='manwin32.exe' cls='#32770' title='Select lot/sample' /&gt;" SearchSteps="Selector, FuzzySelector" />
                   </uix:NGetText.Target>
@@ -154,27 +193,10 @@
                     </OutArgument>
                   </uix:NGetText.Text>
                 </uix:NGetText>
-                <Assign sap2010:Annotation.AnnotationText="Assign lot want to find in all lot on screen" DisplayName="Assign Lot" sap:VirtualizedContainerService.HintSize="911,92" sap2010:WorkflowViewState.IdRef="Assign_3">
-                  <Assign.To>
-                    <OutArgument x:TypeArguments="x:String">
-                      <mca:CSharpReference x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpReference`1_5">lotName</mca:CSharpReference>
-                    </OutArgument>
-                  </Assign.To>
-                  <Assign.Value>
-                    <InArgument x:TypeArguments="x:String">
-                      <mca:CSharpValue x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpValue`1_8">" " + in_lot + " "</mca:CSharpValue>
-                    </InArgument>
-                  </Assign.Value>
-                  <sap:WorkflowViewStateService.ViewState>
-                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                      <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
-                    </scg:Dictionary>
-                  </sap:WorkflowViewStateService.ViewState>
-                </Assign>
-                <If DisplayName="Contain Regname" sap:VirtualizedContainerService.HintSize="911,1815" sap2010:WorkflowViewState.IdRef="If_3">
+                <If DisplayName="Contain Regname" sap:VirtualizedContainerService.HintSize="833,1964" sap2010:WorkflowViewState.IdRef="If_3">
                   <If.Condition>
                     <InArgument x:TypeArguments="x:Boolean">
-                      <mca:CSharpValue x:TypeArguments="x:Boolean" sap2010:WorkflowViewState.IdRef="CSharpValue`1_4">lotText.Contains(lotName)</mca:CSharpValue>
+                      <mca:CSharpValue x:TypeArguments="x:Boolean" sap2010:WorkflowViewState.IdRef="CSharpValue`1_18">lotText.Contains(in_lot)</mca:CSharpValue>
                     </InArgument>
                   </If.Condition>
                   <sap:WorkflowViewStateService.ViewState>
@@ -184,26 +206,30 @@
                     </scg:Dictionary>
                   </sap:WorkflowViewStateService.ViewState>
                   <If.Then>
-                    <Sequence DisplayName="Found lot contain" sap:VirtualizedContainerService.HintSize="604,1656" sap2010:WorkflowViewState.IdRef="Sequence_7">
+                    <Sequence DisplayName="Found lot contain" sap:VirtualizedContainerService.HintSize="526,1805" sap2010:WorkflowViewState.IdRef="Sequence_7">
+                      <Sequence.Variables>
+                        <Variable x:TypeArguments="x:String" Name="lotDate" />
+                        <Variable x:TypeArguments="x:String" Name="lotX" />
+                      </Sequence.Variables>
                       <sap:WorkflowViewStateService.ViewState>
                         <scg:Dictionary x:TypeArguments="x:String, x:Object">
                           <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                           <x:Boolean x:Key="IsPinned">False</x:Boolean>
                         </scg:Dictionary>
                       </sap:WorkflowViewStateService.ViewState>
-                      <ui:ForEach x:TypeArguments="x:String" DisplayName="For Each find item match" sap:VirtualizedContainerService.HintSize="562,974" sap2010:WorkflowViewState.IdRef="ForEach`1_1">
+                      <ui:ForEach x:TypeArguments="x:String" DisplayName="For Each find item match" sap:VirtualizedContainerService.HintSize="484,524" sap2010:WorkflowViewState.IdRef="ForEach`1_1">
                         <ui:ForEach.Body>
                           <ActivityAction x:TypeArguments="x:String">
                             <ActivityAction.Argument>
                               <DelegateInArgument x:TypeArguments="x:String" Name="item" />
                             </ActivityAction.Argument>
-                            <Sequence DisplayName="Body find item match" sap:VirtualizedContainerService.HintSize="526,849" sap2010:WorkflowViewState.IdRef="Sequence_6">
+                            <Sequence DisplayName="Body find item match" sap:VirtualizedContainerService.HintSize="304,399" sap2010:WorkflowViewState.IdRef="Sequence_6">
                               <sap:WorkflowViewStateService.ViewState>
                                 <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                   <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                                 </scg:Dictionary>
                               </sap:WorkflowViewStateService.ViewState>
-                              <Assign DisplayName="Assign reg found" sap:VirtualizedContainerService.HintSize="484,61" sap2010:WorkflowViewState.IdRef="Assign_1">
+                              <Assign DisplayName="Assign reg found" sap:VirtualizedContainerService.HintSize="262,61" sap2010:WorkflowViewState.IdRef="Assign_1">
                                 <Assign.To>
                                   <OutArgument x:TypeArguments="x:Boolean">
                                     <mca:CSharpReference x:TypeArguments="x:Boolean" sap2010:WorkflowViewState.IdRef="CSharpReference`1_6">out_flagLot</mca:CSharpReference>
@@ -213,36 +239,85 @@
                                   <InArgument x:TypeArguments="x:Boolean">True</InArgument>
                                 </Assign.Value>
                               </Assign>
-                              <If DisplayName="Check index first row" sap:VirtualizedContainerService.HintSize="484,376" sap2010:WorkflowViewState.IdRef="If_1">
-                                <If.Condition>
-                                  <InArgument x:TypeArguments="x:Boolean">
-                                    <mca:CSharpValue x:TypeArguments="x:Boolean" sap2010:WorkflowViewState.IdRef="CSharpValue`1_5">indexItem != 0</mca:CSharpValue>
-                                  </InArgument>
-                                </If.Condition>
-                                <If.Then>
-                                  <uix:NKeyboardShortcuts DelayBetweenShortcuts="{x:Null}" ActivateBefore="True" ClickBeforeMode="Single" DisplayName="Keyboard Shortcuts press down" sap:VirtualizedContainerService.HintSize="334,198" sap2010:WorkflowViewState.IdRef="NKeyboardShortcuts_1" ScopeIdentifier="95f7d729-18c0-4be7-b773-6bd58086d14c" Shortcuts="[d(hk)][k(down)][u(hk)]" Version="V1">
-                                    <uix:NKeyboardShortcuts.Target>
-                                      <uix:TargetAnchorable DesignTimeRectangle="3, 31, 918, 383" FriendlyName="'SS32X25_Spread'" FullSelectorArgument="&lt;wnd cls='SS32X25_Spread' /&gt;" FuzzySelectorArgument="&lt;wnd cls='SS32X25_Spread' /&gt;" Guid="3f676e82-4c34-446a-b715-601bf79d2d37" ImageBase64="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AACAUoImAAAApQRNAAAASgmaAAAAlBI0AQAAKCVoAgAAUErQBAAAoJSgCQAAQClBEwAAgFKCJgAAAKUETQAAAEoJmgAAAJQSNAEAACglaAIAAFBK0AQAAKCUoAkAAEApQRMAAIBSgiYAAAClBE0AAABKCZoAAACUEjQBAAAoJWgCAABQStAEAACglKAJAABAKUETAACAUoImAAAApQRNAAAASgmaAAAAlBI0AQAAKCVoAgAAUErQBAAAoJSgCQAAQClBEwAAgFKCJgAAAKUETQAAAEoJmgAAAJQSNAEAACglaAIAAFBK0AQAAKCUoAkAAEApQRMAAIBSgiYAAAClBE0AAABKCZoAAACUEjQBAAAoJWgCAABQStAEAACglKAJAABAKUETAACAUoImAAAApQRNAAAASgmaAAAAlBI0AQAAKCVoAgAAUErQBAAAoJSgCQAAQClBEwAAgFKCJgAAAKUETQAAAEoJmgAAAJQSNAEAACglaAIAAFBK0AQAAKCUoAkAAEApQRMAAIBSgiYAAAClBE0AAABKCZoAAACUEjQBAAAoJWgCAABQStAEAACglKAJAABAKUETAACAUoImAAAApQRNAAAASgmaAAAAlBI0AQAAKCVoAgAAUErQBAAAoJSgCQAAQClBEwAAgFKCJgAAAKUETQAAAEoJmgAAAJQSNAEAACglaAIAAFBK0AQAAKCUoAkAAEApQRMAAIBSgiYAAAClBE0AAABKCZoAAACUEjQBAAAoJWgCAABQStAEAACglKAJAABAKUETAACAUoImAAAApQRNAAAASgmaAAAAlBI0AQAAKCVoAgAAUErQBAAAoJSgCQAAQClBEwAAgFKCJgAAAKUETQAAAEoJmgAAAJQSNAEAACglaAIAAFBK0AQAAKCUoAkAAEApQRMAAIBSgiYAAAClBE0AAABKCZoAAACUEjQBAAAoJWgCAABQStAEAACglKAJAABAKUETAACAUoImAAAApQRNAAAASgmaAAAAlBI0AQAAKCVoAgAAUErQBAAAoJSgCQAAQClBEwAAgFKCJgAAAKUETQAAAEoJmgAAAJQSNAEAACglaAIAAFBK0AQAAKCUoAkAAEApQRMAAIBSgiYAAAClBE0AAABKCZoAAACUEjQBAAAoJWgCAABQStAEAACglKAJAABAKUETAACAUoImAAAApQRNAAAASgmaAAAAlBI0AQAAKCVoAgAAUErQBAAAoJSgCQAAQClBEwAAgFKCJgAAAKUETQAAAEoJmgAAAJQSNAEAACglaAIAAFBK0AQAAKCUoAkAAEApQRMAAIBSgiYAAAClBE0AAABKCZoAAACUEjQBAAAoJWgCAABQStAEAACglKAJAABAKUETAACAUoImAAAApQRNAAAASgmaAAAAlBI0AQAAKCVoAgAAUErQBAAAoJSgCQAAQClBEwAAgFKCJgAAAKUETQAAAEoJmgAAAJQSNAEAACglaAIAAFBK0AQAAKCUoAkAAEApQRMAAIBSgiYAAAClBE0AAABKCZoAAACUEjQBAAAoJWgCAABQStAEAACglKAJAABAKUETAACAUoImAAAApQRNAAAASgmaAAAAlBI0AQAAKCVoAgAAUErQBAAAoJSgCQAAQClBEwAAgFKCJgAAAKUETQAAAEoJmgAAAJQSNAEAACglaAIAAFBK0AQAAKCUoAkAAEApQRMAAIBSgiYAAAClBE0AAABKCZoAAACUEjQBAAAoJWgCAABQStAEAACglKAJAABAKUETAACAUoImAAAApQRNAAAASgmaAAAAlBI0AQAAKCVoAgAAUErQBAAAoJSgCQAAQClBEwAAgFKCJgAAAKUETQAAAEoJmgAAAJQSNAEAACglaAIAAFBK0AQAAKCUoAkAAEApQRMAAIBSgiYAAAClBE0AAABKCZoAAACUEjQBAAAoJWgCAABQStAEAACglKAJAABAKUETAACAUoImAAAApQRNAAAASgmaAAAAlBI0AQAAKCVoAgAAUErQBAAAoJSgCQAAQClBEwAAgFKCJgAAAKUETQAAAEoJmgAAAJQSNAEAACglaAIAAFBK0AQAAKCUoAkAAEApQRMAAIBSgiYAAAClBE0AAABKCZoAAACUEjQBAAAoJWgCAABQStAEAACglKAJAABAKUETAACAUoImAAAApQRNAAAASgmaAAAAlBI0AQAAKCVoAgAAUErQBAAAoJSgCQAAQClBEwAAgFKCJgAAAKUETQAAAEoJmgAAAJQSNAEAACglaAIAAFBK0AQAAKBUC5otMN5L0AQAAOCD33///SGCJgAAAB+0v5VsIfHbt283a88TNAEAAPig/auzjxA0AQAA+KCFxXvLf6MJAADAD3rQ7GHxFoImAAAAPxA0AQAAKCVoAgAAUErQBAAAoJSgCQAAQKksaH758mVqPCdoAgAA8IPZ32gehcxG0AQAAOAHq391dhUyG0ETAACAHxz9N5qzkNkImgAAAPzA/wwIAACAUoImAAAApQRNAAAASgmaAAAAlGpBswXGe02DZnvhe/3+++9pH3hO7Xc2u0EAAHBN2We+W7TPh4+YBs17q/2h2gu3N6eUev7qv7P9RgAAwPU9ksf658Nv377dbRk0xzd6Vgya2RngeVTcSAAAeC6P5DFBE3iYoAkA8HoETWArQRMA4PVcMmh++fIl7TeCJlyLoAkA8HpWeWyV55otQbO9KUETXoegCQDweo6C5plMl73uWTcFzf6GBE14HYImAMDrORM0Z7nupwbN8c3M3lAjaMK1CJoAAK/nbNDMst1PDZr/ObB4M52gCdciaAIAvJ7L/I3mfw8JmvBSBE0AgNdzJmhme82WoNkImvA6BE0AgNdzFDSzfrctaK4ImnAtgiYAwOt5JI8JmsDDBE0AgNcjaAJbCZoAAK/naYNme/F79aCZ7QHPp/3OjjcXAACu7dE89mlBEwAAAO71Q9DsDQAAAHiEoAkAAEChv//5N0NKRbsdFiAwAAAAAElFTkSuQmCC" InformativeScreenshot="a3ee1e5d62b5fc3de3daf6e8c33d2819.png" ScopeSelectorArgument="&lt;wnd app='manwin32.exe' cls='#32770' title='Select/Edit/Delete parts*' /&gt;" SearchSteps="Selector, FuzzySelector, Image" />
-                                    </uix:NKeyboardShortcuts.Target>
-                                  </uix:NKeyboardShortcuts>
-                                </If.Then>
-                              </If>
-                              <If DisplayName="Check line match reg" sap:VirtualizedContainerService.HintSize="484,238" sap2010:WorkflowViewState.IdRef="If_2">
-                                <If.Condition>
-                                  <InArgument x:TypeArguments="x:Boolean">
-                                    <mca:CSharpValue x:TypeArguments="x:Boolean" sap2010:WorkflowViewState.IdRef="CSharpValue`1_6">item.Contains(lotName)</mca:CSharpValue>
-                                  </InArgument>
-                                </If.Condition>
+                              <ui:IfElseIf DisplayName="Check index not equals 0" sap:VirtualizedContainerService.HintSize="262,51" sap2010:WorkflowViewState.IdRef="IfElseIf_3">
+                                <ui:IfElseIf.ConditionBlocks>
+                                  <sc:BindingList x:TypeArguments="ui:IfElseIfBlock" AllowEdit="True" AllowNew="True" AllowRemove="True" RaiseListChangedEvents="True">
+                                    <ui:IfElseIfBlock BlockType="If">
+                                      <ui:IfElseIfBlock.Condition>
+                                        <InArgument x:TypeArguments="x:Boolean">
+                                          <mca:CSharpValue x:TypeArguments="x:Boolean" sap2010:WorkflowViewState.IdRef="CSharpValue`1_27">indexItem != 0</mca:CSharpValue>
+                                        </InArgument>
+                                      </ui:IfElseIfBlock.Condition>
+                                      <ui:IfElseIfBlock.Then>
+                                        <Assign DisplayName="Reassign in_lot" sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_5">
+                                          <Assign.To>
+                                            <OutArgument x:TypeArguments="x:String">
+                                              <mca:CSharpReference x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpReference`1_11">io_lotStr</mca:CSharpReference>
+                                            </OutArgument>
+                                          </Assign.To>
+                                          <Assign.Value>
+                                            <InArgument x:TypeArguments="x:String">
+                                              <mca:CSharpValue x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpValue`1_25">io_lotStr + Regex.Match(item,in_lot + @"[\w]*").ToString() + ","</mca:CSharpValue>
+                                            </InArgument>
+                                          </Assign.Value>
+                                        </Assign>
+                                      </ui:IfElseIfBlock.Then>
+                                    </ui:IfElseIfBlock>
+                                  </sc:BindingList>
+                                </ui:IfElseIf.ConditionBlocks>
                                 <sap:WorkflowViewStateService.ViewState>
                                   <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                    <x:Boolean x:Key="IsExpanded">False</x:Boolean>
                                     <x:Boolean x:Key="IsPinned">False</x:Boolean>
                                   </scg:Dictionary>
                                 </sap:WorkflowViewStateService.ViewState>
-                                <If.Then>
-                                  <ui:Break sap:VirtualizedContainerService.HintSize="200,22" sap2010:WorkflowViewState.IdRef="Break_1" />
-                                </If.Then>
-                              </If>
+                              </ui:IfElseIf>
+                              <ui:IfElseIf DisplayName="Check index first row" sap:VirtualizedContainerService.HintSize="262,51" sap2010:WorkflowViewState.IdRef="IfElseIf_1">
+                                <ui:IfElseIf.ConditionBlocks>
+                                  <sc:BindingList x:TypeArguments="ui:IfElseIfBlock" AllowEdit="True" AllowNew="True" AllowRemove="True" RaiseListChangedEvents="True">
+                                    <ui:IfElseIfBlock BlockType="If">
+                                      <ui:IfElseIfBlock.Condition>
+                                        <InArgument x:TypeArguments="x:Boolean">
+                                          <mca:CSharpValue x:TypeArguments="x:Boolean" sap2010:WorkflowViewState.IdRef="CSharpValue`1_20">indexItem == 1</mca:CSharpValue>
+                                        </InArgument>
+                                      </ui:IfElseIfBlock.Condition>
+                                      <ui:IfElseIfBlock.Then>
+                                        <uix:NKeyboardShortcuts DelayBetweenShortcuts="{x:Null}" ActivateBefore="True" ClickBeforeMode="Single" DisplayName="Keyboard Shortcuts press Up" sap:VirtualizedContainerService.HintSize="334,198" sap2010:WorkflowViewState.IdRef="NKeyboardShortcuts_2" ScopeIdentifier="95f7d729-18c0-4be7-b773-6bd58086d14c" Shortcuts="[d(hk)][k(up)][u(hk)]" Version="V1">
+                                          <uix:NKeyboardShortcuts.Target>
+                                            <uix:TargetAnchorable DesignTimeRectangle="3, 31, 918, 383" FriendlyName="'SS32X25_Spread'" FullSelectorArgument="&lt;wnd cls='SS32X25_Spread' /&gt;" FuzzySelectorArgument="&lt;wnd cls='SS32X25_Spread' /&gt;" Guid="3f676e82-4c34-446a-b715-601bf79d2d37" ImageBase64="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AACAUoImAAAApQRNAAAASgmaAAAAlBI0AQAAKCVoAgAAUErQBAAAoJSgCQAAQClBEwAAgFKCJgAAAKUETQAAAEoJmgAAAJQSNAEAACglaAIAAFBK0AQAAKCUoAkAAEApQRMAAIBSgiYAAAClBE0AAABKCZoAAACUEjQBAAAoJWgCAABQStAEAACglKAJAABAKUETAACAUoImAAAApQRNAAAASgmaAAAAlBI0AQAAKCVoAgAAUErQBAAAoJSgCQAAQClBEwAAgFKCJgAAAKUETQAAAEoJmgAAAJQSNAEAACglaAIAAFBK0AQAAKCUoAkAAEApQRMAAIBSgiYAAAClBE0AAABKCZoAAACUEjQBAAAoJWgCAABQStAEAACglKAJAABAKUETAACAUoImAAAApQRNAAAASgmaAAAAlBI0AQAAKCVoAgAAUErQBAAAoJSgCQAAQClBEwAAgFKCJgAAAKUETQAAAEoJmgAAAJQSNAEAACglaAIAAFBK0AQAAKCUoAkAAEApQRMAAIBSgiYAAAClBE0AAABKCZoAAACUEjQBAAAoJWgCAABQStAEAACglKAJAABAKUETAACAUoImAAAApQRNAAAASgmaAAAAlBI0AQAAKCVoAgAAUErQBAAAoJSgCQAAQClBEwAAgFKCJgAAAKUETQAAAEoJmgAAAJQSNAEAACglaAIAAFBK0AQAAKCUoAkAAEApQRMAAIBSgiYAAAClBE0AAABKCZoAAACUEjQBAAAoJWgCAABQStAEAACglKAJAABAKUETAACAUoImAAAApQRNAAAASgmaAAAAlBI0AQAAKCVoAgAAUErQBAAAoJSgCQAAQClBEwAAgFKCJgAAAKUETQAAAEoJmgAAAJQSNAEAACglaAIAAFBK0AQAAKCUoAkAAEApQRMAAIBSgiYAAAClBE0AAABKCZoAAACUEjQBAAAoJWgCAABQStAEAACglKAJAABAKUETAACAUoImAAAApQRNAAAASgmaAAAAlBI0AQAAKCVoAgAAUErQBAAAoJSgCQAAQClBEwAAgFKCJgAAAKUETQAAAEoJmgAAAJQSNAEAACglaAIAAFBK0AQAAKCUoAkAAEApQRMAAIBSgiYAAAClBE0AAABKCZoAAACUEjQBAAAoJWgCAABQStAEAACglKAJAABAKUETAACAUoImAAAApQRNAAAASgmaAAAAlBI0AQAAKCVoAgAAUErQBAAAoJSgCQAAQClBEwAAgFKCJgAAAKUETQAAAEoJmgAAAJQSNAEAACglaAIAAFBK0AQAAKCUoAkAAEApQRMAAIBSgiYAAAClBE0AAABKCZoAAACUEjQBAAAoJWgCAABQStAEAACglKAJAABAKUETAACAUoImAAAApQRNAAAASgmaAAAAlBI0AQAAKCVoAgAAUErQBAAAoJSgCQAAQClBEwAAgFKCJgAAAKUETQAAAEoJmgAAAJQSNAEAACglaAIAAFBK0AQAAKCUoAkAAEApQRMAAIBSgiYAAAClBE0AAABKCZoAAACUEjQBAAAoJWgCAABQStAEAACglKAJAABAKUETAACAUoImAAAApQRNAAAASgmaAAAAlBI0AQAAKCVoAgAAUErQBAAAoJSgCQAAQClBEwAAgFKCJgAAAKUETQAAAEoJmgAAAJQSNAEAACglaAIAAFBK0AQAAKCUoAkAAEApQRMAAIBSgiYAAAClBE0AAABKCZoAAACUEjQBAAAoJWgCAABQStAEAACglKAJAABAKUETAACAUoImAAAApQRNAAAASgmaAAAAlBI0AQAAKCVoAgAAUErQBAAAoJSgCQAAQClBEwAAgFKCJgAAAKUETQAAAEoJmgAAAJQSNAEAACglaAIAAFBK0AQAAKCUoAkAAEApQRMAAIBSgiYAAAClBE0AAABKCZoAAACUEjQBAAAoJWgCAABQStAEAACglKAJAABAKUETAACAUoImAAAApQRNAAAASgmaAAAAlBI0AQAAKCVoAgAAUErQBAAAoJSgCQAAQClBEwAAgFKCJgAAAKUETQAAAEoJmgAAAJQSNAEAACglaAIAAFBK0AQAAKCUoAkAAEApQRMAAIBSgiYAAAClBE0AAABKCZoAAACUEjQBAAAoJWgCAABQStAEAACglKAJAABAKUETAACAUoImAAAApQRNAAAASgmaAAAAlBI0AQAAKCVoAgAAUErQBAAAoJSgCQAAQClBEwAAgFKCJgAAAKUETQAAAEoJmgAAAJQSNAEAACglaAIAAFBK0AQAAKBUC5otMN5L0AQAAOCD33///SGCJgAAAB+0v5VsIfHbt283a88TNAEAAPig/auzjxA0AQAA+KCFxXvLf6MJAADAD3rQ7GHxFoImAAAAPxA0AQAAKCVoAgAAUErQBAAAoJSgCQAAQKksaH758mVqPCdoAgAA8IPZ32gehcxG0AQAAOAHq391dhUyG0ETAACAHxz9N5qzkNkImgAAAPzA/wwIAACAUoImAAAApQRNAAAASgmaAAAAlGpBswXGe02DZnvhe/3+++9pH3hO7Xc2u0EAAHBN2We+W7TPh4+YBs17q/2h2gu3N6eUev7qv7P9RgAAwPU9ksf658Nv377dbRk0xzd6Vgya2RngeVTcSAAAeC6P5DFBE3iYoAkA8HoETWArQRMA4PVcMmh++fIl7TeCJlyLoAkA8HpWeWyV55otQbO9KUETXoegCQDweo6C5plMl73uWTcFzf6GBE14HYImAMDrORM0Z7nupwbN8c3M3lAjaMK1CJoAAK/nbNDMst1PDZr/ObB4M52gCdciaAIAvJ7L/I3mfw8JmvBSBE0AgNdzJmhme82WoNkImvA6BE0AgNdzFDSzfrctaK4ImnAtgiYAwOt5JI8JmsDDBE0AgNcjaAJbCZoAAK/naYNme/F79aCZ7QHPp/3OjjcXAACu7dE89mlBEwAAAO71Q9DsDQAAAHiEoAkAAEChv//5N0NKRbsdFiAwAAAAAElFTkSuQmCC" InformativeScreenshot="a3ee1e5d62b5fc3de3daf6e8c33d2819.png" ScopeSelectorArgument="&lt;wnd app='manwin32.exe' cls='#32770' title='Select/Edit/Delete parts*' /&gt;" SearchSteps="Selector, FuzzySelector, Image" />
+                                          </uix:NKeyboardShortcuts.Target>
+                                        </uix:NKeyboardShortcuts>
+                                      </ui:IfElseIfBlock.Then>
+                                    </ui:IfElseIfBlock>
+                                    <ui:IfElseIfBlock BlockType="ElseIf">
+                                      <ui:IfElseIfBlock.Condition>
+                                        <InArgument x:TypeArguments="x:Boolean">
+                                          <mca:CSharpValue x:TypeArguments="x:Boolean" sap2010:WorkflowViewState.IdRef="CSharpValue`1_21">indexItem &gt; 1</mca:CSharpValue>
+                                        </InArgument>
+                                      </ui:IfElseIfBlock.Condition>
+                                      <ui:IfElseIfBlock.Then>
+                                        <uix:NKeyboardShortcuts DelayBetweenShortcuts="{x:Null}" ActivateBefore="True" ClickBeforeMode="Single" DisplayName="Keyboard Shortcuts press down" sap:VirtualizedContainerService.HintSize="334,198" sap2010:WorkflowViewState.IdRef="NKeyboardShortcuts_1" ScopeIdentifier="95f7d729-18c0-4be7-b773-6bd58086d14c" Shortcuts="[d(hk)][k(down)][u(hk)]" Version="V1">
+                                          <uix:NKeyboardShortcuts.Target>
+                                            <uix:TargetAnchorable DesignTimeRectangle="3, 31, 918, 383" FriendlyName="'SS32X25_Spread'" FullSelectorArgument="&lt;wnd cls='SS32X25_Spread' /&gt;" FuzzySelectorArgument="&lt;wnd cls='SS32X25_Spread' /&gt;" Guid="3f676e82-4c34-446a-b715-601bf79d2d37" ImageBase64="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AACAUoImAAAApQRNAAAASgmaAAAAlBI0AQAAKCVoAgAAUErQBAAAoJSgCQAAQClBEwAAgFKCJgAAAKUETQAAAEoJmgAAAJQSNAEAACglaAIAAFBK0AQAAKCUoAkAAEApQRMAAIBSgiYAAAClBE0AAABKCZoAAACUEjQBAAAoJWgCAABQStAEAACglKAJAABAKUETAACAUoImAAAApQRNAAAASgmaAAAAlBI0AQAAKCVoAgAAUErQBAAAoJSgCQAAQClBEwAAgFKCJgAAAKUETQAAAEoJmgAAAJQSNAEAACglaAIAAFBK0AQAAKCUoAkAAEApQRMAAIBSgiYAAAClBE0AAABKCZoAAACUEjQBAAAoJWgCAABQStAEAACglKAJAABAKUETAACAUoImAAAApQRNAAAASgmaAAAAlBI0AQAAKCVoAgAAUErQBAAAoJSgCQAAQClBEwAAgFKCJgAAAKUETQAAAEoJmgAAAJQSNAEAACglaAIAAFBK0AQAAKCUoAkAAEApQRMAAIBSgiYAAAClBE0AAABKCZoAAACUEjQBAAAoJWgCAABQStAEAACglKAJAABAKUETAACAUoImAAAApQRNAAAASgmaAAAAlBI0AQAAKCVoAgAAUErQBAAAoJSgCQAAQClBEwAAgFKCJgAAAKUETQAAAEoJmgAAAJQSNAEAACglaAIAAFBK0AQAAKCUoAkAAEApQRMAAIBSgiYAAAClBE0AAABKCZoAAACUEjQBAAAoJWgCAABQStAEAACglKAJAABAKUETAACAUoImAAAApQRNAAAASgmaAAAAlBI0AQAAKCVoAgAAUErQBAAAoJSgCQAAQClBEwAAgFKCJgAAAKUETQAAAEoJmgAAAJQSNAEAACglaAIAAFBK0AQAAKCUoAkAAEApQRMAAIBSgiYAAAClBE0AAABKCZoAAACUEjQBAAAoJWgCAABQStAEAACglKAJAABAKUETAACAUoImAAAApQRNAAAASgmaAAAAlBI0AQAAKCVoAgAAUErQBAAAoJSgCQAAQClBEwAAgFKCJgAAAKUETQAAAEoJmgAAAJQSNAEAACglaAIAAFBK0AQAAKCUoAkAAEApQRMAAIBSgiYAAAClBE0AAABKCZoAAACUEjQBAAAoJWgCAABQStAEAACglKAJAABAKUETAACAUoImAAAApQRNAAAASgmaAAAAlBI0AQAAKCVoAgAAUErQBAAAoJSgCQAAQClBEwAAgFKCJgAAAKUETQAAAEoJmgAAAJQSNAEAACglaAIAAFBK0AQAAKCUoAkAAEApQRMAAIBSgiYAAAClBE0AAABKCZoAAACUEjQBAAAoJWgCAABQStAEAACglKAJAABAKUETAACAUoImAAAApQRNAAAASgmaAAAAlBI0AQAAKCVoAgAAUErQBAAAoJSgCQAAQClBEwAAgFKCJgAAAKUETQAAAEoJmgAAAJQSNAEAACglaAIAAFBK0AQAAKCUoAkAAEApQRMAAIBSgiYAAAClBE0AAABKCZoAAACUEjQBAAAoJWgCAABQStAEAACglKAJAABAKUETAACAUoImAAAApQRNAAAASgmaAAAAlBI0AQAAKCVoAgAAUErQBAAAoJSgCQAAQClBEwAAgFKCJgAAAKUETQAAAEoJmgAAAJQSNAEAACglaAIAAFBK0AQAAKCUoAkAAEApQRMAAIBSgiYAAAClBE0AAABKCZoAAACUEjQBAAAoJWgCAABQStAEAACglKAJAABAKUETAACAUoImAAAApQRNAAAASgmaAAAAlBI0AQAAKCVoAgAAUErQBAAAoJSgCQAAQClBEwAAgFKCJgAAAKUETQAAAEoJmgAAAJQSNAEAACglaAIAAFBK0AQAAKCUoAkAAEApQRMAAIBSgiYAAAClBE0AAABKCZoAAACUEjQBAAAoJWgCAABQStAEAACglKAJAABAKUETAACAUoImAAAApQRNAAAASgmaAAAAlBI0AQAAKCVoAgAAUErQBAAAoJSgCQAAQClBEwAAgFKCJgAAAKUETQAAAEoJmgAAAJQSNAEAACglaAIAAFBK0AQAAKCUoAkAAEApQRMAAIBSgiYAAAClBE0AAABKCZoAAACUEjQBAAAoJWgCAABQStAEAACglKAJAABAKUETAACAUoImAAAApQRNAAAASgmaAAAAlBI0AQAAKCVoAgAAUErQBAAAoJSgCQAAQClBEwAAgFKCJgAAAKUETQAAAEoJmgAAAJQSNAEAACglaAIAAFBK0AQAAKBUC5otMN5L0AQAAOCD33///SGCJgAAAB+0v5VsIfHbt283a88TNAEAAPig/auzjxA0AQAA+KCFxXvLf6MJAADAD3rQ7GHxFoImAAAAPxA0AQAAKCVoAgAAUErQBAAAoJSgCQAAQKksaH758mVqPCdoAgAA8IPZ32gehcxG0AQAAOAHq391dhUyG0ETAACAHxz9N5qzkNkImgAAAPzA/wwIAACAUoImAAAApQRNAAAASgmaAAAAlGpBswXGe02DZnvhe/3+++9pH3hO7Xc2u0EAAHBN2We+W7TPh4+YBs17q/2h2gu3N6eUev7qv7P9RgAAwPU9ksf658Nv377dbRk0xzd6Vgya2RngeVTcSAAAeC6P5DFBE3iYoAkA8HoETWArQRMA4PVcMmh++fIl7TeCJlyLoAkA8HpWeWyV55otQbO9KUETXoegCQDweo6C5plMl73uWTcFzf6GBE14HYImAMDrORM0Z7nupwbN8c3M3lAjaMK1CJoAAK/nbNDMst1PDZr/ObB4M52gCdciaAIAvJ7L/I3mfw8JmvBSBE0AgNdzJmhme82WoNkImvA6BE0AgNdzFDSzfrctaK4ImnAtgiYAwOt5JI8JmsDDBE0AgNcjaAJbCZoAAK/naYNme/F79aCZ7QHPp/3OjjcXAACu7dE89mlBEwAAAO71Q9DsDQAAAHiEoAkAAEChv//5N0NKRbsdFiAwAAAAAElFTkSuQmCC" InformativeScreenshot="a3ee1e5d62b5fc3de3daf6e8c33d2819.png" ScopeSelectorArgument="&lt;wnd app='manwin32.exe' cls='#32770' title='Select/Edit/Delete parts*' /&gt;" SearchSteps="Selector, FuzzySelector, Image" />
+                                          </uix:NKeyboardShortcuts.Target>
+                                        </uix:NKeyboardShortcuts>
+                                      </ui:IfElseIfBlock.Then>
+                                    </ui:IfElseIfBlock>
+                                    <ui:IfElseIfBlock BlockType="Else">
+                                      <ui:IfElseIfBlock.Then>
+                                        <ui:Continue sap:VirtualizedContainerService.HintSize="200,22" sap2010:WorkflowViewState.IdRef="Continue_1" />
+                                      </ui:IfElseIfBlock.Then>
+                                    </ui:IfElseIfBlock>
+                                  </sc:BindingList>
+                                </ui:IfElseIf.ConditionBlocks>
+                                <sap:WorkflowViewStateService.ViewState>
+                                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                    <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                                    <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                  </scg:Dictionary>
+                                </sap:WorkflowViewStateService.ViewState>
+                              </ui:IfElseIf>
+                              <ui:Break sap:VirtualizedContainerService.HintSize="262,22" sap2010:WorkflowViewState.IdRef="Break_1" />
                             </Sequence>
                           </ActivityAction>
                         </ui:ForEach.Body>
@@ -252,8 +327,8 @@
                           </OutArgument>
                         </ui:ForEach.CurrentIndex>
                         <ui:ForEach.Values>
-                          <InArgument x:TypeArguments="sc:IEnumerable">
-                            <mca:CSharpValue x:TypeArguments="sc:IEnumerable" sap2010:WorkflowViewState.IdRef="CSharpValue`1_7">lotText.Split(new String[] {"\n"}, StringSplitOptions.None)</mca:CSharpValue>
+                          <InArgument x:TypeArguments="sc1:IEnumerable">
+                            <mca:CSharpValue x:TypeArguments="sc1:IEnumerable" sap2010:WorkflowViewState.IdRef="CSharpValue`1_7">lotText.Split(new String[] {"\n"}, StringSplitOptions.None)</mca:CSharpValue>
                           </InArgument>
                         </ui:ForEach.Values>
                         <sap:WorkflowViewStateService.ViewState>
@@ -263,21 +338,120 @@
                           </scg:Dictionary>
                         </sap:WorkflowViewStateService.ViewState>
                       </ui:ForEach>
-                      <uix:NClick ClickType="Single" DisplayName="Click Select(F6) button" sap:VirtualizedContainerService.HintSize="562,156" sap2010:WorkflowViewState.IdRef="NClick_3" InteractionMode="Simulate" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="95f7d729-18c0-4be7-b773-6bd58086d14c" Version="V1">
-                        <uix:NClick.Target>
-                          <uix:TargetAnchorable DesignTimeRectangle="875, 180, 72, 23" ElementType="Button" FriendlyName="'Select(F6)'" FullSelectorArgument="&lt;wnd ctrlid='168' title='Select(F6)' /&gt;" FuzzySelectorArgument="&lt;wnd ctrlid='168' title='Select(F6)' check:text='Select(F6)' /&gt;" Guid="88612b6e-f24b-4a7b-8975-97ce82e34b22" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAEwAAAAbCAYAAADWHGlkAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAEpSURBVGhD7ZTrDcIwDIS7brfqbh0g3aDIQkbHYTsxavMDXOlTnLs8T5DlOI5TWNe1CJCMWmvnK7Ciz1tg9fmf+QuTb9/3gti2LQ5M+8WTCixJBZakAktyeWDLsrywfGZ0XA9dB/dXcIylaT3CpYHx5iOHyR5Y8S7trcf6yByLWwMb4Zs5gndhb71on8wZpgYmvoJa5Hs69lnXGvF0IfKYaW+Y1+fW8yOda6Snq4f9iMsDQ/AgeFgFx7CHuq6BoO7VCOsjcyymBoYe6z0/0r0aYX1kjsWtb1h0KO1z6/mR7tWIt47lRUx7wzyPa/Z7OrZcM7oGj4nmMLf+JWeRubDF3wUmfBtadt7PBDaLCixJBZakAksSBiZm8YkZmIiFz0dgRZ8KLElr7XwAkSqu958PrXgAAAAASUVORK5CYII=" InformativeScreenshot="2b0f0e5fa568f9e763e01ff8eef2ba74.png" ScopeSelectorArgument="&lt;wnd app='manwin32.exe' cls='#32770' title='Select lot/sample' /&gt;" SearchSteps="Selector, FuzzySelector, Image" />
-                        </uix:NClick.Target>
-                      </uix:NClick>
-                      <uix:NClick ClickType="Single" DisplayName="Click All samples check box" sap:VirtualizedContainerService.HintSize="562,156" sap2010:WorkflowViewState.IdRef="NClick_4" InteractionMode="Simulate" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="95f7d729-18c0-4be7-b773-6bd58086d14c" Version="V1">
-                        <uix:NClick.Target>
-                          <uix:TargetAnchorable DesignTimeRectangle="138, 124, 92, 16" ElementType="CheckBox" FriendlyName="'All samples'" FullSelectorArgument="&lt;wnd ctrlid='1039' title='All samples' /&gt;" FuzzySelectorArgument="&lt;wnd ctrlid='1039' title='All samples' check:fulltext='All samples' /&gt;" Guid="c436e68c-d595-46d9-86b2-91e797b08e1b" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAGAAAAAUCAYAAAByKzjvAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAD4SURBVFhH7ZHtDcMgDERZN1tlNxZgg1T8IHKu54ZSHFPJSE9xziYfvFRKOQI/QoAzIcCZU8C+719Rl3xQMMZFwLZtXeScQ8Ak3gT0rF4BKSU1Y70n8HqvRghwxkyAdtAh4MpyAmrO9mCO2ac+5mymZTKXmRUmAtgPYc1+kM0hbD+rcT/md32srVhKgJbXTIJzrJYZy+sVwdknMBOAyJ68Mtg83mszrM9y7CN3/VlMF6B9eM8ByEybY/nIvrs+1lYsJaDl2GuZ7MkZVrfZhjaLfZnLzIqLgHqwvWgCVuGpA/yVU8DIkg9ajb8TEPgQApwJAc6EAFfK8QJaXO9Xk/IufwAAAABJRU5ErkJggg==" InformativeScreenshot="329efe40be7ca45f6ba741e09d5262c7.png" ScopeSelectorArgument="&lt;wnd app='manwin32.exe' cls='#32770' title='Editing/New sample' /&gt;" SearchSteps="Selector, FuzzySelector, Image" />
-                        </uix:NClick.Target>
-                      </uix:NClick>
-                      <uix:NClick ClickType="Single" DisplayName="Click ok button" sap:VirtualizedContainerService.HintSize="562,156" sap2010:WorkflowViewState.IdRef="NClick_5" InteractionMode="Simulate" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="95f7d729-18c0-4be7-b773-6bd58086d14c" Version="V1">
-                        <uix:NClick.Target>
-                          <uix:TargetAnchorable DesignTimeRectangle="267, 172, 72, 26" ElementType="Button" FriendlyName="'unchecked'" FullSelectorArgument="&lt;wnd ctrlid='1' title='O K' /&gt;" FuzzySelectorArgument="&lt;wnd ctrlid='1' title='O K' check:text='unchecked' /&gt;" Guid="f9977bc0-baac-4038-9478-6063fa5760bf" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAEwAAAAeCAYAAACG0fjXAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAC1SURBVGhD7dRbCsMgEEZhF+tLduXe3IA7SBnoJa2j+EMqpj3C9xCdFw+YUErZMY5gomewGCM63GCsem3b1g+Wc8ZdSmks2GPv3xFMRDARwUQEEy0XLITwxpsxn2e92TMtFcy7dCvEcX9WLHP5YDNjmUsHmx3LEEzEkxTx0xf9RDDv+1uWCmbs4kfejPHOevNnWS7Y6ggmIpiIYCKCiQgmGgpmQ3jpBrND1JrB0FYFwxiCScp+A7phXhc0U4VFAAAAAElFTkSuQmCC" InformativeScreenshot="f90131fbf9dd8fcacd45feb6415e3500.png" ScopeSelectorArgument="&lt;wnd app='manwin32.exe' cls='#32770' title='Editing/New sample' /&gt;" SearchSteps="Selector, FuzzySelector, Image" />
-                        </uix:NClick.Target>
-                      </uix:NClick>
+                      <If DisplayName="Check date MEA table not null" sap:VirtualizedContainerService.HintSize="484,1041" sap2010:WorkflowViewState.IdRef="If_4">
+                        <If.Condition>
+                          <InArgument x:TypeArguments="x:Boolean">
+                            <mca:CSharpValue x:TypeArguments="x:Boolean" sap2010:WorkflowViewState.IdRef="CSharpValue`1_31">io_dateMEATable != null</mca:CSharpValue>
+                          </InArgument>
+                        </If.Condition>
+                        <If.Then>
+                          <Sequence DisplayName="Get MEA Date" sap:VirtualizedContainerService.HintSize="376,863" sap2010:WorkflowViewState.IdRef="Sequence_8">
+                            <sap:WorkflowViewStateService.ViewState>
+                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                              </scg:Dictionary>
+                            </sap:WorkflowViewStateService.ViewState>
+                            <uix:NClick ClickType="Single" DisplayName="Click Edit(F4) button" sap:VirtualizedContainerService.HintSize="334,156" sap2010:WorkflowViewState.IdRef="NClick_8" InteractionMode="Simulate" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="95f7d729-18c0-4be7-b773-6bd58086d14c" Version="V1">
+                              <uix:NClick.Target>
+                                <uix:TargetAnchorable DesignTimeRectangle="875, 83, 72, 23" ElementType="Button" FriendlyName="'Edit(F4)'" FullSelectorArgument="&lt;wnd ctrlid='110' title='Edit(F4)' /&gt;" FuzzySelectorArgument="&lt;wnd ctrlid='110' title='Edit(F4)' check:text='Edit(F4)' /&gt;" Guid="12b28e57-65d2-4a7d-aaa0-6fb534423484" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAEwAAAAbCAYAAADWHGlkAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAD1SURBVGhD7ZQBDoMgDEW5rrfybl6AG7g0BtfVtlA0srlP8jJoP0ZemCnnvBLTNAGH4mkXBtrYhWHYQ71hNJZlAYJ5nn1hZQ02ICwIhAWBsCC3CEspHdByROlZGd6XWFk5P8NtwrS6hsxah649k/res3qBsCBfIawcrlBqvMdrci7R8tq6hyHfMNnT1vJXm3NKnees+hmG37DaYXnfmnO8jLUnwiOFSXiPZ3t4nDCOzLTsqTHkGyZfXOvxjFfzkJmWPTVuEXYVZw/8d8KI3kNfIYv4OWGjgbAgEBYEwoK4wqgJjqjCqAhsDsJAGx9/SQx9vG9YXl/TIwNdC9VfPwAAAABJRU5ErkJggg==" InformativeScreenshot="5253db91eb00ce4ec01061341c7e6b31.png" ScopeSelectorArgument="&lt;wnd app='manwin32.exe' cls='#32770' title='Select lot/sample' /&gt;" SearchSteps="Selector, FuzzySelector, Image" />
+                              </uix:NClick.Target>
+                            </uix:NClick>
+                            <uix:NGetText DisplayName="Get Text 'Date'" sap:VirtualizedContainerService.HintSize="334,156" sap2010:WorkflowViewState.IdRef="NGetText_3" ScopeIdentifier="95f7d729-18c0-4be7-b773-6bd58086d14c" Version="V1">
+                              <uix:NGetText.Target>
+                                <uix:TargetAnchorable DesignTimeRectangle="119, 61, 74, 16" ElementType="InputBox" FriendlyName="'2022/01/04'" FullSelectorArgument="&lt;wnd ctrlid='167' /&gt;&lt;ctrl role='editable text' /&gt;" FuzzySelectorArgument="&lt;wnd ctrlid='167' /&gt;&lt;ctrl role='editable text' automationid='' /&gt;" Guid="a0f7fd69-341b-4288-9272-aad163002498" InformativeScreenshot="4c3c17213f16115f29324047af09f76e.png" IsResponsive="True" ScopeSelectorArgument="&lt;wnd app='manwin32.exe' cls='#32770' title='Edit lot information' /&gt;" SearchSteps="Selector, FuzzySelector">
+                                  <uix:TargetAnchorable.Anchors>
+                                    <scg:List x:TypeArguments="uix:ITarget" Capacity="1">
+                                      <uix:Target DesignTimeRectangle="15, 65, 90, 13" ElementType="Text" FriendlyName="'Date'" FullSelectorArgument="&lt;wnd ctrlid='190' title='Date' /&gt;&lt;ctrl name='Date' role='text' /&gt;" FuzzySelectorArgument="&lt;wnd ctrlid='190' title='Date' /&gt;&lt;ctrl name='Date' role='text' automationid='' check:text='Date' /&gt;" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAF4AAAARCAYAAABU3BvXAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAACMSURBVFhH7dJBDoAwCARA/v9aflBjDBGopZKacnAPk0iXXtYSMzfYD8UXQfFFUHwRUzwRGTqDb3XFR/MIflJeWPzozEPxeeniz1n4s2gHrKUXL5ne8fvR/T9bevGS6R2f6wxuqeJ9LnO0A8/C4t/O+nx2By5d8ZrOZjv+2+dgmeJhHxRfBMUXQfEluB32JxZMWkMjHQAAAABJRU5ErkJggg==" SearchSteps="Selector, FuzzySelector, Image" />
+                                    </scg:List>
+                                  </uix:TargetAnchorable.Anchors>
+                                </uix:TargetAnchorable>
+                              </uix:NGetText.Target>
+                              <uix:NGetText.Text>
+                                <OutArgument x:TypeArguments="x:String">
+                                  <mca:CSharpReference x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpReference`1_12">lotDate</mca:CSharpReference>
+                                </OutArgument>
+                              </uix:NGetText.Text>
+                            </uix:NGetText>
+                            <Assign DisplayName="Create Lot X" sap:VirtualizedContainerService.HintSize="334,61" sap2010:WorkflowViewState.IdRef="Assign_7">
+                              <Assign.To>
+                                <OutArgument x:TypeArguments="x:String">
+                                  <mca:CSharpReference x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpReference`1_14">lotX</mca:CSharpReference>
+                                </OutArgument>
+                              </Assign.To>
+                              <Assign.Value>
+                                <InArgument x:TypeArguments="x:String">
+                                  <mca:CSharpValue x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpValue`1_28">in_lot.Remove(in_lot.Length-1).Insert(in_lot.Length-1,"X")</mca:CSharpValue>
+                                </InArgument>
+                              </Assign.Value>
+                            </Assign>
+                            <ui:AddDataRow DataRow="{x:Null}" DisplayName="Add Data Row" sap:VirtualizedContainerService.HintSize="334,185" sap2010:WorkflowViewState.IdRef="AddDataRow_1">
+                              <ui:AddDataRow.ArrayRow>
+                                <InArgument x:TypeArguments="s:Object[]">
+                                  <mca:CSharpValue x:TypeArguments="s:Object[]" sap2010:WorkflowViewState.IdRef="CSharpValue`1_30">new string[] {lotX,in_process,in_lot,DateTime.ParseExact(lotDate,"yyyy/MM/dd",System.Globalization.CultureInfo.InvariantCulture).ToString("dd/MM/yy")}</mca:CSharpValue>
+                                </InArgument>
+                              </ui:AddDataRow.ArrayRow>
+                              <ui:AddDataRow.DataTable>
+                                <InOutArgument x:TypeArguments="sd:DataTable">
+                                  <mca:CSharpReference x:TypeArguments="sd:DataTable" sap2010:WorkflowViewState.IdRef="CSharpReference`1_16">io_dateMEATable</mca:CSharpReference>
+                                </InOutArgument>
+                              </ui:AddDataRow.DataTable>
+                            </ui:AddDataRow>
+                            <uix:NClick ClickType="Single" DisplayName="Click Cancel button" sap:VirtualizedContainerService.HintSize="334,51" sap2010:WorkflowViewState.IdRef="NClick_9" InteractionMode="Simulate" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="95f7d729-18c0-4be7-b773-6bd58086d14c" Version="V1">
+                              <uix:NClick.Target>
+                                <uix:TargetAnchorable DesignTimeRectangle="249, 332, 60, 26" ElementType="Button" FriendlyName="'Cancel'" FullSelectorArgument="&lt;wnd ctrlid='2' title='Cancel' /&gt;" FuzzySelectorArgument="&lt;wnd ctrlid='2' title='Cancel' check:text='Cancel' /&gt;" Guid="e8b9d62e-f496-474c-a1fb-f8086c6ae1ff" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAEAAAAAeCAYAAACc7RhZAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAADHSURBVFhH7ZJbDoUgDETZLrtib2yAHXjTjya1lyIawEfH5CQ4HRVPCKWUzTMQwAtPV4yxLiDn/HlSSm0BfP9VIAACIAACIGC0gBDCjlpnBle+NVxAbROrJDxWwCpeIYDmjMzkjHOZ9eS608OtJ4C71o/od53Ne7j1BHBXP2PlDD8r4Vx3j1gqQM+sjVs5czZvsUSA9UOz8x6GCyBoI5KjWa0j17LbynWnhykC3gQEQAAEQAAEQIAhgIYeqAqg0BN/ArziXEDZfvyr1eycGmFGAAAAAElFTkSuQmCC" InformativeScreenshot="cc3fb00c81e7e2f96b8f7c37f234e725.png" ScopeSelectorArgument="&lt;wnd app='manwin32.exe' cls='#32770' title='Edit lot information' /&gt;" SearchSteps="Selector, FuzzySelector, Image" />
+                              </uix:NClick.Target>
+                              <sap:WorkflowViewStateService.ViewState>
+                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                  <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                </scg:Dictionary>
+                              </sap:WorkflowViewStateService.ViewState>
+                            </uix:NClick>
+                          </Sequence>
+                        </If.Then>
+                      </If>
+                      <Sequence DisplayName="Select Lot to select list" sap:VirtualizedContainerService.HintSize="484,66" sap2010:WorkflowViewState.IdRef="Sequence_9">
+                        <sap:WorkflowViewStateService.ViewState>
+                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                          </scg:Dictionary>
+                        </sap:WorkflowViewStateService.ViewState>
+                        <uix:NClick ClickType="Single" DisplayName="Click Select(F6) button" sap:VirtualizedContainerService.HintSize="200,51" sap2010:WorkflowViewState.IdRef="NClick_3" InteractionMode="Simulate" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="95f7d729-18c0-4be7-b773-6bd58086d14c" Version="V1">
+                          <uix:NClick.Target>
+                            <uix:TargetAnchorable DesignTimeRectangle="875, 180, 72, 23" ElementType="Button" FriendlyName="'Select(F6)'" FullSelectorArgument="&lt;wnd ctrlid='168' title='Select(F6)' /&gt;" FuzzySelectorArgument="&lt;wnd ctrlid='168' title='Select(F6)' check:text='Select(F6)' /&gt;" Guid="88612b6e-f24b-4a7b-8975-97ce82e34b22" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAEwAAAAbCAYAAADWHGlkAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAEpSURBVGhD7ZTrDcIwDIS7brfqbh0g3aDIQkbHYTsxavMDXOlTnLs8T5DlOI5TWNe1CJCMWmvnK7Ciz1tg9fmf+QuTb9/3gti2LQ5M+8WTCixJBZakAktyeWDLsrywfGZ0XA9dB/dXcIylaT3CpYHx5iOHyR5Y8S7trcf6yByLWwMb4Zs5gndhb71on8wZpgYmvoJa5Hs69lnXGvF0IfKYaW+Y1+fW8yOda6Snq4f9iMsDQ/AgeFgFx7CHuq6BoO7VCOsjcyymBoYe6z0/0r0aYX1kjsWtb1h0KO1z6/mR7tWIt47lRUx7wzyPa/Z7OrZcM7oGj4nmMLf+JWeRubDF3wUmfBtadt7PBDaLCixJBZakAksSBiZm8YkZmIiFz0dgRZ8KLElr7XwAkSqu958PrXgAAAAASUVORK5CYII=" InformativeScreenshot="2b0f0e5fa568f9e763e01ff8eef2ba74.png" ScopeSelectorArgument="&lt;wnd app='manwin32.exe' cls='#32770' title='Select lot/sample' /&gt;" SearchSteps="Selector, FuzzySelector, Image" />
+                          </uix:NClick.Target>
+                          <sap:WorkflowViewStateService.ViewState>
+                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                              <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                            </scg:Dictionary>
+                          </sap:WorkflowViewStateService.ViewState>
+                        </uix:NClick>
+                        <uix:NCheck Action="Check" DisplayName="Check All samples" sap:VirtualizedContainerService.HintSize="200,51" sap2010:WorkflowViewState.IdRef="NCheck_1" ScopeIdentifier="95f7d729-18c0-4be7-b773-6bd58086d14c" Version="V1">
+                          <uix:NCheck.Target>
+                            <uix:TargetAnchorable DesignTimeRectangle="138, 124, 92, 16" ElementType="CheckBox" FriendlyName="'All samples'" FullSelectorArgument="&lt;wnd ctrlid='1039' title='All samples' /&gt;" FuzzySelectorArgument="&lt;wnd ctrlid='1039' title='All samples' check:fulltext='All samples' /&gt;" Guid="70a2e04f-6bca-4f98-ae86-c8abee9d0bce" InformativeScreenshot="fe089d7942b20814511eba48a5481079.png" ScopeSelectorArgument="&lt;wnd app='manwin32.exe' cls='#32770' title='Editing/New sample' /&gt;" SearchSteps="Selector, FuzzySelector" />
+                          </uix:NCheck.Target>
+                          <sap:WorkflowViewStateService.ViewState>
+                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                              <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                            </scg:Dictionary>
+                          </sap:WorkflowViewStateService.ViewState>
+                        </uix:NCheck>
+                        <uix:NClick ClickType="Single" DisplayName="Click ok button" sap:VirtualizedContainerService.HintSize="200,51" sap2010:WorkflowViewState.IdRef="NClick_5" InteractionMode="Simulate" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="95f7d729-18c0-4be7-b773-6bd58086d14c" Version="V1">
+                          <uix:NClick.Target>
+                            <uix:TargetAnchorable DesignTimeRectangle="267, 172, 72, 26" ElementType="Button" FriendlyName="'unchecked'" FullSelectorArgument="&lt;wnd ctrlid='1' title='O K' /&gt;" FuzzySelectorArgument="&lt;wnd ctrlid='1' title='O K' check:text='unchecked' /&gt;" Guid="f9977bc0-baac-4038-9478-6063fa5760bf" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAEwAAAAeCAYAAACG0fjXAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAC1SURBVGhD7dRbCsMgEEZhF+tLduXe3IA7SBnoJa2j+EMqpj3C9xCdFw+YUErZMY5gomewGCM63GCsem3b1g+Wc8ZdSmks2GPv3xFMRDARwUQEEy0XLITwxpsxn2e92TMtFcy7dCvEcX9WLHP5YDNjmUsHmx3LEEzEkxTx0xf9RDDv+1uWCmbs4kfejPHOevNnWS7Y6ggmIpiIYCKCiQgmGgpmQ3jpBrND1JrB0FYFwxiCScp+A7phXhc0U4VFAAAAAElFTkSuQmCC" InformativeScreenshot="f90131fbf9dd8fcacd45feb6415e3500.png" ScopeSelectorArgument="&lt;wnd app='manwin32.exe' cls='#32770' title='Editing/New sample' /&gt;" SearchSteps="Selector, FuzzySelector, Image" />
+                          </uix:NClick.Target>
+                          <sap:WorkflowViewStateService.ViewState>
+                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                              <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                            </scg:Dictionary>
+                          </sap:WorkflowViewStateService.ViewState>
+                        </uix:NClick>
+                      </Sequence>
                     </Sequence>
                   </If.Then>
                   <If.Else>
@@ -318,6 +492,12 @@
           <mca:CSharpValue x:TypeArguments="x:Double" sap2010:WorkflowViewState.IdRef="CSharpValue`1_2">Convert.ToInt32(in_masterConfigDict["maximumCount"])</mca:CSharpValue>
         </InArgument>
       </uix:NCheckState.Timeout>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
     </uix:NCheckState>
   </Sequence>
 </Activity>
