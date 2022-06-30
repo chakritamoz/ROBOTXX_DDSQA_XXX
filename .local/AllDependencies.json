@@ -29,6 +29,15 @@
           "lib/ShinTransposeTable.dll": {}
         }
       },
+      "Arutu.ZipFile.Activity/1.0.1": {
+        "type": "package",
+        "compile": {
+          "lib/_._": {}
+        },
+        "runtime": {
+          "lib/ZipFile.dll": {}
+        }
+      },
       "AvalonEdit/6.0.1": {
         "type": "package",
         "frameworkAssemblies": [
@@ -2660,6 +2669,15 @@
           "lib/ShinTransposeTable.dll": {}
         }
       },
+      "Arutu.ZipFile.Activity/1.0.1": {
+        "type": "package",
+        "compile": {
+          "lib/_._": {}
+        },
+        "runtime": {
+          "lib/ZipFile.dll": {}
+        }
+      },
       "AvalonEdit/6.0.1": {
         "type": "package",
         "frameworkAssemblies": [
@@ -5281,6 +5299,17 @@
         "arutu.transposetable.activity.1.0.1.nupkg.sha512",
         "arutu.transposetable.activity.nuspec",
         "lib/ShinTransposeTable.dll"
+      ]
+    },
+    "Arutu.ZipFile.Activity/1.0.1": {
+      "sha512": "IznHNqZnqfJB5eZ6LM73SoVi84PCWX2UYL/xe1L0rGBRmYyk7L9gQkchrc2/AuLzEU1yq4ZxD00fmCCSuakUUw==",
+      "type": "package",
+      "path": "arutu.zipfile.activity/1.0.1",
+      "files": [
+        ".nupkg.metadata",
+        "arutu.zipfile.activity.1.0.1.nupkg.sha512",
+        "arutu.zipfile.activity.nuspec",
+        "lib/ZipFile.dll"
       ]
     },
     "AvalonEdit/6.0.1": {
@@ -10623,6 +10652,7 @@
       "Arutu.ColNumberToColLetter.Activity >= 1.0.2 <= 1.0.2",
       "Arutu.ReadAllExcelSheet.Activity >= 1.0.5 <= 1.0.5",
       "Arutu.TransposeTable.Activity >= 1.0.1 <= 1.0.1",
+      "Arutu.ZipFile.Activity >= 1.0.1 <= 1.0.1",
       "UiPath.Credentials.Activities >= 2.0.0 <= 2.0.0",
       "UiPath.Excel.Activities >= 2.11.4 <= 2.11.4",
       "UiPath.FTP.Activities >= 2.3.0 <= 2.3.0",
@@ -10638,8 +10668,8 @@
   },
   "project": {
     "restore": {
-      "projectUniqueName": "NEWPROJECT",
-      "projectName": "NEWPROJECT",
+      "projectUniqueName": "ROBOT131_DDSQE_Copy_Data_form_Manmos_Support_Indystry4.0",
+      "projectName": "ROBOT131_DDSQE_Copy_Data_form_Manmos_Support_Indystry4.0",
       "projectPath": "D:\\RobotDevelopment\\NEWPROJECT\\.local",
       "packagesPath": "C:\\Users\\chakrit.pok\\.nuget\\packages\\",
       "outputPath": "D:\\RobotDevelopment\\NEWPROJECT\\.local"
@@ -10658,6 +10688,11 @@
             "version": "[1.0.5, 1.0.5]"
           },
           "Arutu.TransposeTable.Activity": {
+            "include": "Runtime",
+            "target": "Package",
+            "version": "[1.0.1, 1.0.1]"
+          },
+          "Arutu.ZipFile.Activity": {
             "include": "Runtime",
             "target": "Package",
             "version": "[1.0.1, 1.0.1]"

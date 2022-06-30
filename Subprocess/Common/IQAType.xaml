@@ -2,7 +2,6 @@
   <x:Members>
     <x:Property Name="in_process" Type="InArgument(x:String)" />
     <x:Property Name="in_masterConfigDict" Type="InArgument(scg:Dictionary(x:String, x:String))" />
-    <x:Property Name="in_tableDict" Type="InArgument(scg:Dictionary(x:String, sd:DataTable))" />
     <x:Property Name="in_key" Type="InArgument(x:String)" />
     <x:Property Name="in_regName" Type="InArgument(x:String)" />
     <x:Property Name="io_otherTerminalsDict" Type="InOutArgument(scg:Dictionary(x:String, x:String))" />
@@ -10,9 +9,10 @@
     <x:Property Name="io_inLotTable" Type="InOutArgument(sd:DataTable)" />
     <x:Property Name="in_rawPath" Type="InArgument(x:String)" />
     <x:Property Name="io_rawRow" Type="InOutArgument(sd:DataRow)" />
+    <x:Property Name="in_infoTableDict" Type="InArgument(scg:Dictionary(x:String, sd:DataTable))" />
   </x:Members>
   <sap2010:ExpressionActivityEditor.ExpressionActivityEditor>C#</sap2010:ExpressionActivityEditor.ExpressionActivityEditor>
-  <sap:VirtualizedContainerService.HintSize>1474,2180</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1794,2180</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>ActivityBuilder_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <sco:Collection x:TypeArguments="x:String">
@@ -243,7 +243,7 @@
                                 <ui:IfElseIfBlock BlockType="If">
                                   <ui:IfElseIfBlock.Condition>
                                     <InArgument x:TypeArguments="x:Boolean">
-                                      <mca:CSharpValue x:TypeArguments="x:Boolean" sap2010:WorkflowViewState.IdRef="CSharpValue`1_60">indexLot == in_tableDict[in_key].DefaultView.ToTable(true,in_process).Rows.Count -1</mca:CSharpValue>
+                                      <mca:CSharpValue x:TypeArguments="x:Boolean" sap2010:WorkflowViewState.IdRef="CSharpValue`1_60">indexLot == in_infoTableDict[in_key].DefaultView.ToTable(true,in_process).Rows.Count -1</mca:CSharpValue>
                                     </InArgument>
                                   </ui:IfElseIfBlock.Condition>
                                   <ui:IfElseIfBlock.Then>
@@ -315,7 +315,7 @@
               </ui:ForEachRow.CurrentIndex>
               <ui:ForEachRow.DataTable>
                 <InArgument x:TypeArguments="sd:DataTable">
-                  <mca:CSharpValue x:TypeArguments="sd:DataTable" sap2010:WorkflowViewState.IdRef="CSharpValue`1_3">in_tableDict[in_key].DefaultView.ToTable(true,in_process)</mca:CSharpValue>
+                  <mca:CSharpValue x:TypeArguments="sd:DataTable" sap2010:WorkflowViewState.IdRef="CSharpValue`1_3">in_infoTableDict[in_key].DefaultView.ToTable(true,in_process)</mca:CSharpValue>
                 </InArgument>
               </ui:ForEachRow.DataTable>
               <sap:WorkflowViewStateService.ViewState>

@@ -1,11 +1,12 @@
 {
-  "name": "NEWPROJECT",
+  "name": "ROBOT131_DDSQE_Copy_Data_form_Manmos_Support_Indystry4.0",
   "description": "Blank Process",
   "main": "Main.xaml",
   "dependencies": {
     "Arutu.ColNumberToColLetter.Activity": "[1.0.2]",
     "Arutu.ReadAllExcelSheet.Activity": "[1.0.5]",
     "Arutu.TransposeTable.Activity": "[1.0.1]",
+    "Arutu.ZipFile.Activity": "[1.0.1]",
     "UiPath.Credentials.Activities": "[2.0.0]",
     "UiPath.Excel.Activities": "[2.11.4]",
     "UiPath.Form.Activities": "[1.9.6]",
@@ -19,7 +20,7 @@
   "entitiesStores": [],
   "schemaVersion": "4.0",
   "studioVersion": "21.10.3.0",
-  "projectVersion": "1.0.0",
+  "projectVersion": "1.0.14",
   "runtimeOptions": {
     "autoDispose": false,
     "isPausable": true,

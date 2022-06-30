@@ -3,7 +3,7 @@
     <x:Property Name="out_masterConfigDict" Type="OutArgument(scg:Dictionary(x:String, x:String))" />
   </x:Members>
   <sap2010:ExpressionActivityEditor.ExpressionActivityEditor>C#</sap2010:ExpressionActivityEditor.ExpressionActivityEditor>
-  <sap:VirtualizedContainerService.HintSize>1474,1671</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1794,2171</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>ActivityBuilder_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <sco:Collection x:TypeArguments="x:String">
@@ -84,7 +84,7 @@
       <AssemblyReference>UiPath.Web.Activities</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="ReadConfiguration" sap:VirtualizedContainerService.HintSize="480,1606" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="ReadConfiguration" sap:VirtualizedContainerService.HintSize="483,2106" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="sd:DataTable" Name="rootConfigTable" />
       <Variable x:TypeArguments="scg:Dictionary(x:String, x:String)" Name="rootConfigDict">
@@ -99,14 +99,14 @@
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="438,91" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info">
+    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="441,91" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info">
       <ui:LogMessage.Message>
         <InArgument x:TypeArguments="x:Object">
           <mca:CSharpValue x:TypeArguments="x:Object" sap2010:WorkflowViewState.IdRef="CSharpValue`1_1">"Start read excel root configuration."</mca:CSharpValue>
         </InArgument>
       </ui:LogMessage.Message>
     </ui:LogMessage>
-    <TryCatch DisplayName="Try Catch read root config" sap:VirtualizedContainerService.HintSize="438,359" sap2010:WorkflowViewState.IdRef="TryCatch_1">
+    <TryCatch DisplayName="Try Catch read root config" sap:VirtualizedContainerService.HintSize="441,183" sap2010:WorkflowViewState.IdRef="TryCatch_1">
       <TryCatch.Try>
         <r:Class1 DisplayName="Read Excel Sheet" ExcelPath="Document\rootConfig.xlsx" sap:VirtualizedContainerService.HintSize="284,132" sap2010:WorkflowViewState.IdRef="Class1_1">
           <r:Class1.AllDataTable>
@@ -117,7 +117,7 @@
         </r:Class1>
       </TryCatch.Try>
       <TryCatch.Catches>
-        <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="404,21" sap2010:WorkflowViewState.IdRef="Catch`1_3">
+        <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="400,21" sap2010:WorkflowViewState.IdRef="Catch`1_3">
           <sap:WorkflowViewStateService.ViewState>
             <scg:Dictionary x:TypeArguments="x:String, x:Object">
               <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -144,7 +144,7 @@
                   </InArgument>
                 </ui:LogMessage.Message>
               </ui:LogMessage>
-              <ui:DeserializeJson x:TypeArguments="njl:JObject" DisplayName="Deserialize JSON" sap:VirtualizedContainerService.HintSize="359,59" sap2010:WorkflowViewState.IdRef="DeserializeJson`1_3">
+              <ui:DeserializeJson x:TypeArguments="njl:JObject" DisplayName="Deserialize JSON root config error" sap:VirtualizedContainerService.HintSize="334,59" sap2010:WorkflowViewState.IdRef="DeserializeJson`1_3">
                 <ui:DeserializeJson.JsonObject>
                   <OutArgument x:TypeArguments="njl:JObject">
                     <mca:CSharpReference x:TypeArguments="njl:JObject" sap2010:WorkflowViewState.IdRef="CSharpReference`1_6">jsonObj</mca:CSharpReference>
@@ -207,7 +207,7 @@ Replace("{fileName}", "rootConfig.xlsx")</mca:CSharpValue>
         </Catch>
       </TryCatch.Catches>
     </TryCatch>
-    <ui:ForEachRow ColumnNames="{x:Null}" CurrentIndex="{x:Null}" DisplayName="For Each Row in root config table" sap:VirtualizedContainerService.HintSize="438,180" sap2010:WorkflowViewState.IdRef="ForEachRow_1">
+    <ui:ForEachRow ColumnNames="{x:Null}" CurrentIndex="{x:Null}" DisplayName="For Each Row in root config table" sap:VirtualizedContainerService.HintSize="441,180" sap2010:WorkflowViewState.IdRef="ForEachRow_1">
       <ui:ForEachRow.Body>
         <ActivityAction x:TypeArguments="sd:DataRow">
           <ActivityAction.Argument>
@@ -233,21 +233,21 @@ Replace("{fileName}", "rootConfig.xlsx")</mca:CSharpValue>
         </InArgument>
       </ui:ForEachRow.DataTable>
     </ui:ForEachRow>
-    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="438,91" sap2010:WorkflowViewState.IdRef="LogMessage_3" Level="Info">
+    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="441,91" sap2010:WorkflowViewState.IdRef="LogMessage_3" Level="Info">
       <ui:LogMessage.Message>
         <InArgument x:TypeArguments="x:Object">
           <mca:CSharpValue x:TypeArguments="x:Object" sap2010:WorkflowViewState.IdRef="CSharpValue`1_11">"Complete add root config to root dictionary."</mca:CSharpValue>
         </InArgument>
       </ui:LogMessage.Message>
     </ui:LogMessage>
-    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="438,91" sap2010:WorkflowViewState.IdRef="LogMessage_4" Level="Info">
+    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="441,91" sap2010:WorkflowViewState.IdRef="LogMessage_4" Level="Info">
       <ui:LogMessage.Message>
         <InArgument x:TypeArguments="x:Object">
           <mca:CSharpValue x:TypeArguments="x:Object" sap2010:WorkflowViewState.IdRef="CSharpValue`1_10">"Start read excel master configuration."</mca:CSharpValue>
         </InArgument>
       </ui:LogMessage.Message>
     </ui:LogMessage>
-    <TryCatch DisplayName="Try Catch read root config" sap:VirtualizedContainerService.HintSize="438,51" sap2010:WorkflowViewState.IdRef="TryCatch_2">
+    <TryCatch DisplayName="Try Catch read root config" sap:VirtualizedContainerService.HintSize="441,727" sap2010:WorkflowViewState.IdRef="TryCatch_2">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
           <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -269,10 +269,10 @@ Replace("{fileName}", "rootConfig.xlsx")</mca:CSharpValue>
         </r:Class1>
       </TryCatch.Try>
       <TryCatch.Catches>
-        <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="404,21" sap2010:WorkflowViewState.IdRef="Catch`1_4">
+        <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="407,565" sap2010:WorkflowViewState.IdRef="Catch`1_4">
           <sap:WorkflowViewStateService.ViewState>
             <scg:Dictionary x:TypeArguments="x:String, x:Object">
-              <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
               <x:Boolean x:Key="IsPinned">False</x:Boolean>
             </scg:Dictionary>
           </sap:WorkflowViewStateService.ViewState>
@@ -280,7 +280,7 @@ Replace("{fileName}", "rootConfig.xlsx")</mca:CSharpValue>
             <ActivityAction.Argument>
               <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
             </ActivityAction.Argument>
-            <Sequence DisplayName="Body catch" sap:VirtualizedContainerService.HintSize="376,496" sap2010:WorkflowViewState.IdRef="Sequence_5">
+            <Sequence DisplayName="Body catch" sap:VirtualizedContainerService.HintSize="401,496" sap2010:WorkflowViewState.IdRef="Sequence_5">
               <Sequence.Variables>
                 <Variable x:TypeArguments="njl:JObject" Name="jsonObj" />
               </Sequence.Variables>
@@ -296,7 +296,7 @@ Replace("{fileName}", "rootConfig.xlsx")</mca:CSharpValue>
                   </InArgument>
                 </ui:LogMessage.Message>
               </ui:LogMessage>
-              <ui:DeserializeJson x:TypeArguments="njl:JObject" DisplayName="Deserialize JSON" sap:VirtualizedContainerService.HintSize="359,59" sap2010:WorkflowViewState.IdRef="DeserializeJson`1_4">
+              <ui:DeserializeJson x:TypeArguments="njl:JObject" DisplayName="Deserialize JSON file config error" sap:VirtualizedContainerService.HintSize="359,59" sap2010:WorkflowViewState.IdRef="DeserializeJson`1_4">
                 <ui:DeserializeJson.JsonObject>
                   <OutArgument x:TypeArguments="njl:JObject">
                     <mca:CSharpReference x:TypeArguments="njl:JObject" sap2010:WorkflowViewState.IdRef="CSharpReference`1_7">jsonObj</mca:CSharpReference>
@@ -331,7 +331,7 @@ Replace("{fileName}",Path.GetFileNameWithoutExtension(rootConfigDict["rootMaster
         </Catch>
       </TryCatch.Catches>
     </TryCatch>
-    <Assign DisplayName="Initial out_masterConfigDIct" sap:VirtualizedContainerService.HintSize="438,60" sap2010:WorkflowViewState.IdRef="Assign_2">
+    <Assign DisplayName="Initial out_masterConfigDIct" sap:VirtualizedContainerService.HintSize="441,60" sap2010:WorkflowViewState.IdRef="Assign_2">
       <Assign.To>
         <OutArgument x:TypeArguments="scg:Dictionary(x:String, x:String)">
           <mca:CSharpReference x:TypeArguments="scg:Dictionary(x:String, x:String)" sap2010:WorkflowViewState.IdRef="CSharpReference`1_8">out_masterConfigDict</mca:CSharpReference>
@@ -343,7 +343,7 @@ Replace("{fileName}",Path.GetFileNameWithoutExtension(rootConfigDict["rootMaster
         </InArgument>
       </Assign.Value>
     </Assign>
-    <ui:ForEachRow ColumnNames="{x:Null}" CurrentIndex="{x:Null}" DisplayName="For Each Row in out_masterConfigDict" sap:VirtualizedContainerService.HintSize="438,180" sap2010:WorkflowViewState.IdRef="ForEachRow_2">
+    <ui:ForEachRow ColumnNames="{x:Null}" CurrentIndex="{x:Null}" DisplayName="For Each Row in out_masterConfigDict" sap:VirtualizedContainerService.HintSize="441,180" sap2010:WorkflowViewState.IdRef="ForEachRow_2">
       <ui:ForEachRow.Body>
         <ActivityAction x:TypeArguments="sd:DataRow">
           <ActivityAction.Argument>

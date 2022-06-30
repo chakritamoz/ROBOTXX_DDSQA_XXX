@@ -5,7 +5,7 @@
     <x:Property Name="in_pathLocation" Type="InArgument(x:String)" />
   </x:Members>
   <sap2010:ExpressionActivityEditor.ExpressionActivityEditor>C#</sap2010:ExpressionActivityEditor.ExpressionActivityEditor>
-  <sap:VirtualizedContainerService.HintSize>1474,2036</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1474,2037</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>ActivityBuilder_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <scg:List x:TypeArguments="x:String" Capacity="70">
@@ -93,19 +93,19 @@
       <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="CheckSelectionList" sap:VirtualizedContainerService.HintSize="901,1971" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="CheckSelectionList" sap:VirtualizedContainerService.HintSize="901,1972" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <uix:NApplicationCard AttachMode="ByInstance" DisplayName="Use Application: Mr.Manmos" sap:VirtualizedContainerService.HintSize="859,1879" sap2010:WorkflowViewState.IdRef="NApplicationCard_1" ScopeGuid="0a0af529-9dca-4c8a-8a87-70a8dd6dbb24" Version="V1">
+    <uix:NApplicationCard AttachMode="ByInstance" DisplayName="Use Application: Mr.Manmos" sap:VirtualizedContainerService.HintSize="859,1880" sap2010:WorkflowViewState.IdRef="NApplicationCard_1" ScopeGuid="0a0af529-9dca-4c8a-8a87-70a8dd6dbb24" Version="V1">
       <uix:NApplicationCard.Body>
         <ActivityAction x:TypeArguments="x:Object">
           <ActivityAction.Argument>
             <DelegateInArgument x:TypeArguments="x:Object" Name="WSSessionData" />
           </ActivityAction.Argument>
-          <Sequence DisplayName="Body application manmos" sap:VirtualizedContainerService.HintSize="825,1590" sap2010:WorkflowViewState.IdRef="Sequence_4">
+          <Sequence DisplayName="Body application manmos" sap:VirtualizedContainerService.HintSize="825,1591" sap2010:WorkflowViewState.IdRef="Sequence_4">
             <Sequence.Variables>
               <Variable x:TypeArguments="x:String" Name="selectionText" />
             </Sequence.Variables>
@@ -178,7 +178,7 @@
                       <uix:TargetAnchorable DesignTimeRectangle="179, 114, 75, 23" ElementType="Button" FriendlyName="'&amp;No'" FullSelectorArgument="&lt;wnd ctrlid='7' title='&amp;amp;No' /&gt;" FuzzySelectorArgument="&lt;wnd ctrlid='7' title='&amp;amp;No' check:text='&amp;amp;No' /&gt;" Guid="da69f9f1-e67f-4c13-8a6c-7b60f53ca0fc" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAE8AAAAbCAYAAAA9K9JnAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAADbSURBVGhD7dXBDYQgEIVhqqIerlYybXinF5qgATqYBd01CCxhnUTZ5Jn8iYycvqCqEAKjawFP0IGHa+xalqWN571HndZ17eN91qgOeIKAJwh4goAnaEI8y0YpVsYWM83k8n3PNymeZq1zLOAN9oayFAGJXT47YcbTufUc6rx4EcQaxcaeZ2lPmmty+35rWB3I9zY13na/wRSz02kr1/c1OV5gR/H7RwS8sdo4+Q8Er+3XGicpAVWg+GH8dcATBDxBwBMEPEHAE9TFSw9RvyZeGqKxKjz0e8C7XOAXWaNk5C/5JyoAAAAASUVORK5CYII=" InformativeScreenshot="3c3b4a1d1c8bf2ad336e51e994be68ba.png" ScopeSelectorArgument="&lt;wnd app='manwin32.exe' cls='#32770' title='manwin32' /&gt;" SearchSteps="Selector, FuzzySelector, Image" />
                     </uix:NClick.Target>
                   </uix:NClick>
-                  <uix:NClick ClickType="Single" DisplayName="Click 'unchecked'" sap:VirtualizedContainerService.HintSize="362,156" sap2010:WorkflowViewState.IdRef="NClick_4" InteractionMode="Simulate" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="0a0af529-9dca-4c8a-8a87-70a8dd6dbb24" Version="V1">
+                  <uix:NClick ClickType="Single" ContinueOnError="True" DisplayName="Click 'unchecked'" sap:VirtualizedContainerService.HintSize="362,156" sap2010:WorkflowViewState.IdRef="NClick_4" InteractionMode="Simulate" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="0a0af529-9dca-4c8a-8a87-70a8dd6dbb24" Version="V1">
                     <uix:NClick.Target>
                       <uix:TargetAnchorable DesignTimeRectangle="23, 78, 75, 23" ElementType="Button" FriendlyName="'unchecked'" FullSelectorArgument="&lt;wnd ctrlid='1359' title='Parts' /&gt;" FuzzySelectorArgument="&lt;wnd ctrlid='1359' title='Parts' check:text='unchecked' /&gt;" Guid="7caf35ee-96f1-423d-99a1-12292ac9479d" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAE8AAAAbCAYAAAA9K9JnAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAADvSURBVGhD7ZTRDcMgDEQZNj/ZKrtlATZo649rLeogQ0hklIv0hLHBRKeDlHN+kT4o3gm+4i3LQpyY4vGrf+u61sXb950YbNvmEw858qNZvJQSx88oNImnNz4Z6BDi2srPlFjrohHCeVbflrPuFhvnhXGeJ3fE3eKBKZwnMShzZWzNR4Pe0715qOk1nvgKwjpPI3UNcrqO2JqPBv3DvnngSBidt/bXeo4ivPPKGuY674lHgr7hnSdIXYNcuUbHZf0KQjhvNqBDCOfNCp3XQbfzsPHpo8BrewKXeLKI2FTFkyKpcyge8fEnHmmH4nWTX2+aUQ8tQLfvXwAAAABJRU5ErkJggg==" InformativeScreenshot="d2c8fde517a3123b17058652d24da849.png" ScopeSelectorArgument="&lt;wnd app='manwin32.exe' cls='#32770' title='select a return screen' /&gt;" SearchSteps="Selector, FuzzySelector, Image" />
                     </uix:NClick.Target>

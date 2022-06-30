@@ -1,15 +1,15 @@
-<Activity mc:Ignorable="sap sap2010" x:Class="FindColumnLetter" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:c="clr-namespace:ColumnNumberToColumnLetter;assembly=ColumnNumberToColumnLetter" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mca="clr-namespace:Microsoft.CSharp.Activities;assembly=System.Activities" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="FindColumnLetter" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:c="clr-namespace:ColumnNumberToColumnLetter;assembly=ColumnNumberToColumnLetter" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mca="clr-namespace:Microsoft.CSharp.Activities;assembly=System.Activities" xmlns:njl="clr-namespace:Newtonsoft.Json.Linq;assembly=Newtonsoft.Json" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <x:Members>
     <x:Property Name="in_columnName" Type="InArgument(x:String)" />
     <x:Property Name="in_dataTable" Type="InArgument(sd:DataTable)" />
     <x:Property Name="count" Type="InArgument(x:Int32)" />
-    <x:Property Name="in_masterConfigDict" Type="InArgument(scg:Dictionary(x:String, x:String))" />
-    <x:Property Name="in_startRow" Type="InArgument(x:String)" />
     <x:Property Name="io_colLetterDict" Type="InOutArgument(scg:Dictionary(x:Int32, x:String))" />
     <x:Property Name="in_index" Type="InArgument(x:Int32)" />
+    <x:Property Name="in_masterConfigDict" Type="InArgument(scg:Dictionary(x:String, x:String))" />
+    <x:Property Name="in_comPath" Type="InArgument(x:String)" />
   </x:Members>
   <sap2010:ExpressionActivityEditor.ExpressionActivityEditor>C#</sap2010:ExpressionActivityEditor.ExpressionActivityEditor>
-  <sap:VirtualizedContainerService.HintSize>1794,827</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1794,1102</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>ActivityBuilder_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <sco:Collection x:TypeArguments="x:String">
@@ -44,6 +44,11 @@
       <x:String>System.ComponentModel</x:String>
       <x:String>System.Xml.Serialization</x:String>
       <x:String>System.Linq.Expressions</x:String>
+      <x:String>Newtonsoft.Json.Linq</x:String>
+      <x:String>Newtonsoft.Json</x:String>
+      <x:String>System.Dynamic</x:String>
+      <x:String>System.Collections.Specialized</x:String>
+      <x:String>UiPath.Web.Activities</x:String>
     </sco:Collection>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
@@ -80,9 +85,12 @@
       <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
       <AssemblyReference>UiPath.Excel</AssemblyReference>
       <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>Newtonsoft.Json</AssemblyReference>
+      <AssemblyReference>UiPath.Web.Activities</AssemblyReference>
+      <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="FindColumnLetter" sap:VirtualizedContainerService.HintSize="526,705" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="FindColumnLetter" sap:VirtualizedContainerService.HintSize="526,1037" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:Int32" Name="colIndex" />
     </Sequence.Variables>
@@ -91,18 +99,86 @@
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <Assign DisplayName="Get column Raw index" sap:VirtualizedContainerService.HintSize="484,60" sap2010:WorkflowViewState.IdRef="Assign_1">
-      <Assign.To>
-        <OutArgument x:TypeArguments="x:Int32">
-          <mca:CSharpReference x:TypeArguments="x:Int32" sap2010:WorkflowViewState.IdRef="CSharpReference`1_1">colIndex</mca:CSharpReference>
-        </OutArgument>
-      </Assign.To>
-      <Assign.Value>
-        <InArgument x:TypeArguments="x:Int32">
-          <mca:CSharpValue x:TypeArguments="x:Int32" sap2010:WorkflowViewState.IdRef="CSharpValue`1_1">in_dataTable.Columns[in_columnName].Ordinal</mca:CSharpValue>
-        </InArgument>
-      </Assign.Value>
-    </Assign>
+    <TryCatch DisplayName="Find index of column name" sap:VirtualizedContainerService.HintSize="484,596" sap2010:WorkflowViewState.IdRef="TryCatch_1">
+      <TryCatch.Try>
+        <Assign DisplayName="Get column Raw index" sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_1">
+          <Assign.To>
+            <OutArgument x:TypeArguments="x:Int32">
+              <mca:CSharpReference x:TypeArguments="x:Int32" sap2010:WorkflowViewState.IdRef="CSharpReference`1_1">colIndex</mca:CSharpReference>
+            </OutArgument>
+          </Assign.To>
+          <Assign.Value>
+            <InArgument x:TypeArguments="x:Int32">
+              <mca:CSharpValue x:TypeArguments="x:Int32" sap2010:WorkflowViewState.IdRef="CSharpValue`1_1">in_dataTable.Columns[in_columnName].Ordinal</mca:CSharpValue>
+            </InArgument>
+          </Assign.Value>
+        </Assign>
+      </TryCatch.Try>
+      <TryCatch.Catches>
+        <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="407,434" sap2010:WorkflowViewState.IdRef="Catch`1_1">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <ActivityAction x:TypeArguments="s:Exception">
+            <ActivityAction.Argument>
+              <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
+            </ActivityAction.Argument>
+            <Sequence DisplayName="Body catch find column send email and throw error" sap:VirtualizedContainerService.HintSize="401,365" sap2010:WorkflowViewState.IdRef="Sequence_2">
+              <Sequence.Variables>
+                <Variable x:TypeArguments="njl:JObject" Name="jsonObj" />
+              </Sequence.Variables>
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+              <ui:DeserializeJson x:TypeArguments="njl:JObject" DisplayName="Deserialize JSON columnMapNotFound" sap:VirtualizedContainerService.HintSize="359,59" sap2010:WorkflowViewState.IdRef="DeserializeJson`1_1">
+                <ui:DeserializeJson.JsonObject>
+                  <OutArgument x:TypeArguments="njl:JObject">
+                    <mca:CSharpReference x:TypeArguments="njl:JObject" sap2010:WorkflowViewState.IdRef="CSharpReference`1_3">jsonObj</mca:CSharpReference>
+                  </OutArgument>
+                </ui:DeserializeJson.JsonObject>
+                <ui:DeserializeJson.JsonString>
+                  <InArgument x:TypeArguments="x:String">
+                    <mca:CSharpValue x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpValue`1_14" xml:space="preserve">in_masterConfigDict["columnMapNotFound"].
+Replace("{sendTo}",in_masterConfigDict["sendTo"]).
+Replace("{robotName}",in_masterConfigDict["robotName"]).
+Replace("{column}",in_columnName).
+Replace("{filePath}",Path.Combine(in_masterConfigDict["comMasterPath"],in_masterConfigDict["outputName"].Replace("{lot}","")).Replace("\\","\\\\")).
+Replace("{file}",Path.GetFileName(in_masterConfigDict["outputName"].Replace("{lot}",""))).
+Replace("{sheetConfigName}",in_masterConfigDict["comConfigSheet"]).
+Replace("{sheetTemplateName}",in_masterConfigDict["comTemplateSheet"])</mca:CSharpValue>
+                  </InArgument>
+                </ui:DeserializeJson.JsonString>
+              </ui:DeserializeJson>
+              <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Invoke send outlook mail" sap:VirtualizedContainerService.HintSize="359,112" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="Subprocess\\Common\\SendOutlookMail.xaml">
+                <ui:InvokeWorkflowFile.Arguments>
+                  <InArgument x:TypeArguments="njl:JObject" x:Key="in_jsonObj">
+                    <mca:CSharpValue x:TypeArguments="njl:JObject" sap2010:WorkflowViewState.IdRef="CSharpValue`1_5">jsonObj</mca:CSharpValue>
+                  </InArgument>
+                  <InArgument x:TypeArguments="s:String[]" x:Key="in_attachment">
+                    <mca:CSharpValue x:TypeArguments="s:String[]" sap2010:WorkflowViewState.IdRef="CSharpValue`1_1">null</mca:CSharpValue>
+                  </InArgument>
+                </ui:InvokeWorkflowFile.Arguments>
+              </ui:InvokeWorkflowFile>
+              <Throw sap:VirtualizedContainerService.HintSize="359,22" sap2010:WorkflowViewState.IdRef="Throw_1">
+                <InArgument x:TypeArguments="s:Exception">
+                  <mca:CSharpValue x:TypeArguments="s:Exception" sap2010:WorkflowViewState.IdRef="CSharpValue`1_7" xml:space="preserve">new Exception(
+	"File: {comPath} Column : {column} not found\n กรุณาตรวจสอบที่ sheet Back up".
+	Replace("{comPath}",Path.GetFileName(in_comPath)).
+	Replace("{column}",in_columnName) +"\n\n" +
+	exception.Message
+)</mca:CSharpValue>
+                </InArgument>
+              </Throw>
+            </Sequence>
+          </ActivityAction>
+        </Catch>
+      </TryCatch.Catches>
+    </TryCatch>
     <If DisplayName="Get column leter only one time" sap:VirtualizedContainerService.HintSize="484,309" sap2010:WorkflowViewState.IdRef="If_1">
       <If.Condition>
         <InArgument x:TypeArguments="x:Boolean">
@@ -130,15 +206,5 @@
         </c:Class1>
       </If.Then>
     </If>
-    <ui:InvokeCode ContinueOnError="{x:Null}" Code="Microsoft.Office.Interop.Excel.Application excel = (Microsoft.Office.Interop.Excel.Application)System.Runtime.InteropServices.Marshal.GetActiveObject(&quot;Excel.Application&quot;);&#xA;Microsoft.Office.Interop.Excel.Workbook activeBook = excel.ActiveWorkbook;&#xA;&#xA;int index=1;&#xA;&#xA;foreach(Microsoft.Office.Interop.Excel.Worksheet xlsheet in activeBook.Worksheets){&#xA;&#x9;if(xlsheet.Name.Equals(sheetName)){&#xA;&#x9;&#x9;break;&#xA;&#x9;}else{&#xA;&#x9;&#x9;index++;&#xA;&#x9;}&#xA;}&#xA;&#xA;((Microsoft.Office.Interop.Excel.Worksheet)activeBook.Sheets[index]).Select();&#xA;Microsoft.Office.Interop.Excel.Worksheet activeSheet = (Microsoft.Office.Interop.Excel.Worksheet)activeBook.ActiveSheet;&#xA;activeSheet.Range[colLetter].Select();" DisplayName="Select sheet" sap:VirtualizedContainerService.HintSize="484,164" sap2010:WorkflowViewState.IdRef="InvokeCode_1" Language="CSharp">
-      <ui:InvokeCode.Arguments>
-        <InArgument x:TypeArguments="x:String" x:Key="sheetName">
-          <mca:CSharpValue x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpValue`1_5">in_masterConfigDict["comTemplateSheet"]</mca:CSharpValue>
-        </InArgument>
-        <InArgument x:TypeArguments="x:String" x:Key="colLetter">
-          <mca:CSharpValue x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpValue`1_4">io_colLetterDict[in_index] + in_startRow</mca:CSharpValue>
-        </InArgument>
-      </ui:InvokeCode.Arguments>
-    </ui:InvokeCode>
   </Sequence>
 </Activity>

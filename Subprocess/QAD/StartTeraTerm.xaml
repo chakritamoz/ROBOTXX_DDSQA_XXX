@@ -1,4 +1,3 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
 <Activity mc:Ignorable="sap sap2010" x:Class="StartTeraTerm" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mca="clr-namespace:Microsoft.CSharp.Activities;assembly=System.Activities" xmlns:njl="clr-namespace:Newtonsoft.Json.Linq;assembly=Newtonsoft.Json" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib" xmlns:sn="clr-namespace:System.Net;assembly=System" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <x:Members>
     <x:Property Name="in_masterConfigDict" Type="InArgument(scg:Dictionary(x:String, x:String))" />
@@ -6,7 +5,7 @@
     <x:Property Name="out_qadCredential" Type="OutArgument(sn:NetworkCredential)" />
   </x:Members>
   <sap2010:ExpressionActivityEditor.ExpressionActivityEditor>C#</sap2010:ExpressionActivityEditor.ExpressionActivityEditor>
-  <sap:VirtualizedContainerService.HintSize>1240,755</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1794,755</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>ActivityBuilder_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <sco:Collection x:TypeArguments="x:String">
@@ -78,19 +77,18 @@
       <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
       <AssemblyReference>System.Memory</AssemblyReference>
       <AssemblyReference>UiPath.Excel</AssemblyReference>
-      <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
       <AssemblyReference>System.Reflection.Metadata</AssemblyReference>
       <AssemblyReference>Newtonsoft.Json</AssemblyReference>
       <AssemblyReference>UiPath.Web.Activities</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="StartTeraTerm" sap:VirtualizedContainerService.HintSize="391,690" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="StartTeraTerm" sap:VirtualizedContainerService.HintSize="412,690" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Invoke Get Credential to get teraterm credential" sap:VirtualizedContainerService.HintSize="349,112" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="Subprocess\\Credential\\GetCrendential.xaml">
+    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Invoke Get Credential to get teraterm credential" sap:VirtualizedContainerService.HintSize="370,112" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="Subprocess\\Credential\\GetCrendential.xaml">
       <ui:InvokeWorkflowFile.Arguments>
         <InArgument x:TypeArguments="x:String" x:Key="in_credentialTarget">
           <mca:CSharpValue x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpValue`1_2">in_masterConfigDict["teraCredential"]</mca:CSharpValue>
@@ -103,7 +101,7 @@
         </InArgument>
       </ui:InvokeWorkflowFile.Arguments>
     </ui:InvokeWorkflowFile>
-    <If DisplayName="Check tera term credential is null" sap:VirtualizedContainerService.HintSize="349,51" sap2010:WorkflowViewState.IdRef="If_1">
+    <If DisplayName="Check tera term credential is null" sap:VirtualizedContainerService.HintSize="370,51" sap2010:WorkflowViewState.IdRef="If_1">
       <If.Condition>
         <InArgument x:TypeArguments="x:Boolean">
           <mca:CSharpValue x:TypeArguments="x:Boolean" sap2010:WorkflowViewState.IdRef="CSharpValue`1_3">out_teraCredential == null</mca:CSharpValue>
@@ -116,7 +114,7 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
       <If.Then>
-        <Sequence DisplayName="Tera Term Credential is null" sap:VirtualizedContainerService.HintSize="376,365" sap2010:WorkflowViewState.IdRef="Sequence_2">
+        <Sequence DisplayName="Tera Term Credential is null" sap:VirtualizedContainerService.HintSize="401,365" sap2010:WorkflowViewState.IdRef="Sequence_2">
           <Sequence.Variables>
             <Variable x:TypeArguments="njl:JObject" Name="jsonObj" />
           </Sequence.Variables>
@@ -125,7 +123,7 @@
               <x:Boolean x:Key="IsExpanded">True</x:Boolean>
             </scg:Dictionary>
           </sap:WorkflowViewStateService.ViewState>
-          <ui:DeserializeJson x:TypeArguments="njl:JObject" DisplayName="Deserialize JSON" sap:VirtualizedContainerService.HintSize="334,59" sap2010:WorkflowViewState.IdRef="DeserializeJson`1_1">
+          <ui:DeserializeJson x:TypeArguments="njl:JObject" DisplayName="Deserialize JSON tera term credential error" sap:VirtualizedContainerService.HintSize="359,59" sap2010:WorkflowViewState.IdRef="DeserializeJson`1_1">
             <ui:DeserializeJson.JsonObject>
               <OutArgument x:TypeArguments="njl:JObject">
                 <mca:CSharpReference x:TypeArguments="njl:JObject" sap2010:WorkflowViewState.IdRef="CSharpReference`1_2">jsonObj</mca:CSharpReference>
@@ -140,7 +138,7 @@ Replace("{credentail}",in_masterConfigDict["teraTitle"])</mca:CSharpValue>
               </InArgument>
             </ui:DeserializeJson.JsonString>
           </ui:DeserializeJson>
-          <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Invoke Send Outlook Mail" sap:VirtualizedContainerService.HintSize="334,112" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_2" UnSafe="False" WorkflowFileName="Subprocess\\Common\\SendOutlookMail.xaml">
+          <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Invoke Send Outlook Mail" sap:VirtualizedContainerService.HintSize="359,112" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_2" UnSafe="False" WorkflowFileName="Subprocess\\Common\\SendOutlookMail.xaml">
             <ui:InvokeWorkflowFile.Arguments>
               <InArgument x:TypeArguments="njl:JObject" x:Key="in_jsonObj">
                 <mca:CSharpValue x:TypeArguments="njl:JObject" sap2010:WorkflowViewState.IdRef="CSharpValue`1_6">jsonObj</mca:CSharpValue>
@@ -150,7 +148,7 @@ Replace("{credentail}",in_masterConfigDict["teraTitle"])</mca:CSharpValue>
               </InArgument>
             </ui:InvokeWorkflowFile.Arguments>
           </ui:InvokeWorkflowFile>
-          <Throw sap:VirtualizedContainerService.HintSize="334,22" sap2010:WorkflowViewState.IdRef="Throw_1">
+          <Throw sap:VirtualizedContainerService.HintSize="359,22" sap2010:WorkflowViewState.IdRef="Throw_1">
             <InArgument x:TypeArguments="s:Exception">
               <mca:CSharpValue x:TypeArguments="s:Exception" sap2010:WorkflowViewState.IdRef="CSharpValue`1_7">new Exception("Please check" + in_masterConfigDict["teraTitle"])</mca:CSharpValue>
             </InArgument>
@@ -158,7 +156,7 @@ Replace("{credentail}",in_masterConfigDict["teraTitle"])</mca:CSharpValue>
         </Sequence>
       </If.Then>
     </If>
-    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Invoke Get Credential to get qad credential" sap:VirtualizedContainerService.HintSize="349,112" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_3" UnSafe="False" WorkflowFileName="Subprocess\\Credential\\GetCrendential.xaml">
+    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Invoke Get Credential to get qad credential" sap:VirtualizedContainerService.HintSize="370,112" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_3" UnSafe="False" WorkflowFileName="Subprocess\\Credential\\GetCrendential.xaml">
       <ui:InvokeWorkflowFile.Arguments>
         <InArgument x:TypeArguments="x:String" x:Key="in_credentialTarget">
           <mca:CSharpValue x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpValue`1_8">in_masterConfigDict["qadCredential"]</mca:CSharpValue>
@@ -171,7 +169,7 @@ Replace("{credentail}",in_masterConfigDict["teraTitle"])</mca:CSharpValue>
         </InArgument>
       </ui:InvokeWorkflowFile.Arguments>
     </ui:InvokeWorkflowFile>
-    <If DisplayName="Check qad credential is null" sap:VirtualizedContainerService.HintSize="349,51" sap2010:WorkflowViewState.IdRef="If_2">
+    <If DisplayName="Check qad credential is null" sap:VirtualizedContainerService.HintSize="484,542" sap2010:WorkflowViewState.IdRef="If_2">
       <If.Condition>
         <InArgument x:TypeArguments="x:Boolean">
           <mca:CSharpValue x:TypeArguments="x:Boolean" sap2010:WorkflowViewState.IdRef="CSharpValue`1_10">out_qadCredential == null</mca:CSharpValue>
@@ -184,7 +182,7 @@ Replace("{credentail}",in_masterConfigDict["teraTitle"])</mca:CSharpValue>
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
       <If.Then>
-        <Sequence DisplayName="QAD Credential is null" sap:VirtualizedContainerService.HintSize="376,365" sap2010:WorkflowViewState.IdRef="Sequence_3">
+        <Sequence DisplayName="QAD Credential is null" sap:VirtualizedContainerService.HintSize="401,365" sap2010:WorkflowViewState.IdRef="Sequence_3">
           <Sequence.Variables>
             <Variable x:TypeArguments="njl:JObject" Name="jsonObj" />
           </Sequence.Variables>
@@ -193,7 +191,7 @@ Replace("{credentail}",in_masterConfigDict["teraTitle"])</mca:CSharpValue>
               <x:Boolean x:Key="IsExpanded">True</x:Boolean>
             </scg:Dictionary>
           </sap:WorkflowViewStateService.ViewState>
-          <ui:DeserializeJson x:TypeArguments="njl:JObject" DisplayName="Deserialize JSON" sap:VirtualizedContainerService.HintSize="334,59" sap2010:WorkflowViewState.IdRef="DeserializeJson`1_2">
+          <ui:DeserializeJson x:TypeArguments="njl:JObject" DisplayName="Deserialize JSON QAD credential error" sap:VirtualizedContainerService.HintSize="359,59" sap2010:WorkflowViewState.IdRef="DeserializeJson`1_2">
             <ui:DeserializeJson.JsonObject>
               <OutArgument x:TypeArguments="njl:JObject">
                 <mca:CSharpReference x:TypeArguments="njl:JObject" sap2010:WorkflowViewState.IdRef="CSharpReference`1_4">jsonObj</mca:CSharpReference>
@@ -208,7 +206,7 @@ Replace("{credentail}",in_masterConfigDict["qadTitle"])</mca:CSharpValue>
               </InArgument>
             </ui:DeserializeJson.JsonString>
           </ui:DeserializeJson>
-          <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Invoke Send Outlook Mail" sap:VirtualizedContainerService.HintSize="334,112" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_4" UnSafe="False" WorkflowFileName="Subprocess\\Common\\SendOutlookMail.xaml">
+          <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Invoke Send Outlook Mail" sap:VirtualizedContainerService.HintSize="359,112" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_4" UnSafe="False" WorkflowFileName="Subprocess\\Common\\SendOutlookMail.xaml">
             <ui:InvokeWorkflowFile.Arguments>
               <InArgument x:TypeArguments="njl:JObject" x:Key="in_jsonObj">
                 <mca:CSharpValue x:TypeArguments="njl:JObject" sap2010:WorkflowViewState.IdRef="CSharpValue`1_12">jsonObj</mca:CSharpValue>
@@ -218,7 +216,7 @@ Replace("{credentail}",in_masterConfigDict["qadTitle"])</mca:CSharpValue>
               </InArgument>
             </ui:InvokeWorkflowFile.Arguments>
           </ui:InvokeWorkflowFile>
-          <Throw sap:VirtualizedContainerService.HintSize="334,22" sap2010:WorkflowViewState.IdRef="Throw_2">
+          <Throw sap:VirtualizedContainerService.HintSize="359,22" sap2010:WorkflowViewState.IdRef="Throw_2">
             <InArgument x:TypeArguments="s:Exception">
               <mca:CSharpValue x:TypeArguments="s:Exception" sap2010:WorkflowViewState.IdRef="CSharpValue`1_16">new Exception("Please check" + in_masterConfigDict["qadTitle"])</mca:CSharpValue>
             </InArgument>

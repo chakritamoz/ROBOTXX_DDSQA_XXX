@@ -22,6 +22,16 @@
     },
     {
       "Package": {
+        "Id": "Arutu.TransposeTable.Activity",
+        "Version": "1.0.1"
+      },
+      "Assemblies": [
+        "C:\\Users\\chakrit.pok\\.nuget\\packages\\arutu.transposetable.activity/1.0.1\\lib/ShinTransposeTable.dll"
+      ],
+      "Path": "C:\\Users\\chakrit.pok\\.nuget\\packages\\arutu.transposetable.activity\\1.0.1"
+    },
+    {
+      "Package": {
         "Id": "UiPath.Credentials.Activities",
         "Version": "2.0.0"
       },
@@ -294,13 +304,13 @@
     },
     {
       "Package": {
-        "Id": "Arutu.TransposeTable.Activity",
+        "Id": "Arutu.ZipFile.Activity",
         "Version": "1.0.1"
       },
       "Assemblies": [
-        "C:\\Users\\chakrit.pok\\.nuget\\packages\\arutu.transposetable.activity/1.0.1\\lib/ShinTransposeTable.dll"
+        "C:\\Users\\chakrit.pok\\.nuget\\packages\\arutu.zipfile.activity/1.0.1\\lib/ZipFile.dll"
       ],
-      "Path": "C:\\Users\\chakrit.pok\\.nuget\\packages\\arutu.transposetable.activity\\1.0.1"
+      "Path": "C:\\Users\\chakrit.pok\\.nuget\\packages\\arutu.zipfile.activity\\1.0.1"
     }
   ],
   "Conflicts": [],
@@ -317,6 +327,11 @@
     },
     "Arutu.TransposeTable.Activity": {
       "Id": "Arutu.TransposeTable.Activity",
+      "Version": "1.0.1",
+      "Dependencies": []
+    },
+    "Arutu.ZipFile.Activity": {
+      "Id": "Arutu.ZipFile.Activity",
       "Version": "1.0.1",
       "Dependencies": []
     },
@@ -1685,6 +1700,16 @@
         "C:\\Users\\chakrit.pok\\.nuget\\packages\\arutu.transposetable.activity\\1.0.1\\lib\\ShinTransposeTable.dll"
       ],
       "Path": "C:\\Users\\chakrit.pok\\.nuget\\packages\\arutu.transposetable.activity\\1.0.1"
+    },
+    {
+      "Package": {
+        "Id": "Arutu.ZipFile.Activity",
+        "Version": "1.0.1"
+      },
+      "Assemblies": [
+        "C:\\Users\\chakrit.pok\\.nuget\\packages\\arutu.zipfile.activity\\1.0.1\\lib\\ZipFile.dll"
+      ],
+      "Path": "C:\\Users\\chakrit.pok\\.nuget\\packages\\arutu.zipfile.activity\\1.0.1"
     },
     {
       "Package": {

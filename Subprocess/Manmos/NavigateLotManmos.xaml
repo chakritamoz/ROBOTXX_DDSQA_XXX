@@ -8,7 +8,7 @@
     <x:Property Name="io_dateMEATable" Type="InOutArgument(sd:DataTable)" />
   </x:Members>
   <sap2010:ExpressionActivityEditor.ExpressionActivityEditor>C#</sap2010:ExpressionActivityEditor.ExpressionActivityEditor>
-  <sap:VirtualizedContainerService.HintSize>1474,3749</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1794,3749</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>ActivityBuilder_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <scg:List x:TypeArguments="x:String" Capacity="74">
@@ -388,7 +388,7 @@
                             <ui:AddDataRow DataRow="{x:Null}" DisplayName="Add Data Row" sap:VirtualizedContainerService.HintSize="334,185" sap2010:WorkflowViewState.IdRef="AddDataRow_1">
                               <ui:AddDataRow.ArrayRow>
                                 <InArgument x:TypeArguments="s:Object[]">
-                                  <mca:CSharpValue x:TypeArguments="s:Object[]" sap2010:WorkflowViewState.IdRef="CSharpValue`1_30">new string[] {lotX,in_process,in_lot,DateTime.ParseExact(lotDate,"yyyy/MM/dd",System.Globalization.CultureInfo.InvariantCulture).ToString("dd/MM/yy")}</mca:CSharpValue>
+                                  <mca:CSharpValue x:TypeArguments="s:Object[]" sap2010:WorkflowViewState.IdRef="CSharpValue`1_32">new string[] {lotX,in_process,in_lot,DateTime.ParseExact(lotDate,"yyyy/MM/dd",System.Globalization.CultureInfo.InvariantCulture).ToString("yyyy/MM/dd")}</mca:CSharpValue>
                                 </InArgument>
                               </ui:AddDataRow.ArrayRow>
                               <ui:AddDataRow.DataTable>

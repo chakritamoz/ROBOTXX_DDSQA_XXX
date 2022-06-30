@@ -5,7 +5,7 @@
     <x:Property Name="in_masterConfigDict" Type="InArgument(scg:Dictionary(x:String, x:String))" />
   </x:Members>
   <sap2010:ExpressionActivityEditor.ExpressionActivityEditor>C#</sap2010:ExpressionActivityEditor.ExpressionActivityEditor>
-  <sap:VirtualizedContainerService.HintSize>1474,1652</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1474,1614</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>ActivityBuilder_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <sco:Collection x:TypeArguments="x:String">
@@ -48,6 +48,7 @@
       <x:String>System.Activities.DynamicUpdate</x:String>
       <x:String>UiPath.Excel</x:String>
       <x:String>UiPath.Excel.Activities</x:String>
+      <x:String>Newtonsoft.Json.Linq</x:String>
     </sco:Collection>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
@@ -96,15 +97,17 @@
       <AssemblyReference>UiPath.Web.Activities</AssemblyReference>
       <AssemblyReference>UiPath.Excel.Activities.Design</AssemblyReference>
       <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
-      <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
       <AssemblyReference>UiPath.System.Activities.Design</AssemblyReference>
+      <AssemblyReference>Newtonsoft.Json</AssemblyReference>
+      <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="CopyReportToExcel" sap:VirtualizedContainerService.HintSize="516,1587" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="CopyReportToExcel" sap:VirtualizedContainerService.HintSize="516,1549" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:String" Name="textClipboard" />
       <Variable x:TypeArguments="sd:DataTable" Name="manmosData" />
       <Variable x:TypeArguments="x:String" Name="flagPaste" />
+      <Variable x:TypeArguments="x:Object" Name="textObj" />
     </Sequence.Variables>
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -128,17 +131,68 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </Assign>
-    <ui:InvokeCode ContinueOnError="{x:Null}" Code="Clipboard.SetText(textClipboard);" DisplayName="Assign string to clipboard" sap:VirtualizedContainerService.HintSize="474,164" sap2010:WorkflowViewState.IdRef="InvokeCode_2" Language="CSharp">
-      <ui:InvokeCode.Arguments>
-        <InArgument x:TypeArguments="x:String" x:Key="textClipboard">
-          <mca:CSharpValue x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpValue`1_6">textClipboard</mca:CSharpValue>
-        </InArgument>
-      </ui:InvokeCode.Arguments>
-    </ui:InvokeCode>
+    <ui:InterruptibleDoWhile Condition="True" DisplayName="Do While write again" sap:VirtualizedContainerService.HintSize="474,710" sap2010:WorkflowViewState.IdRef="InterruptibleDoWhile_2">
+      <ui:InterruptibleDoWhile.Body>
+        <TryCatch DisplayName="Try catch write excel" sap:VirtualizedContainerService.HintSize="438,545" sap2010:WorkflowViewState.IdRef="TryCatch_2">
+          <TryCatch.Try>
+            <Sequence DisplayName="try to write excel to location path" sap:VirtualizedContainerService.HintSize="376,318" sap2010:WorkflowViewState.IdRef="Sequence_4">
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+              <ui:InvokeCode ContinueOnError="{x:Null}" Code="Clipboard.SetDataObject(textClipboard, true, 2, 1);" DisplayName="Assign string to clipboard" sap:VirtualizedContainerService.HintSize="334,164" sap2010:WorkflowViewState.IdRef="InvokeCode_2" Language="CSharp">
+                <ui:InvokeCode.Arguments>
+                  <InArgument x:TypeArguments="x:String" x:Key="textClipboard">
+                    <mca:CSharpValue x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpValue`1_6">textClipboard</mca:CSharpValue>
+                  </InArgument>
+                </ui:InvokeCode.Arguments>
+              </ui:InvokeCode>
+              <ui:Break sap:VirtualizedContainerService.HintSize="334,22" sap2010:WorkflowViewState.IdRef="Break_2" />
+            </Sequence>
+          </TryCatch.Try>
+          <TryCatch.Catches>
+            <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="404,21" sap2010:WorkflowViewState.IdRef="Catch`1_2">
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+              <ActivityAction x:TypeArguments="s:Exception">
+                <ActivityAction.Argument>
+                  <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
+                </ActivityAction.Argument>
+                <Sequence DisplayName="Catch write excel to location path" sap:VirtualizedContainerService.HintSize="376,176" sap2010:WorkflowViewState.IdRef="Sequence_5">
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                  <ui:MessageBox ChosenButton="{x:Null}" AutoCloseAfter="00:00:03" Buttons="Ok" Caption="Caution can't write excel" DisplayName="Can't write file please close" sap:VirtualizedContainerService.HintSize="334,84" sap2010:WorkflowViewState.IdRef="MessageBox_2">
+                    <ui:MessageBox.Text>
+                      <InArgument x:TypeArguments="x:Object">
+                        <mca:CSharpValue x:TypeArguments="x:Object" sap2010:WorkflowViewState.IdRef="CSharpValue`1_22">Clipboard.GetText()</mca:CSharpValue>
+                      </InArgument>
+                    </ui:MessageBox.Text>
+                  </ui:MessageBox>
+                </Sequence>
+              </ActivityAction>
+            </Catch>
+          </TryCatch.Catches>
+        </TryCatch>
+      </ui:InterruptibleDoWhile.Body>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:InterruptibleDoWhile>
     <ui:InvokeCode ContinueOnError="{x:Null}" Code="Microsoft.Office.Interop.Excel.Application xlApp = new Microsoft.Office.Interop.Excel.ApplicationClass();&#xA;Microsoft.Office.Interop.Excel.Workbook xlWorkbook = xlApp.Workbooks.Add(Missing.Value);&#xA;Microsoft.Office.Interop.Excel.Worksheet xlWorksheet = (Microsoft.Office.Interop.Excel.Worksheet)xlWorkbook.ActiveSheet;&#xA;xlWorksheet.Range[colLetter].PasteSpecial(Microsoft.Office.Interop.Excel.XlPasteType.xlPasteAll,Microsoft.Office.Interop.Excel.XlPasteSpecialOperation.xlPasteSpecialOperationNone);&#xA;xlWorkbook.SaveAs(xlsxFullPath);&#xA;xlWorkbook.Close();&#xA;xlApp.Quit();&#xA;" DisplayName="Paste data to excel" sap:VirtualizedContainerService.HintSize="474,164" sap2010:WorkflowViewState.IdRef="InvokeCode_3" Language="CSharp">
       <ui:InvokeCode.Arguments>
         <InArgument x:TypeArguments="x:String" x:Key="xlsxFullPath">
-          <mca:CSharpValue x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpValue`1_7">Path.Combine(in_masterConfigDict["mainPath"],in_masterConfigDict["tempManmos"])</mca:CSharpValue>
+          <mca:CSharpValue x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpValue`1_17">Path.Combine(in_masterConfigDict["mainPath"],in_masterConfigDict["tempManmos"].Replace("{queue}",in_masterConfigDict["queueName"]))</mca:CSharpValue>
         </InArgument>
         <InArgument x:TypeArguments="x:String" x:Key="colLetter">A1</InArgument>
       </ui:InvokeCode.Arguments>
@@ -151,100 +205,31 @@
       </ui:ReadRange.DataTable>
       <ui:ReadRange.WorkbookPath>
         <InArgument x:TypeArguments="x:String">
-          <mca:CSharpValue x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpValue`1_8">Path.Combine(in_masterConfigDict["mainPath"],in_masterConfigDict["tempManmos"])</mca:CSharpValue>
+          <mca:CSharpValue x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpValue`1_20">Path.Combine(in_masterConfigDict["mainPath"],in_masterConfigDict["tempManmos"].Replace("{queue}",in_masterConfigDict["queueName"]))</mca:CSharpValue>
         </InArgument>
       </ui:ReadRange.WorkbookPath>
     </ui:ReadRange>
-    <ui:InterruptibleDoWhile DisplayName="Do While write again" sap:VirtualizedContainerService.HintSize="474,699" sap2010:WorkflowViewState.IdRef="InterruptibleDoWhile_1">
-      <ui:InterruptibleDoWhile.Body>
-        <TryCatch DisplayName="Try catch write excel" sap:VirtualizedContainerService.HintSize="438,534" sap2010:WorkflowViewState.IdRef="TryCatch_1">
-          <TryCatch.Try>
-            <Sequence DisplayName="try to write excel to location path" sap:VirtualizedContainerService.HintSize="376,307" sap2010:WorkflowViewState.IdRef="Sequence_3">
-              <sap:WorkflowViewStateService.ViewState>
-                <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                </scg:Dictionary>
-              </sap:WorkflowViewStateService.ViewState>
-              <ui:WriteRange AddHeaders="True" DisplayName="Write Range temp excel to path location excel" sap:VirtualizedContainerService.HintSize="334,115" sap2010:WorkflowViewState.IdRef="WriteRange_1" StartingCell="A1">
-                <ui:WriteRange.DataTable>
-                  <InArgument x:TypeArguments="sd:DataTable">
-                    <mca:CSharpValue x:TypeArguments="sd:DataTable" sap2010:WorkflowViewState.IdRef="CSharpValue`1_9">manmosData</mca:CSharpValue>
-                  </InArgument>
-                </ui:WriteRange.DataTable>
-                <ui:WriteRange.SheetName>
-                  <InArgument x:TypeArguments="x:String">
-                    <mca:CSharpValue x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpValue`1_10">in_sheetName</mca:CSharpValue>
-                  </InArgument>
-                </ui:WriteRange.SheetName>
-                <ui:WriteRange.WorkbookPath>
-                  <InArgument x:TypeArguments="x:String">
-                    <mca:CSharpValue x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpValue`1_11">in_pathLocation</mca:CSharpValue>
-                  </InArgument>
-                </ui:WriteRange.WorkbookPath>
-              </ui:WriteRange>
-              <Assign DisplayName="Set flagPaste to cancel" sap:VirtualizedContainerService.HintSize="334,60" sap2010:WorkflowViewState.IdRef="Assign_4">
-                <Assign.To>
-                  <OutArgument x:TypeArguments="x:String">
-                    <mca:CSharpReference x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpReference`1_7">flagPaste</mca:CSharpReference>
-                  </OutArgument>
-                </Assign.To>
-                <Assign.Value>
-                  <InArgument x:TypeArguments="x:String">
-                    <Literal x:TypeArguments="x:String" Value="" />
-                  </InArgument>
-                </Assign.Value>
-              </Assign>
-            </Sequence>
-          </TryCatch.Try>
-          <TryCatch.Catches>
-            <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="404,21" sap2010:WorkflowViewState.IdRef="Catch`1_1">
-              <sap:WorkflowViewStateService.ViewState>
-                <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                  <x:Boolean x:Key="IsExpanded">False</x:Boolean>
-                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
-                </scg:Dictionary>
-              </sap:WorkflowViewStateService.ViewState>
-              <ActivityAction x:TypeArguments="s:Exception">
-                <ActivityAction.Argument>
-                  <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
-                </ActivityAction.Argument>
-                <Sequence DisplayName="Catch write excel to location path" sap:VirtualizedContainerService.HintSize="401,328" sap2010:WorkflowViewState.IdRef="Sequence_2">
-                  <sap:WorkflowViewStateService.ViewState>
-                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                    </scg:Dictionary>
-                  </sap:WorkflowViewStateService.ViewState>
-                  <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Invoke Send outlook mail" sap:VirtualizedContainerService.HintSize="359,112" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="Subprocess\\Common\\SendOutlookMail.xaml">
-                    <ui:InvokeWorkflowFile.Arguments>
-                      <scg:Dictionary x:TypeArguments="x:String, Argument" />
-                    </ui:InvokeWorkflowFile.Arguments>
-                  </ui:InvokeWorkflowFile>
-                  <ui:MessageBox AutoCloseAfter="00:00:00" Buttons="Ok" Caption="Caution can't write excel" DisplayName="Message Box" sap:VirtualizedContainerService.HintSize="359,84" sap2010:WorkflowViewState.IdRef="MessageBox_1">
-                    <ui:MessageBox.ChosenButton>
-                      <OutArgument x:TypeArguments="x:String">
-                        <mca:CSharpReference x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpReference`1_6">flagPaste</mca:CSharpReference>
-                      </OutArgument>
-                    </ui:MessageBox.ChosenButton>
-                    <ui:MessageBox.Text>
-                      <InArgument x:TypeArguments="x:Object">
-                        <mca:CSharpValue x:TypeArguments="x:Object" sap2010:WorkflowViewState.IdRef="CSharpValue`1_16">"Please close file " + Path.GetFileName(in_pathLocation)</mca:CSharpValue>
-                      </InArgument>
-                    </ui:MessageBox.Text>
-                  </ui:MessageBox>
-                </Sequence>
-              </ActivityAction>
-            </Catch>
-          </TryCatch.Catches>
-        </TryCatch>
-      </ui:InterruptibleDoWhile.Body>
-      <ui:InterruptibleDoWhile.Condition>
-        <mca:CSharpValue x:TypeArguments="x:Boolean" sap2010:WorkflowViewState.IdRef="CSharpValue`1_14">flagPaste == "Ok"</mca:CSharpValue>
-      </ui:InterruptibleDoWhile.Condition>
-    </ui:InterruptibleDoWhile>
+    <ui:WriteRange AddHeaders="True" DisplayName="Write Range temp excel to path location excel" sap:VirtualizedContainerService.HintSize="474,115" sap2010:WorkflowViewState.IdRef="WriteRange_1" StartingCell="A1">
+      <ui:WriteRange.DataTable>
+        <InArgument x:TypeArguments="sd:DataTable">
+          <mca:CSharpValue x:TypeArguments="sd:DataTable" sap2010:WorkflowViewState.IdRef="CSharpValue`1_9">manmosData</mca:CSharpValue>
+        </InArgument>
+      </ui:WriteRange.DataTable>
+      <ui:WriteRange.SheetName>
+        <InArgument x:TypeArguments="x:String">
+          <mca:CSharpValue x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpValue`1_10">in_sheetName</mca:CSharpValue>
+        </InArgument>
+      </ui:WriteRange.SheetName>
+      <ui:WriteRange.WorkbookPath>
+        <InArgument x:TypeArguments="x:String">
+          <mca:CSharpValue x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpValue`1_11">in_pathLocation</mca:CSharpValue>
+        </InArgument>
+      </ui:WriteRange.WorkbookPath>
+    </ui:WriteRange>
     <ui:Delete ContinueOnError="{x:Null}" DisplayName="Delete temp excel" sap:VirtualizedContainerService.HintSize="474,79" sap2010:WorkflowViewState.IdRef="Delete_1">
       <ui:Delete.Path>
         <InArgument x:TypeArguments="x:String">
-          <mca:CSharpValue x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpValue`1_12">Path.Combine(in_masterConfigDict["mainPath"],in_masterConfigDict["tempManmos"])</mca:CSharpValue>
+          <mca:CSharpValue x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpValue`1_21">Path.Combine(in_masterConfigDict["mainPath"],in_masterConfigDict["tempManmos"].Replace("{queue}",in_masterConfigDict["queueName"]))</mca:CSharpValue>
         </InArgument>
       </ui:Delete.Path>
     </ui:Delete>

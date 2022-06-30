@@ -18,7 +18,7 @@
     <x:Property Name="io_colInfoLetterDict" Type="InArgument(scg:Dictionary(x:Int32, x:String))" />
   </x:Members>
   <sap2010:ExpressionActivityEditor.ExpressionActivityEditor>C#</sap2010:ExpressionActivityEditor.ExpressionActivityEditor>
-  <sap:VirtualizedContainerService.HintSize>1474,2607</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1794,2048</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>ActivityBuilder_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <sco:Collection x:TypeArguments="x:String">
@@ -56,6 +56,7 @@
       <x:String>System.Reflection</x:String>
       <x:String>System.Linq.Expressions</x:String>
       <x:String>ColumnNumberToColumnLetter</x:String>
+      <x:String>Microsoft.Office.Interop.Excel</x:String>
     </sco:Collection>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
@@ -101,28 +102,29 @@
       <AssemblyReference>System.ValueTuple</AssemblyReference>
       <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
       <AssemblyReference>ColumnNumberToColumnLetter</AssemblyReference>
-      <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
+      <AssemblyReference>ReadAllWorkSheetExcel</AssemblyReference>
+      <AssemblyReference>Microsoft.Office.Interop.Excel</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="InsertInfoData" sap:VirtualizedContainerService.HintSize="661,2542" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="InsertInfoData" sap:VirtualizedContainerService.HintSize="586,1983" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <ueab:ExcelProcessScopeX DisplayAlerts="{x:Null}" ExistingProcessAction="{x:Null}" FileConflictResolution="{x:Null}" LaunchMethod="{x:Null}" LaunchTimeout="{x:Null}" MacroSettings="{x:Null}" ProcessMode="{x:Null}" ShowExcelWindow="{x:Null}" DisplayName="Excel Process Scope" sap:VirtualizedContainerService.HintSize="619,2450" sap2010:WorkflowViewState.IdRef="ExcelProcessScopeX_1">
+    <ueab:ExcelProcessScopeX DisplayAlerts="{x:Null}" ExistingProcessAction="{x:Null}" FileConflictResolution="{x:Null}" LaunchMethod="{x:Null}" LaunchTimeout="{x:Null}" MacroSettings="{x:Null}" ProcessMode="{x:Null}" ShowExcelWindow="{x:Null}" DisplayName="Excel Process Scope" sap:VirtualizedContainerService.HintSize="544,1891" sap2010:WorkflowViewState.IdRef="ExcelProcessScopeX_1">
       <ueab:ExcelProcessScopeX.Body>
         <ActivityAction x:TypeArguments="ui:IExcelProcess">
           <ActivityAction.Argument>
             <DelegateInArgument x:TypeArguments="ui:IExcelProcess" Name="ExcelProcessScopeTag" />
           </ActivityAction.Argument>
-          <ueab:ExcelApplicationCard Password="{x:Null}" ReadFormatting="{x:Null}" AutoSave="False" DisplayName="Use Excel File" sap:VirtualizedContainerService.HintSize="585,2364" sap2010:WorkflowViewState.IdRef="ExcelApplicationCard_1">
+          <ueab:ExcelApplicationCard Password="{x:Null}" ReadFormatting="{x:Null}" AutoSave="False" DisplayName="Use Excel File" sap:VirtualizedContainerService.HintSize="510,1805" sap2010:WorkflowViewState.IdRef="ExcelApplicationCard_1">
             <ueab:ExcelApplicationCard.Body>
               <ActivityAction x:TypeArguments="ue:IWorkbookQuickHandle">
                 <ActivityAction.Argument>
                   <DelegateInArgument x:TypeArguments="ue:IWorkbookQuickHandle" Name="Excel" />
                 </ActivityAction.Argument>
-                <Sequence DisplayName="Body use excel" sap:VirtualizedContainerService.HintSize="551,2098" sap2010:WorkflowViewState.IdRef="Sequence_3">
+                <Sequence DisplayName="Body use excel" sap:VirtualizedContainerService.HintSize="476,1539" sap2010:WorkflowViewState.IdRef="Sequence_3">
                   <Sequence.Variables>
                     <Variable x:TypeArguments="x:Int32" Default="1" Name="counterIndiLot" />
                   </Sequence.Variables>
@@ -131,7 +133,7 @@
                       <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                     </scg:Dictionary>
                   </sap:WorkflowViewStateService.ViewState>
-                  <Assign DisplayName="Clone comtable to comInfoTable" sap:VirtualizedContainerService.HintSize="509,60" sap2010:WorkflowViewState.IdRef="Assign_8">
+                  <Assign DisplayName="Clone comtable to comInfoTable" sap:VirtualizedContainerService.HintSize="434,60" sap2010:WorkflowViewState.IdRef="Assign_8">
                     <Assign.To>
                       <OutArgument x:TypeArguments="sd:DataTable">
                         <mca:CSharpReference x:TypeArguments="sd:DataTable" sap2010:WorkflowViewState.IdRef="CSharpReference`1_45">out_comInfoTable</mca:CSharpReference>
@@ -143,11 +145,15 @@
                       </InArgument>
                     </Assign.Value>
                   </Assign>
-                  <ui:InterruptibleDoWhile DisplayName="Do While repeat add row" sap:VirtualizedContainerService.HintSize="509,1557" sap2010:WorkflowViewState.IdRef="InterruptibleDoWhile_1">
+                  <ui:InterruptibleDoWhile DisplayName="Do While repeat add row" sap:VirtualizedContainerService.HintSize="434,846" sap2010:WorkflowViewState.IdRef="InterruptibleDoWhile_1">
                     <ui:InterruptibleDoWhile.Body>
-                      <Sequence DisplayName="Body add row" sap:VirtualizedContainerService.HintSize="473,1392" sap2010:WorkflowViewState.IdRef="Sequence_2">
+                      <Sequence DisplayName="Body add row" sap:VirtualizedContainerService.HintSize="376,681" sap2010:WorkflowViewState.IdRef="Sequence_2">
                         <Sequence.Variables>
-                          <Variable x:TypeArguments="sd:DataRow" Name="comRow" />
+                          <Variable x:TypeArguments="sd:DataRow" Name="comRow">
+                            <Variable.Default>
+                              <mca:CSharpValue x:TypeArguments="sd:DataRow" sap2010:WorkflowViewState.IdRef="CSharpValue`1_83">out_comInfoTable.NewRow()</mca:CSharpValue>
+                            </Variable.Default>
+                          </Variable>
                         </Sequence.Variables>
                         <sap:WorkflowViewStateService.ViewState>
                           <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -155,359 +161,49 @@
                             <x:Boolean x:Key="IsPinned">False</x:Boolean>
                           </scg:Dictionary>
                         </sap:WorkflowViewStateService.ViewState>
-                        <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="431,875" sap2010:WorkflowViewState.IdRef="MultipleAssign_1">
-                          <ui:MultipleAssign.AssignOperations>
-                            <scg:List x:TypeArguments="ui:AssignOperation" Capacity="32">
-                              <ui:AssignOperation sap:VirtualizedContainerService.HintSize="200,22" sap2010:WorkflowViewState.IdRef="AssignOperation_1">
-                                <ui:AssignOperation.To>
-                                  <OutArgument x:TypeArguments="sd:DataRow">
-                                    <mca:CSharpReference x:TypeArguments="sd:DataRow" sap2010:WorkflowViewState.IdRef="CSharpReference`1_1">comRow</mca:CSharpReference>
-                                  </OutArgument>
-                                </ui:AssignOperation.To>
-                                <ui:AssignOperation.Value>
-                                  <InArgument x:TypeArguments="sd:DataRow">
-                                    <mca:CSharpValue x:TypeArguments="sd:DataRow" sap2010:WorkflowViewState.IdRef="CSharpValue`1_62">out_comInfoTable.NewRow()</mca:CSharpValue>
-                                  </InArgument>
-                                </ui:AssignOperation.Value>
-                              </ui:AssignOperation>
-                              <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_2">
-                                <ui:AssignOperation.To>
-                                  <OutArgument x:TypeArguments="x:Object">
-                                    <mca:CSharpReference x:TypeArguments="x:Object" sap2010:WorkflowViewState.IdRef="CSharpReference`1_2">comRow[in_masterConfigDict["col_PartNum"]]</mca:CSharpReference>
-                                  </OutArgument>
-                                </ui:AssignOperation.To>
-                                <ui:AssignOperation.Value>
-                                  <InArgument x:TypeArguments="x:Object">
-                                    <mca:CSharpValue x:TypeArguments="x:Object" sap2010:WorkflowViewState.IdRef="CSharpValue`1_3">in_partNumber</mca:CSharpValue>
-                                  </InArgument>
-                                </ui:AssignOperation.Value>
-                              </ui:AssignOperation>
-                              <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_3">
-                                <ui:AssignOperation.To>
-                                  <OutArgument x:TypeArguments="x:Object">
-                                    <mca:CSharpReference x:TypeArguments="x:Object" sap2010:WorkflowViewState.IdRef="CSharpReference`1_3">comRow[in_masterConfigDict["col_EC"]]</mca:CSharpReference>
-                                  </OutArgument>
-                                </ui:AssignOperation.To>
-                                <ui:AssignOperation.Value>
-                                  <InArgument x:TypeArguments="x:Object">
-                                    <mca:CSharpValue x:TypeArguments="x:Object" sap2010:WorkflowViewState.IdRef="CSharpValue`1_4" xml:space="preserve">in_controlTable.AsEnumerable().
+                        <ui:InvokeCode ContinueOnError="{x:Null}" Code="//Fix value to com row&#xD;&#xA;comRow[in_masterConfigDict[&quot;col_PartNum&quot;]] = partNumber;&#xD;&#xA;comRow[in_masterConfigDict[&quot;col_EC&quot;]] = EC;&#xD;&#xA;comRow[in_masterConfigDict[&quot;col_Tab&quot;]] = tab;&#xD;&#xA;comRow[in_masterConfigDict[&quot;col_Lot&quot;]] = lotX;&#xD;&#xA;comRow[in_masterConfigDict[&quot;col_SubLot&quot;]] = currLot;&#xD;&#xA;comRow[in_masterConfigDict[&quot;col_LotSeq&quot;]] = lotSeq;&#xD;&#xA;comRow[in_masterConfigDict[&quot;col_SubLotSeq&quot;]] = subLotSeq;&#xD;&#xA;&#xD;&#xA;string fx,lb,bp,&#xD;&#xA;&#x9;pzt1,pzt2,pzt3,pzt4,damper,&#xD;&#xA;&#x9;ca1,ca2,ca3,ca4,ca5,&#xD;&#xA;&#x9;nca1,nca2,nca3,nca4,nca5;&#xD;&#xA;fx=lb=bp=&#xD;&#xA;pzt1=pzt2=pzt3=pzt4=&#xD;&#xA;damper=&#xD;&#xA;ca1=ca2=ca3=ca4=ca5=&#xD;&#xA;nca1=nca2=nca3=nca4=nca5=&quot;&quot;;&#xD;&#xA;&#xD;&#xA;try{&#xD;&#xA;&#x9;System.Data.DataTable filterCurrLotTable = infoTable.AsEnumerable().&#xD;&#xA;&#x9;&#x9;Where(row =&gt;&#xD;&#xA;&#x9;&#x9;&#x9;row[in_masterConfigDict[&quot;colProdLot&quot;]].Equals(currLot)&#xD;&#xA;&#x9;&#x9;).CopyToDataTable();&#xD;&#xA;&#x9;&#xD;&#xA;&#x9;&#x9;fx = filterCurrLotTable.Rows[0][in_masterConfigDict[&quot;colFX&quot;]].ToString();&#xD;&#xA;&#x9;&#x9;lb = filterCurrLotTable.Rows[0][in_masterConfigDict[&quot;colLB&quot;]].ToString();&#xD;&#xA;&#x9;&#x9;bp = filterCurrLotTable.Rows[0][in_masterConfigDict[&quot;colBP&quot;]].ToString();&#xD;&#xA;&#x9;&#x9;pzt1 = filterCurrLotTable.Rows[0][in_masterConfigDict[&quot;colPZT1&quot;]].ToString();&#xD;&#xA;&#x9;&#x9;pzt2 = filterCurrLotTable.Rows[0][in_masterConfigDict[&quot;colPZT2&quot;]].ToString();&#xD;&#xA;&#x9;/*&#x9;TO-DO&#xD;&#xA;&#x9;&#x9;string pzt3 = infoTable.Rows[0][in_masterConfigDict[&quot;colPZT3&quot;]].ToString();&#xD;&#xA;&#x9;&#x9;string pzt4 = infoTable.Rows[0][in_masterConfigDict[&quot;colPZT4&quot;]].ToString();&#xD;&#xA;&#x9;&#x9;string damper = infoTable.Rows[0][in_masterConfigDict[&quot;colDamper&quot;]].ToString();&#xD;&#xA;&#x9;&#x9;string ca1 = infoTable.Rows[0][in_masterConfigDict[&quot;colCA1&quot;]].ToString();&#xD;&#xA;&#x9;&#x9;string ca2 = infoTable.Rows[0][in_masterConfigDict[&quot;colCA2&quot;]].ToString();&#xD;&#xA;&#x9;&#x9;string ca3 = infoTable.Rows[0][in_masterConfigDict[&quot;colCA3&quot;]].ToString();&#xD;&#xA;&#x9;&#x9;string ca4 = infoTable.Rows[0][in_masterConfigDict[&quot;colCA4&quot;]].ToString();&#xD;&#xA;&#x9;&#x9;string ca5 = infoTable.Rows[0][in_masterConfigDict[&quot;colCA5&quot;]].ToString();&#xD;&#xA;&#x9;&#x9;string nca1 = infoTable.Rows[0][in_masterConfigDict[&quot;colNCA1&quot;]].ToString();&#xD;&#xA;&#x9;&#x9;string nca2 = infoTable.Rows[0][in_masterConfigDict[&quot;colNCA2&quot;]].ToString();&#xD;&#xA;&#x9;&#x9;string nca3 = infoTable.Rows[0][in_masterConfigDict[&quot;colNCA3&quot;]].ToString();&#xD;&#xA;&#x9;&#x9;string nca4 = infoTable.Rows[0][in_masterConfigDict[&quot;colNCA4&quot;]].ToString();&#xD;&#xA;&#x9;&#x9;string nca5 = infoTable.Rows[0][in_masterConfigDict[&quot;colNCA5&quot;]].ToString();&#xD;&#xA;&#x9;*/&#xD;&#xA;}catch(InvalidOperationException e){&#xD;&#xA;&#x9;fx = &quot;&quot;;&#xD;&#xA;&#x9;lb = &quot;&quot;;&#xD;&#xA;&#x9;bp = &quot;&quot;;&#xD;&#xA;&#x9;pzt1 = &quot;&quot;;&#xD;&#xA;&#x9;pzt2 = &quot;&quot;;&#xD;&#xA;}catch(Exception e){&#xD;&#xA;&#x9;System.Windows.Forms.MessageBox.Show(e.Message);&#xD;&#xA;}finally{&#xD;&#xA;&#x9;comRow[in_masterConfigDict[&quot;col_FX&quot;]] = fx;&#xD;&#xA;&#x9;comRow[in_masterConfigDict[&quot;col_LB&quot;]] = lb;&#xD;&#xA;&#x9;comRow[in_masterConfigDict[&quot;col_BP&quot;]] = bp;&#xD;&#xA;&#x9;comRow[in_masterConfigDict[&quot;col_PZT1&quot;]] = pzt1;&#xD;&#xA;&#x9;comRow[in_masterConfigDict[&quot;col_PZT2&quot;]] = pzt2;&#xD;&#xA;&#x9;comRow[in_masterConfigDict[&quot;col_PZT3&quot;]] = pzt3;&#xD;&#xA;&#x9;comRow[in_masterConfigDict[&quot;col_PZT4&quot;]] = pzt4;&#xD;&#xA;&#x9;comRow[in_masterConfigDict[&quot;col_Damper&quot;]] =damper;&#xD;&#xA;&#x9;comRow[in_masterConfigDict[&quot;col_CA1&quot;]] = ca1;&#xD;&#xA;&#x9;comRow[in_masterConfigDict[&quot;col_CA2&quot;]] = ca2;&#xD;&#xA;&#x9;comRow[in_masterConfigDict[&quot;col_CA3&quot;]] = ca3;&#xD;&#xA;&#x9;comRow[in_masterConfigDict[&quot;col_CA4&quot;]] = ca4;&#xD;&#xA;&#x9;comRow[in_masterConfigDict[&quot;col_CA5&quot;]] = ca5;&#xD;&#xA;&#x9;comRow[in_masterConfigDict[&quot;col_NCA1&quot;]] = nca1;&#xD;&#xA;&#x9;comRow[in_masterConfigDict[&quot;col_NCA2&quot;]] = nca2;&#xD;&#xA;&#x9;comRow[in_masterConfigDict[&quot;col_NCA3&quot;]] = nca3;&#xD;&#xA;&#x9;comRow[in_masterConfigDict[&quot;col_NCA4&quot;]] = nca4;&#xD;&#xA;&#x9;comRow[in_masterConfigDict[&quot;col_NCA5&quot;]] = nca5;&#xD;&#xA;}&#xD;&#xA;" DisplayName="Add data to comRow" sap:VirtualizedContainerService.HintSize="334,164" sap2010:WorkflowViewState.IdRef="InvokeCode_1" Language="CSharp">
+                          <ui:InvokeCode.Arguments>
+                            <InArgument x:TypeArguments="sd:DataRow" x:Key="comRow">
+                              <mca:CSharpValue x:TypeArguments="sd:DataRow" sap2010:WorkflowViewState.IdRef="CSharpValue`1_72">comRow</mca:CSharpValue>
+                            </InArgument>
+                            <InArgument x:TypeArguments="x:String" x:Key="partNumber">
+                              <mca:CSharpValue x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpValue`1_73">in_partNumber</mca:CSharpValue>
+                            </InArgument>
+                            <InArgument x:TypeArguments="x:String" x:Key="EC">
+                              <mca:CSharpValue x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpValue`1_74" xml:space="preserve">in_controlTable.AsEnumerable().
 Where(row =&gt; 
 row[in_masterConfigDict["controlColFileName"]].Equals(in_originName)
 ).CopyToDataTable().
 Rows[0][in_masterConfigDict["controlColEC"]].ToString()</mca:CSharpValue>
-                                  </InArgument>
-                                </ui:AssignOperation.Value>
-                              </ui:AssignOperation>
-                              <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_4">
-                                <ui:AssignOperation.To>
-                                  <OutArgument x:TypeArguments="x:Object">
-                                    <mca:CSharpReference x:TypeArguments="x:Object" sap2010:WorkflowViewState.IdRef="CSharpReference`1_4">comRow[in_masterConfigDict["col_Tab"]]</mca:CSharpReference>
-                                  </OutArgument>
-                                </ui:AssignOperation.To>
-                                <ui:AssignOperation.Value>
-                                  <InArgument x:TypeArguments="x:Object">
-                                    <mca:CSharpValue x:TypeArguments="x:Object" sap2010:WorkflowViewState.IdRef="CSharpValue`1_5" xml:space="preserve">in_controlTable.AsEnumerable().
+                            </InArgument>
+                            <InArgument x:TypeArguments="x:String" x:Key="tab">
+                              <mca:CSharpValue x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpValue`1_75" xml:space="preserve">in_controlTable.AsEnumerable().
 Where(row =&gt; 
 row[in_masterConfigDict["controlColFileName"]].Equals(in_originName)
 ).CopyToDataTable().
 Rows[0][in_masterConfigDict["controlColTab"]].ToString()</mca:CSharpValue>
-                                  </InArgument>
-                                </ui:AssignOperation.Value>
-                              </ui:AssignOperation>
-                              <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_5">
-                                <ui:AssignOperation.To>
-                                  <OutArgument x:TypeArguments="x:Object">
-                                    <mca:CSharpReference x:TypeArguments="x:Object" sap2010:WorkflowViewState.IdRef="CSharpReference`1_5">comRow[in_masterConfigDict["col_Lot"]]</mca:CSharpReference>
-                                  </OutArgument>
-                                </ui:AssignOperation.To>
-                                <ui:AssignOperation.Value>
-                                  <InArgument x:TypeArguments="x:Object">
-                                    <mca:CSharpValue x:TypeArguments="x:Object" sap2010:WorkflowViewState.IdRef="CSharpValue`1_6">in_lotX</mca:CSharpValue>
-                                  </InArgument>
-                                </ui:AssignOperation.Value>
-                              </ui:AssignOperation>
-                              <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_6">
-                                <ui:AssignOperation.To>
-                                  <OutArgument x:TypeArguments="x:Object">
-                                    <mca:CSharpReference x:TypeArguments="x:Object" sap2010:WorkflowViewState.IdRef="CSharpReference`1_6">comRow[in_masterConfigDict["col_SubLot"]]</mca:CSharpReference>
-                                  </OutArgument>
-                                </ui:AssignOperation.To>
-                                <ui:AssignOperation.Value>
-                                  <InArgument x:TypeArguments="x:Object">
-                                    <mca:CSharpValue x:TypeArguments="x:Object" sap2010:WorkflowViewState.IdRef="CSharpValue`1_7">in_currLot</mca:CSharpValue>
-                                  </InArgument>
-                                </ui:AssignOperation.Value>
-                              </ui:AssignOperation>
-                              <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_7">
-                                <ui:AssignOperation.To>
-                                  <OutArgument x:TypeArguments="x:Object">
-                                    <mca:CSharpReference x:TypeArguments="x:Object" sap2010:WorkflowViewState.IdRef="CSharpReference`1_7">comRow[in_masterConfigDict["col_LotSeq"]]</mca:CSharpReference>
-                                  </OutArgument>
-                                </ui:AssignOperation.To>
-                                <ui:AssignOperation.Value>
-                                  <InArgument x:TypeArguments="x:Object">
-                                    <mca:CSharpValue x:TypeArguments="x:Object" sap2010:WorkflowViewState.IdRef="CSharpValue`1_8">io_counterAllRow.ToString()</mca:CSharpValue>
-                                  </InArgument>
-                                </ui:AssignOperation.Value>
-                              </ui:AssignOperation>
-                              <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_8">
-                                <ui:AssignOperation.To>
-                                  <OutArgument x:TypeArguments="x:Object">
-                                    <mca:CSharpReference x:TypeArguments="x:Object" sap2010:WorkflowViewState.IdRef="CSharpReference`1_8">comRow[in_masterConfigDict["col_SubLotSeq"]]</mca:CSharpReference>
-                                  </OutArgument>
-                                </ui:AssignOperation.To>
-                                <ui:AssignOperation.Value>
-                                  <InArgument x:TypeArguments="x:Object">
-                                    <mca:CSharpValue x:TypeArguments="x:Object" sap2010:WorkflowViewState.IdRef="CSharpValue`1_9">counterIndiLot.ToString()</mca:CSharpValue>
-                                  </InArgument>
-                                </ui:AssignOperation.Value>
-                              </ui:AssignOperation>
-                              <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_9">
-                                <ui:AssignOperation.To>
-                                  <OutArgument x:TypeArguments="x:Object">
-                                    <mca:CSharpReference x:TypeArguments="x:Object" sap2010:WorkflowViewState.IdRef="CSharpReference`1_9">comRow[in_masterConfigDict["col_FX"]]</mca:CSharpReference>
-                                  </OutArgument>
-                                </ui:AssignOperation.To>
-                                <ui:AssignOperation.Value>
-                                  <InArgument x:TypeArguments="x:Object">
-                                    <mca:CSharpValue x:TypeArguments="x:Object" sap2010:WorkflowViewState.IdRef="CSharpValue`1_10" xml:space="preserve">in_infoTableDict[in_keyInfoTable].AsEnumerable().
-Where(
-row =&gt;row[in_masterConfigDict["colProdLot"]].Equals(in_currLot)
-).CopyToDataTable().
-Rows[0][in_masterConfigDict["colFX"]].ToString()</mca:CSharpValue>
-                                  </InArgument>
-                                </ui:AssignOperation.Value>
-                              </ui:AssignOperation>
-                              <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_10">
-                                <ui:AssignOperation.To>
-                                  <OutArgument x:TypeArguments="x:Object">
-                                    <mca:CSharpReference x:TypeArguments="x:Object" sap2010:WorkflowViewState.IdRef="CSharpReference`1_10">comRow[in_masterConfigDict["col_LB"]]</mca:CSharpReference>
-                                  </OutArgument>
-                                </ui:AssignOperation.To>
-                                <ui:AssignOperation.Value>
-                                  <InArgument x:TypeArguments="x:Object">
-                                    <mca:CSharpValue x:TypeArguments="x:Object" sap2010:WorkflowViewState.IdRef="CSharpValue`1_11" xml:space="preserve">in_infoTableDict[in_keyInfoTable].AsEnumerable().
-Where(
-row =&gt;row[in_masterConfigDict["colProdLot"]].Equals(in_currLot)
-).CopyToDataTable().
-Rows[0][in_masterConfigDict["colLB"]].ToString()</mca:CSharpValue>
-                                  </InArgument>
-                                </ui:AssignOperation.Value>
-                              </ui:AssignOperation>
-                              <ui:AssignOperation sap:VirtualizedContainerService.HintSize="200,22" sap2010:WorkflowViewState.IdRef="AssignOperation_11">
-                                <ui:AssignOperation.To>
-                                  <OutArgument x:TypeArguments="x:Object">
-                                    <mca:CSharpReference x:TypeArguments="x:Object" sap2010:WorkflowViewState.IdRef="CSharpReference`1_11">comRow[in_masterConfigDict["col_BP"]]</mca:CSharpReference>
-                                  </OutArgument>
-                                </ui:AssignOperation.To>
-                                <ui:AssignOperation.Value>
-                                  <InArgument x:TypeArguments="x:Object">
-                                    <mca:CSharpValue x:TypeArguments="x:Object" sap2010:WorkflowViewState.IdRef="CSharpValue`1_12" xml:space="preserve">in_infoTableDict[in_keyInfoTable].AsEnumerable().
-Where(
-row =&gt;row[in_masterConfigDict["colProdLot"]].Equals(in_currLot)
-).CopyToDataTable().
-Rows[0][in_masterConfigDict["colBP"]].ToString()</mca:CSharpValue>
-                                  </InArgument>
-                                </ui:AssignOperation.Value>
-                              </ui:AssignOperation>
-                              <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_12">
-                                <ui:AssignOperation.To>
-                                  <OutArgument x:TypeArguments="x:Object">
-                                    <mca:CSharpReference x:TypeArguments="x:Object" sap2010:WorkflowViewState.IdRef="CSharpReference`1_12">comRow[in_masterConfigDict["col_PZT1"]]</mca:CSharpReference>
-                                  </OutArgument>
-                                </ui:AssignOperation.To>
-                                <ui:AssignOperation.Value>
-                                  <InArgument x:TypeArguments="x:Object">
-                                    <mca:CSharpValue x:TypeArguments="x:Object" sap2010:WorkflowViewState.IdRef="CSharpValue`1_13" xml:space="preserve">in_infoTableDict[in_keyInfoTable].AsEnumerable().
-Where(
-row =&gt;row[in_masterConfigDict["colProdLot"]].Equals(in_currLot)
-).CopyToDataTable().
-Rows[0][in_masterConfigDict["colPZT1"]].ToString()</mca:CSharpValue>
-                                  </InArgument>
-                                </ui:AssignOperation.Value>
-                              </ui:AssignOperation>
-                              <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_13">
-                                <ui:AssignOperation.To>
-                                  <OutArgument x:TypeArguments="x:Object">
-                                    <mca:CSharpReference x:TypeArguments="x:Object" sap2010:WorkflowViewState.IdRef="CSharpReference`1_13">comRow[in_masterConfigDict["col_PZT2"]]</mca:CSharpReference>
-                                  </OutArgument>
-                                </ui:AssignOperation.To>
-                                <ui:AssignOperation.Value>
-                                  <InArgument x:TypeArguments="x:Object">
-                                    <mca:CSharpValue x:TypeArguments="x:Object" sap2010:WorkflowViewState.IdRef="CSharpValue`1_14" xml:space="preserve">in_infoTableDict[in_keyInfoTable].AsEnumerable().
-Where(
-row =&gt;row[in_masterConfigDict["colProdLot"]].Equals(in_currLot)
-).CopyToDataTable().
-Rows[0][in_masterConfigDict["colPZT2"]].ToString()</mca:CSharpValue>
-                                  </InArgument>
-                                </ui:AssignOperation.Value>
-                              </ui:AssignOperation>
-                              <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_14">
-                                <ui:AssignOperation.To>
-                                  <OutArgument x:TypeArguments="x:Object">
-                                    <mca:CSharpReference x:TypeArguments="x:Object" sap2010:WorkflowViewState.IdRef="CSharpReference`1_14">comRow[in_masterConfigDict["col_PZT3"]]</mca:CSharpReference>
-                                  </OutArgument>
-                                </ui:AssignOperation.To>
-                                <ui:AssignOperation.Value>
-                                  <InArgument x:TypeArguments="x:Object">
-                                    <mca:CSharpValue x:TypeArguments="x:Object" sap2010:WorkflowViewState.IdRef="CSharpValue`1_15">""</mca:CSharpValue>
-                                  </InArgument>
-                                </ui:AssignOperation.Value>
-                              </ui:AssignOperation>
-                              <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_15">
-                                <ui:AssignOperation.To>
-                                  <OutArgument x:TypeArguments="x:Object">
-                                    <mca:CSharpReference x:TypeArguments="x:Object" sap2010:WorkflowViewState.IdRef="CSharpReference`1_15">comRow[in_masterConfigDict["col_PZT4"]]</mca:CSharpReference>
-                                  </OutArgument>
-                                </ui:AssignOperation.To>
-                                <ui:AssignOperation.Value>
-                                  <InArgument x:TypeArguments="x:Object">
-                                    <mca:CSharpValue x:TypeArguments="x:Object" sap2010:WorkflowViewState.IdRef="CSharpValue`1_16">""</mca:CSharpValue>
-                                  </InArgument>
-                                </ui:AssignOperation.Value>
-                              </ui:AssignOperation>
-                              <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_16">
-                                <ui:AssignOperation.To>
-                                  <OutArgument x:TypeArguments="x:Object">
-                                    <mca:CSharpReference x:TypeArguments="x:Object" sap2010:WorkflowViewState.IdRef="CSharpReference`1_16">comRow[in_masterConfigDict["col_Damper"]]</mca:CSharpReference>
-                                  </OutArgument>
-                                </ui:AssignOperation.To>
-                                <ui:AssignOperation.Value>
-                                  <InArgument x:TypeArguments="x:Object">
-                                    <mca:CSharpValue x:TypeArguments="x:Object" sap2010:WorkflowViewState.IdRef="CSharpValue`1_17">""</mca:CSharpValue>
-                                  </InArgument>
-                                </ui:AssignOperation.Value>
-                              </ui:AssignOperation>
-                              <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_17">
-                                <ui:AssignOperation.To>
-                                  <OutArgument x:TypeArguments="x:Object">
-                                    <mca:CSharpReference x:TypeArguments="x:Object" sap2010:WorkflowViewState.IdRef="CSharpReference`1_17">comRow[in_masterConfigDict["col_CA1"]]</mca:CSharpReference>
-                                  </OutArgument>
-                                </ui:AssignOperation.To>
-                                <ui:AssignOperation.Value>
-                                  <InArgument x:TypeArguments="x:Object">
-                                    <mca:CSharpValue x:TypeArguments="x:Object" sap2010:WorkflowViewState.IdRef="CSharpValue`1_18">""</mca:CSharpValue>
-                                  </InArgument>
-                                </ui:AssignOperation.Value>
-                              </ui:AssignOperation>
-                              <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_18">
-                                <ui:AssignOperation.To>
-                                  <OutArgument x:TypeArguments="x:Object">
-                                    <mca:CSharpReference x:TypeArguments="x:Object" sap2010:WorkflowViewState.IdRef="CSharpReference`1_18">comRow[in_masterConfigDict["col_CA2"]]</mca:CSharpReference>
-                                  </OutArgument>
-                                </ui:AssignOperation.To>
-                                <ui:AssignOperation.Value>
-                                  <InArgument x:TypeArguments="x:Object">
-                                    <mca:CSharpValue x:TypeArguments="x:Object" sap2010:WorkflowViewState.IdRef="CSharpValue`1_19">""</mca:CSharpValue>
-                                  </InArgument>
-                                </ui:AssignOperation.Value>
-                              </ui:AssignOperation>
-                              <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_19">
-                                <ui:AssignOperation.To>
-                                  <OutArgument x:TypeArguments="x:Object">
-                                    <mca:CSharpReference x:TypeArguments="x:Object" sap2010:WorkflowViewState.IdRef="CSharpReference`1_19">comRow[in_masterConfigDict["col_CA3"]]</mca:CSharpReference>
-                                  </OutArgument>
-                                </ui:AssignOperation.To>
-                                <ui:AssignOperation.Value>
-                                  <InArgument x:TypeArguments="x:Object">
-                                    <mca:CSharpValue x:TypeArguments="x:Object" sap2010:WorkflowViewState.IdRef="CSharpValue`1_20">""</mca:CSharpValue>
-                                  </InArgument>
-                                </ui:AssignOperation.Value>
-                              </ui:AssignOperation>
-                              <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_20">
-                                <ui:AssignOperation.To>
-                                  <OutArgument x:TypeArguments="x:Object">
-                                    <mca:CSharpReference x:TypeArguments="x:Object" sap2010:WorkflowViewState.IdRef="CSharpReference`1_20">comRow[in_masterConfigDict["col_CA4"]]</mca:CSharpReference>
-                                  </OutArgument>
-                                </ui:AssignOperation.To>
-                                <ui:AssignOperation.Value>
-                                  <InArgument x:TypeArguments="x:Object">
-                                    <mca:CSharpValue x:TypeArguments="x:Object" sap2010:WorkflowViewState.IdRef="CSharpValue`1_21">""</mca:CSharpValue>
-                                  </InArgument>
-                                </ui:AssignOperation.Value>
-                              </ui:AssignOperation>
-                              <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_21">
-                                <ui:AssignOperation.To>
-                                  <OutArgument x:TypeArguments="x:Object">
-                                    <mca:CSharpReference x:TypeArguments="x:Object" sap2010:WorkflowViewState.IdRef="CSharpReference`1_21">comRow[in_masterConfigDict["col_CA5"]]</mca:CSharpReference>
-                                  </OutArgument>
-                                </ui:AssignOperation.To>
-                                <ui:AssignOperation.Value>
-                                  <InArgument x:TypeArguments="x:Object">
-                                    <mca:CSharpValue x:TypeArguments="x:Object" sap2010:WorkflowViewState.IdRef="CSharpValue`1_22">""</mca:CSharpValue>
-                                  </InArgument>
-                                </ui:AssignOperation.Value>
-                              </ui:AssignOperation>
-                              <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_22">
-                                <ui:AssignOperation.To>
-                                  <OutArgument x:TypeArguments="x:Object">
-                                    <mca:CSharpReference x:TypeArguments="x:Object" sap2010:WorkflowViewState.IdRef="CSharpReference`1_22">comRow[in_masterConfigDict["col_NCA1"]]</mca:CSharpReference>
-                                  </OutArgument>
-                                </ui:AssignOperation.To>
-                                <ui:AssignOperation.Value>
-                                  <InArgument x:TypeArguments="x:Object">
-                                    <mca:CSharpValue x:TypeArguments="x:Object" sap2010:WorkflowViewState.IdRef="CSharpValue`1_23">""</mca:CSharpValue>
-                                  </InArgument>
-                                </ui:AssignOperation.Value>
-                              </ui:AssignOperation>
-                              <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_23">
-                                <ui:AssignOperation.To>
-                                  <OutArgument x:TypeArguments="x:Object">
-                                    <mca:CSharpReference x:TypeArguments="x:Object" sap2010:WorkflowViewState.IdRef="CSharpReference`1_23">comRow[in_masterConfigDict["col_NCA2"]]</mca:CSharpReference>
-                                  </OutArgument>
-                                </ui:AssignOperation.To>
-                                <ui:AssignOperation.Value>
-                                  <InArgument x:TypeArguments="x:Object">
-                                    <mca:CSharpValue x:TypeArguments="x:Object" sap2010:WorkflowViewState.IdRef="CSharpValue`1_24">""</mca:CSharpValue>
-                                  </InArgument>
-                                </ui:AssignOperation.Value>
-                              </ui:AssignOperation>
-                              <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_24">
-                                <ui:AssignOperation.To>
-                                  <OutArgument x:TypeArguments="x:Object">
-                                    <mca:CSharpReference x:TypeArguments="x:Object" sap2010:WorkflowViewState.IdRef="CSharpReference`1_24">comRow[in_masterConfigDict["col_NCA3"]]</mca:CSharpReference>
-                                  </OutArgument>
-                                </ui:AssignOperation.To>
-                                <ui:AssignOperation.Value>
-                                  <InArgument x:TypeArguments="x:Object">
-                                    <mca:CSharpValue x:TypeArguments="x:Object" sap2010:WorkflowViewState.IdRef="CSharpValue`1_25">""</mca:CSharpValue>
-                                  </InArgument>
-                                </ui:AssignOperation.Value>
-                              </ui:AssignOperation>
-                              <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_25">
-                                <ui:AssignOperation.To>
-                                  <OutArgument x:TypeArguments="x:Object">
-                                    <mca:CSharpReference x:TypeArguments="x:Object" sap2010:WorkflowViewState.IdRef="CSharpReference`1_25">comRow[in_masterConfigDict["col_NCA4"]]</mca:CSharpReference>
-                                  </OutArgument>
-                                </ui:AssignOperation.To>
-                                <ui:AssignOperation.Value>
-                                  <InArgument x:TypeArguments="x:Object">
-                                    <mca:CSharpValue x:TypeArguments="x:Object" sap2010:WorkflowViewState.IdRef="CSharpValue`1_26">""</mca:CSharpValue>
-                                  </InArgument>
-                                </ui:AssignOperation.Value>
-                              </ui:AssignOperation>
-                              <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_26">
-                                <ui:AssignOperation.To>
-                                  <OutArgument x:TypeArguments="x:Object">
-                                    <mca:CSharpReference x:TypeArguments="x:Object" sap2010:WorkflowViewState.IdRef="CSharpReference`1_26">comRow[in_masterConfigDict["col_NCA5"]]</mca:CSharpReference>
-                                  </OutArgument>
-                                </ui:AssignOperation.To>
-                                <ui:AssignOperation.Value>
-                                  <InArgument x:TypeArguments="x:Object">
-                                    <mca:CSharpValue x:TypeArguments="x:Object" sap2010:WorkflowViewState.IdRef="CSharpValue`1_27">""</mca:CSharpValue>
-                                  </InArgument>
-                                </ui:AssignOperation.Value>
-                              </ui:AssignOperation>
-                            </scg:List>
-                          </ui:MultipleAssign.AssignOperations>
-                          <sap:WorkflowViewStateService.ViewState>
-                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                              <x:Boolean x:Key="IsPinned">False</x:Boolean>
-                            </scg:Dictionary>
-                          </sap:WorkflowViewStateService.ViewState>
-                        </ui:MultipleAssign>
-                        <ui:AddDataRow ArrayRow="{x:Null}" DisplayName="Add Data Row to output template table" sap:VirtualizedContainerService.HintSize="431,185" sap2010:WorkflowViewState.IdRef="AddDataRow_1">
+                            </InArgument>
+                            <InArgument x:TypeArguments="x:String" x:Key="lotX">
+                              <mca:CSharpValue x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpValue`1_76">in_lotX</mca:CSharpValue>
+                            </InArgument>
+                            <InArgument x:TypeArguments="x:String" x:Key="currLot">
+                              <mca:CSharpValue x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpValue`1_77">in_currLot</mca:CSharpValue>
+                            </InArgument>
+                            <InArgument x:TypeArguments="x:String" x:Key="lotSeq">
+                              <mca:CSharpValue x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpValue`1_78">io_counterAllRow.ToString()</mca:CSharpValue>
+                            </InArgument>
+                            <InArgument x:TypeArguments="x:String" x:Key="subLotSeq">
+                              <mca:CSharpValue x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpValue`1_79">counterIndiLot.ToString()</mca:CSharpValue>
+                            </InArgument>
+                            <InArgument x:TypeArguments="sd:DataTable" x:Key="infoTable">
+                              <mca:CSharpValue x:TypeArguments="sd:DataTable" sap2010:WorkflowViewState.IdRef="CSharpValue`1_80">in_infoTableDict[in_keyInfoTable]</mca:CSharpValue>
+                            </InArgument>
+                            <InArgument x:TypeArguments="scg:Dictionary(x:String, x:String)" x:Key="in_masterConfigDict">
+                              <mca:CSharpValue x:TypeArguments="scg:Dictionary(x:String, x:String)" sap2010:WorkflowViewState.IdRef="CSharpValue`1_82">in_masterConfigDict</mca:CSharpValue>
+                            </InArgument>
+                          </ui:InvokeCode.Arguments>
+                        </ui:InvokeCode>
+                        <ui:AddDataRow ArrayRow="{x:Null}" DisplayName="Add Data Row to output template table" sap:VirtualizedContainerService.HintSize="334,185" sap2010:WorkflowViewState.IdRef="AddDataRow_1">
                           <ui:AddDataRow.DataRow>
                             <InArgument x:TypeArguments="sd:DataRow">
                               <mca:CSharpValue x:TypeArguments="sd:DataRow" sap2010:WorkflowViewState.IdRef="CSharpValue`1_28">comRow</mca:CSharpValue>
@@ -519,7 +215,7 @@ Rows[0][in_masterConfigDict["colPZT2"]].ToString()</mca:CSharpValue>
                             </InOutArgument>
                           </ui:AddDataRow.DataTable>
                         </ui:AddDataRow>
-                        <Assign DisplayName="Increase counter individual lot " sap:VirtualizedContainerService.HintSize="431,60" sap2010:WorkflowViewState.IdRef="Assign_1">
+                        <Assign DisplayName="Increase counter individual lot " sap:VirtualizedContainerService.HintSize="334,60" sap2010:WorkflowViewState.IdRef="Assign_1">
                           <Assign.To>
                             <OutArgument x:TypeArguments="x:Int32">
                               <mca:CSharpReference x:TypeArguments="x:Int32" sap2010:WorkflowViewState.IdRef="CSharpReference`1_44">counterIndiLot</mca:CSharpReference>
@@ -531,7 +227,7 @@ Rows[0][in_masterConfigDict["colPZT2"]].ToString()</mca:CSharpValue>
                             </InArgument>
                           </Assign.Value>
                         </Assign>
-                        <Assign DisplayName="Increase counter all row" sap:VirtualizedContainerService.HintSize="431,60" sap2010:WorkflowViewState.IdRef="Assign_2">
+                        <Assign DisplayName="Increase counter all row" sap:VirtualizedContainerService.HintSize="334,60" sap2010:WorkflowViewState.IdRef="Assign_2">
                           <Assign.To>
                             <OutArgument x:TypeArguments="x:Int32">
                               <mca:CSharpReference x:TypeArguments="x:Int32" sap2010:WorkflowViewState.IdRef="CSharpReference`1_29">io_counterAllRow</mca:CSharpReference>
@@ -555,7 +251,7 @@ Rows[0][in_masterConfigDict["colPZT2"]].ToString()</mca:CSharpValue>
                       </scg:Dictionary>
                     </sap:WorkflowViewStateService.ViewState>
                   </ui:InterruptibleDoWhile>
-                  <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Invoke Find Column Letter" sap:VirtualizedContainerService.HintSize="509,112" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="Subprocess\\Common\\FindColumnLetter.xaml">
+                  <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Invoke Find Column Letter" sap:VirtualizedContainerService.HintSize="434,112" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="Subprocess\\Common\\FindColumnLetter.xaml">
                     <ui:InvokeWorkflowFile.Arguments>
                       <InArgument x:TypeArguments="x:String" x:Key="in_columnName">
                         <mca:CSharpValue x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpValue`1_55">in_masterConfigDict["col_PartNum"]</mca:CSharpValue>
@@ -566,19 +262,29 @@ Rows[0][in_masterConfigDict["colPZT2"]].ToString()</mca:CSharpValue>
                       <InArgument x:TypeArguments="x:Int32" x:Key="count">
                         <mca:CSharpValue x:TypeArguments="x:Int32" sap2010:WorkflowViewState.IdRef="CSharpValue`1_51">in_indexCRow</mca:CSharpValue>
                       </InArgument>
-                      <InArgument x:TypeArguments="scg:Dictionary(x:String, x:String)" x:Key="in_masterConfigDict">
-                        <mca:CSharpValue x:TypeArguments="scg:Dictionary(x:String, x:String)" sap2010:WorkflowViewState.IdRef="CSharpValue`1_52">in_masterConfigDict</mca:CSharpValue>
-                      </InArgument>
-                      <InArgument x:TypeArguments="x:String" x:Key="in_startRow">
-                        <mca:CSharpValue x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpValue`1_53">in_startRow</mca:CSharpValue>
-                      </InArgument>
                       <InOutArgument x:TypeArguments="scg:Dictionary(x:Int32, x:String)" x:Key="io_colLetterDict">
                         <mca:CSharpReference x:TypeArguments="scg:Dictionary(x:Int32, x:String)" sap2010:WorkflowViewState.IdRef="CSharpReference`1_42">io_colInfoLetterDict</mca:CSharpReference>
                       </InOutArgument>
                       <InArgument x:TypeArguments="x:Int32" x:Key="in_index">1</InArgument>
+                      <InArgument x:TypeArguments="scg:Dictionary(x:String, x:String)" x:Key="in_masterConfigDict">
+                        <mca:CSharpValue x:TypeArguments="scg:Dictionary(x:String, x:String)" sap2010:WorkflowViewState.IdRef="CSharpValue`1_69">in_masterConfigDict</mca:CSharpValue>
+                      </InArgument>
+                      <InArgument x:TypeArguments="x:String" x:Key="in_comPath">
+                        <mca:CSharpValue x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpValue`1_68">in_comPath</mca:CSharpValue>
+                      </InArgument>
                     </ui:InvokeWorkflowFile.Arguments>
                   </ui:InvokeWorkflowFile>
-                  <ueab:WriteRangeX DisplayName="Write DataTable to Excel" ExcludeHeaders="True" sap:VirtualizedContainerService.HintSize="509,157" sap2010:WorkflowViewState.IdRef="WriteRangeX_1" IgnoreEmptySource="False">
+                  <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Invoke Select Cell in excel" sap:VirtualizedContainerService.HintSize="434,112" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_2" UnSafe="False" WorkflowFileName="Subprocess\\Common\\SelectCellExcel.xaml">
+                    <ui:InvokeWorkflowFile.Arguments>
+                      <InArgument x:TypeArguments="x:String" x:Key="colLetter">
+                        <mca:CSharpValue x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpValue`1_65">io_colInfoLetterDict[1] + in_startRow</mca:CSharpValue>
+                      </InArgument>
+                      <InArgument x:TypeArguments="x:String" x:Key="sheetName">
+                        <mca:CSharpValue x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpValue`1_64">in_masterConfigDict["comTemplateSheet"]</mca:CSharpValue>
+                      </InArgument>
+                    </ui:InvokeWorkflowFile.Arguments>
+                  </ui:InvokeWorkflowFile>
+                  <ueab:WriteRangeX DisplayName="Write DataTable to Excel" ExcludeHeaders="True" sap:VirtualizedContainerService.HintSize="434,157" sap2010:WorkflowViewState.IdRef="WriteRangeX_1" IgnoreEmptySource="False">
                     <ueab:WriteRangeX.Destination>
                       <InArgument x:TypeArguments="ue:IReadWriteRangeRef">
                         <mca:CSharpValue x:TypeArguments="ue:IReadWriteRangeRef" sap2010:WorkflowViewState.IdRef="CSharpValue`1_58">Excel.Sheet[in_masterConfigDict["comTemplateSheet"]].Range[io_colInfoLetterDict[1] + in_startRow]</mca:CSharpValue>
